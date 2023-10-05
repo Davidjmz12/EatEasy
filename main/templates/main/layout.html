@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="es">
+    <head>
+        <title>EatEasy</title>
+
+        <!--Styles-->
+        <link rel="stylesheet" href="{% static 'main/layout.css' %}">
+
+        {% block head %}
+
+        {% endblock %}
+    </head>
+
+    <body>
+        <!--Head-->
+        <header>
+            <!--Left part-->
+            <div class="header-left">
+                <a class="our-page-button" href="{% url 'main:index' %}">
+                    <img alt="logo" class="our-page-logo" src={% static 'main/images/logo-black.png' %}>
+                    <p class="our-page-text">EatEasy</p>
+                </a>
+            </div>
+
+            <!--Right part-->
+            <div class="header-right">
+                <a href="{% url 'login:index' %}">
+                    <button class="log-in-button">
+                        Log in
+                    </button>
+                </a>
+            </div>
+
+        </header>
+
+        {% block body %}
+
+        {% endblock %}
+
+    </body>
+</html>

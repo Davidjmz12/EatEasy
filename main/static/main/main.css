@@ -1,0 +1,79 @@
+/********************************************************
+                    GENERAL
+********************************************************/
+.search {
+    background-color: darkcyan;
+    display: grid;
+    align-items: center;
+
+    grid-template-columns: 1fr 5fr 1fr 20fr 2fr;
+
+    border-radius: 50px;
+    padding: 20px 0;
+    min-width: 680px;
+    height: 100%;
+
+    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.3);
+}
+
+/********************************************************
+                        LOGO
+********************************************************/
+.logo-search {
+    width: 100%;
+    border-radius: 100vh;
+
+    box-shadow: 8px 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+/********************************************************
+                    INPUT AND BUTTON
+********************************************************/
+.search-bar-button {
+    display: flex;
+    flex: 1fr 1fr;
+    justify-content: center;
+}
+
+.input-search {
+    font-size: 20px;
+    height: 60px;
+    width: 100%;
+    min-width: 330px;
+
+    border: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    padding-left: 30px;
+
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.vertical-line {
+    background-color: darkgray;
+    width: 1px;
+    height: 62px;
+}
+
+.search-button {
+    height: 62px;
+    width: 90px;
+    border: none;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    cursor: pointer;
+
+    box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.search-button:hover {
+    background-color: lightgray;
+}
+
+.search-button:active {
+    background-color: rgb(174, 173, 173);
+}
+
+.search-button-img {
+    height: 80%;
+}
