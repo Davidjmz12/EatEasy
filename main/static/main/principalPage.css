@@ -1,0 +1,153 @@
+body {
+    background: linear-gradient(to bottom, lightgray, white);
+    height: 100vh;
+
+    display: grid;
+    grid-template-columns: 1.5fr 7fr 1.5fr;
+    grid-template-rows: 1fr 1fr 2fr;
+    padding-top: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+/********************************************************
+                    THE HEADER
+********************************************************/
+header {
+    background-color: darkcyan;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+
+    height: 50px;
+    padding-right: 50px;
+}
+
+/********************************
+            HEADER LEFT
+********************************/
+
+.our-page-button {
+    background-color: darkcyan;
+    border: none;
+    text-decoration: none;
+
+    height: 50px;
+    padding: 0;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.our-page-logo {
+    height: 40px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-left: 5px
+}
+
+.our-page-text {
+    margin-top: 5px;
+    font-size: 35px;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    height: 200px;
+}
+
+/********************************
+            HEADER RIGHT
+********************************/
+.log-in-button {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+
+    border: none;
+    border-radius: 15px;
+    height: 30px;
+    width: 100px;
+    cursor: pointer;
+}
+
+.log-in-button:hover {
+    background-color: lightgray;
+}
+
+.log-in-button:active {
+    background-color: rgb(174, 173, 173);
+}
+
+
+/********************************************************
+                    THE SEARCH BAR
+********************************************************/
+.search {
+    background-color: darkcyan;
+    display: grid;
+    align-items: center;
+
+    grid-template-columns: 1fr 5fr 1fr 20fr 2fr;
+
+    border-radius: 50px;
+    padding: 20px 0;
+    min-width: 680px;
+    height: 100%;
+}
+
+.logo-search {
+    width: 100%;
+    border-radius: 100vh;
+}
+
+.search-bar-button {
+    display: flex;
+    flex: 1fr 1fr;
+    justify-content: center;
+}
+
+.input-search {
+    font-size: 20px;
+    height: 60px;
+    width: 100%;
+    min-width: 330px;
+
+    border: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    padding-left: 30px;
+}
+
+.vertical-line {
+    background-color: darkgray;
+    width: 1px;
+    height: 62px;
+}
+
+.search-button {
+    height: 62px;
+    width: 90px;
+    border: none;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    background-color: lightgray;
+}
+
+.search-button:active {
+    background-color: rgb(174, 173, 173);
+}
+
+.search-button-img {
+    height: 80%;
+}

@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="es">
+    <head>
+        <title>EatEasy</title>
+
+        <!--Styles-->
+        <link rel="stylesheet" href="{% static 'main/principalPage.css' %}">
+    </head>
+
+    <body>
+        <!--Head-->
+        <header>
+            <!--Left part-->
+            <div class="header-left">
+                <a class="our-page-button" href="">
+                    <img alt="logo" class="our-page-logo" src={% static 'main/images/logo-black.png' %}>
+                    <p class="our-page-text">EatEasy</p>
+                </a>
+            </div>
+
+            <!--Right part-->
+            <div class="header-right">
+                <button class="log-in-button">
+                    Log in
+                </button>
+            </div>
+
+        </header>
+
+        <!--Empty divs to center the search bar-->
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+        <!--Search bar-->
+        <div class="search">
+            <div></div>
+            <img alt="logo" class="logo-search" src={% static "main/images/logo-color.png" %}>
+            <div></div>
+            <div class="search-bar-button">
+                <input class="input-search" placeholder="Busca tu ciudad y empieza a comer...">
+                <div class="vertical-line"></div>
+                <button class="search-button">
+                    <img alt="search" class="search-button-img" src={% static "main/images/search.svg" %}>
+                </button>
+            </div>
+            <div></div>
+        </div>
+    </body>
+</html>
