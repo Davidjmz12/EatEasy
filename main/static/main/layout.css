@@ -1,6 +1,10 @@
 body {
-    background: linear-gradient(to bottom, lightgray, white);
-    height: 100vh;
+    background: linear-gradient(to bottom, #c8c8c8, white);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 
     display: grid;
     grid-template-columns: 1.5fr 7fr 1.5fr;
@@ -25,11 +29,11 @@ header {
     top:0;
     left: 0;
     right: 0;
-
     height: 50px;
+
     padding-right: 50px;
 
-    box-shadow: 8px 0px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 8px 0 10px rgba(0, 0, 0, 0.3);
 }
 
 /********************************

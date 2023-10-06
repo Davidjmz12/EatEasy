@@ -1,18 +1,118 @@
-.main {
-    display: grid;
-    grid-template-columns: 1fr 5fr;
-
-    height: 100vh;
-    width: 100vw;
-    margin-top: -8px;
+p {
+    padding: 0;
+    margin: 0;
 }
 
-.filters {
-    height: 100%;
-    background: rgb(170, 170, 170);
-    min-width: 0;
+/********************************************************
+                        FILTERS
+********************************************************/
+
+.filters-column {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    bottom: 0;
+    right: 85%;
+
+    background: linear-gradient(to bottom, #38b3b3, #28b3b3);
+    box-shadow: 8px 0 10px rgba(0, 0, 0, 0.15);
+
+    padding-top: 10px;
+    min-width: 200px;
 }
+
+.one-filter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: 30px;
+    margin: 5px 20px 5px 20px;
+}
+
+.filter-checkbox {
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
+}
+
+.filter-text {
+    font-size: 20px;
+}
+
+
+/********************************************************
+                        SCREEN
+********************************************************/
 
 .screen {
+    position: fixed;
+    top: 50px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin-left: max(15vw, 200px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-top: 40px;
+}
+
+.link-menu {
+    width: 75%;
+    height: 30%;
+
+    min-width: 700px;
+    min-height: 200px;
+
+    margin-top: 40px;
+    padding-right: 50px;
+
+    text-decoration: none;
+}
+
+.one-menu {
+    display: flex;
+    flex-direction: row;
+    flex: 80px 1fr;
+    align-items: center;
+
+    border: solid 3px darkgray;
+
+    width: 100%;
+    height: 100%;
+}
+
+.image-menu {
+    height: 80%;
+    margin: 0 40px;
+}
+
+.info-one-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    height: 80%;
+    width: 100%;
+
+    padding: 10px 30px;
+}
+
+.title-menu {
+    font-weight: bold;
+    font-size: 40px;
+    color: black;
+    text-decoration: underline;
+
+    margin-bottom: 20px;
+}
+
+.description-menu {
+    font-size: 20px;
+    color: black;
+    width: 100%;
     height: 100%;
 }
