@@ -20,9 +20,11 @@
             <div class="search-bar-button">
                 <input class="input-search" placeholder="Busca tu ciudad y empieza a comer...">
                 <div class="vertical-line"></div>
-                <button class="search-button">
-                    <img alt="search" class="search-button-img" src={% static "main/images/search.svg" %}>
-                </button>
+                <a href={% url 'main:search' %}>
+                    <button class="search-button">
+                        <img alt="search" class="search-button-img" src={% static "main/images/search.svg" %}>
+                    </button>
+                </a>
             </div>
             <div></div>
         </div>
