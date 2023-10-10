@@ -39,32 +39,18 @@
 
         <!-- The main view -->
         <div class="screen">
-            <!-- One menu -->
-            <a class="link-menu" href="{% url 'main:index' %}">
-                <div class="one-menu">
-                    <img class="image-menu" alt="Restaurante" src="{% static "main/images/munu.png" %}">
 
-                    <div class="info-one-menu">
-                        <p class="title-menu">
-                            Bocadillo de tortilla
-                        </p>
-                        <p class="description-menu">
-                            El típico bocacillo de tortilla de patata de toda la vida.
-                        </p>
-                    </div>
-                </div>
-            </a>
+            <!-- Restaurants -->
+            {% for restaurant in restaurants %}
+            <a class="restaurant-link" href="{% url 'main:index' %}">
+                <div class="one-restaurant">
+                    <img class="restaurant-image" alt="Restaurante" src="{% static "main/images/munu.png" %}">
 
-            <!-- Another menu -->
-            <a class="link-menu" href="{% url 'main:index' %}">
-                <div class="one-menu">
-                    <img class="image-menu" alt="Restaurante" src="{% static "main/images/munu.png" %}">
-
-                    <div class="info-one-menu">
-                        <p class="title-menu">
-                            Cocido madrileño
+                    <div class="info-one-restaurant">
+                        <p class="restaurant-name">
+                            {{ restaurant.name }}
                         </p>
-                        <p class="description-menu">
+                        <p class="restaurant-description">
                             El mejor cocido madrileño que probarás en toda tu vida! No sé a que estas
                             esperando, animate y ven a probarlo de una vez por todas! Tiene su chorizo,
                             morcilla, longaniza, patatas...
@@ -75,45 +61,11 @@
                 </div>
             </a>
 
-            <!-- One menu -->
-            <a class="link-menu" href="{% url 'main:index' %}">
-                <div class="one-menu">
-                <img class="image-menu" alt="Restaurante" src="{% static "main/images/munu.png" %}">
-
-                <div class="info-one-menu">
-                    <p class="title-menu">
-                        Bocadillo de tortilla
-                    </p>
-                    <p class="description-menu">
-                        El típico bocacillo de tortilla de patata de toda la vida.
-                    </p>
-                </div>
-
-                </div>
-            </a>
-
-            <!-- Another menu -->
-            <a class="link-menu" href="{% url 'main:index' %}">
-                <div class="one-menu">
-                <img class="image-menu" alt="Restaurante" src="{% static "main/images/munu.png" %}">
-
-                <div class="info-one-menu">
-                    <p class="title-menu">
-                        Cocido madrileño
-                    </p>
-                    <p class="description-menu">
-                        El mejor cocido madrileño que probarás en toda tu vida! No sé a que estas
-                        esperando, animate y ven a probarlo de una vez por todas! Tiene su chorizo,
-                        morcilla, longaniza, patatas...
-                        Todo lo que te puedas imaginar!
-                    </p>
-                </div>
-
-                </div>
-            </a>
-
-
-
+            {% empty %}
+                <p>
+                    No hay restaurantes
+                </p>
+            {% endfor %}
 
         </div>
     </div>
