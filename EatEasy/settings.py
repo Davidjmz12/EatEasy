@@ -79,8 +79,12 @@ WSGI_APPLICATION = 'EatEasy.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'EatEasyDB',  # Replace with your database name
+        'USER': 'admin',  # Replace with your PostgreSQL username
+        'PASSWORD': 'admin',  # Replace with your PostgreSQL password
+        'HOST': 'localhost',  # Use 'localhost' for a local PostgreSQL server
+        'PORT': '',  # Leave empty to use the default PostgreSQL port (5432)
     }
 }
 
@@ -103,6 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "login.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
