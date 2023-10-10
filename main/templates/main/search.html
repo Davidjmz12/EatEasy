@@ -11,6 +11,9 @@
     <div class="main">
         <!-- The filters -->
         <div class="filters-column">
+            <p class="info-title">
+                Filtros
+            </p>
 
             <div class="one-filter">
                 <input class="filter-checkbox" type="checkbox">
@@ -26,6 +29,11 @@
                 <input class="filter-checkbox" type="checkbox">
                 <p class="filter-text">Vegano</p>
             </div>
+
+
+            <p class="info-title">
+                Precios
+            </p>
         </div>
 
 
@@ -34,17 +42,16 @@
             <!-- One menu -->
             <a class="link-menu" href="{% url 'main:index' %}">
                 <div class="one-menu">
-                <img class="image-menu" alt="Restaurante" src="{% static "main/images/munu.png" %}">
+                    <img class="image-menu" alt="Restaurante" src="{% static "main/images/munu.png" %}">
 
-                <div class="info-one-menu">
-                    <p class="title-menu">
-                        Bocadillo de tortilla
-                    </p>
-                    <p class="description-menu">
-                        El típico bocacillo de tortilla de patata de toda la vida.
-                    </p>
-                </div>
-
+                    <div class="info-one-menu">
+                        <p class="title-menu">
+                            Bocadillo de tortilla
+                        </p>
+                        <p class="description-menu">
+                            El típico bocacillo de tortilla de patata de toda la vida.
+                        </p>
+                    </div>
                 </div>
             </a>
 
