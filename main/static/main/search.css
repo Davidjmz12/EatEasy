@@ -22,7 +22,8 @@ body {
     box-shadow: 8px 0 10px rgba(0, 0, 0, 0.15);
 
     padding-left: 20px;
-    min-width: 200px;
+    padding-right: 50px;
+    min-width: 180px;
 
     z-index: 200;
 }
@@ -45,14 +46,26 @@ body {
 }
 
 .filter-checkbox {
-    width: 20px;
     height: 20px;
-    margin-right: 20px;
+    width: 20px;
+    margin-right: 10px;
 }
 
 .filter-text {
     font-size: 20px;
+    font-weight: lighter;
 }
+
+
+/********************************************************
+                        SLIDER
+********************************************************/
+
+.slice{
+    width: 95%;
+    margin-left: 20px;
+}
+
 
 
 /********************************************************
@@ -79,10 +92,10 @@ body {
 
 .restaurant-link {
     width: 75%;
-    height: 30%;
+    height: 30vh;
 
     min-width: 700px;
-    min-height: 200px;
+    min-height: 235px;
 
     margin-top: 40px;
     padding-right: 50px;

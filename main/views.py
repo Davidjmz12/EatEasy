@@ -1,15 +1,15 @@
 from django.shortcuts import render
 
 
-class Restaurante:
-  def __init__(self, name):
-    self.name = name
+class Restaurant:
+    def __init__(self, name):
+        self.name = name
 
 
-Restaurantes = [Restaurante("Restaurante 1"),
-                Restaurante("Restaurante 2"),
-                Restaurante("Restaurante 3"),
-                Restaurante("Restaurante 4")]
+Restaurants = [Restaurant("Restaurant 1"),
+               Restaurant("Restaurant 2"),
+               Restaurant("Restaurant 3"),
+               Restaurant("Restaurant 4")]
 
 
 # Create your views here.
@@ -19,5 +19,5 @@ def index(request):
 
 def search(request):
     return render(request, "main/search.html", {
-        "restaurants": Restaurantes
+        "restaurants": Restaurants
     })
