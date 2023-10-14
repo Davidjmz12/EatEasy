@@ -9,18 +9,15 @@
     <!-- Restaurants -->
     {% for restaurant in restaurants %}
     <a class="restaurant-link" href="{% url 'main:restaurant' %}">
-        <div class="one-restaurant">
-            <img class="restaurant-image" alt="Restaurante" src="{{ restaurant.img }}">
+        <img class="restaurant-image" alt="Restaurante" src="{{ restaurant.img }}">
 
-            <div class="info-one-restaurant">
-                <p class="restaurant-name">
-                    {{ restaurant.name }}
-                </p>
-                <p class="restaurant-description">
-                    {{ restaurant.description }}
-                </p>
-            </div>
-
+        <div class="info-one-restaurant">
+            <p class="restaurant-name">
+                {{ restaurant.name }}
+            </p>
+            <p class="restaurant-description">
+                {{ restaurant.description }}
+            </p>
         </div>
     </a>
 

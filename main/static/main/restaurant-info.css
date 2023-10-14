@@ -1,6 +1,8 @@
 body {
     display: flex;
     background-color: rgb(240, 240, 240);
+    padding: 0;
+    margin: 0;
 }
 
 p {
@@ -20,7 +22,7 @@ p {
     box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.3);
 
     width: 80%;
-    height: 40%;
+    height: 100%;
     min-height: 250px;
     max-height: 400px;
 }
@@ -30,7 +32,8 @@ p {
     font-weight: bold;
     color: darkcyan;
 
-    margin: 15px 0;
+    margin-bottom: 15px;
+    margin-top: 25px;
 }
 
 .div-title {
