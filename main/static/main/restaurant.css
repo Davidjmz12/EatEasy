@@ -1,0 +1,98 @@
+body {
+    display: flex;
+    background-color: rgb(240, 240, 240);
+
+    overflow: auto;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+.main {
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 80%;
+    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.3);
+    padding-bottom: 20px;
+
+    min-width: 575px;
+}
+
+.restaurant-name {
+    text-decoration: none;
+    font-size: 40px;
+    font-weight: bold;
+    color: darkcyan;
+
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+.one-dish {
+    border: 2px solid darkcyan;
+    background-color: rgb(240, 240, 240);
+    text-decoration: none;
+    color: black;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: 20vh;
+    width: 80%;
+    margin: 20px 0;
+    padding: 20px;
+
+    min-width: 500px;
+
+    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.3);
+
+    overflow: auto;
+}
+
+.dish-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: justify;
+
+    height: 100%;
+    width: 90%;
+}
+
+.dish-img {
+    height: 80%;
+    margin: 0 20px;
+}
+
+.dish-header {
+    display: flex;
+    flex-direction: row;
+
+    font-size: 25px;
+    font-weight: bold;
+
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.dish-name {
+    width: 80%;
+    text-align: center;
+}
+
+.dish-price {
+    width: 20%;
+    text-align: right;
+}
+
+.dish-ingredients {
+    width: 100%;
+}

@@ -2,11 +2,47 @@
 {% load static %}
 
 {% block new-head %}
-    <link rel="stylesheet" href="{% static "main/restaurant-info.css" %}">
+    <link rel="stylesheet" href="{% static "main/restaurant.css" %}">
 {% endblock %}
 
 {% block main %}
-    <a href="{% url 'main:restaurant-info' %}">
-        Restaurant 1
-    </a>
+    <div class="main">
+        <a class="restaurant-name" href="{% url 'main:restaurant-info' %}">
+            Restaurant 1
+        </a>
+
+        {% for dish in dishes %}
+
+            <a class="one-dish" href="{% url 'main:search' %}">
+                <img class="dish-img" alt="dish" src="{{ dish.img }}">
+                <div class="dish-info">
+                    <div class="dish-header">
+                        <p class="dish-name">
+                            {{ dish.name }}
+                        </p>
+
+                        <p class="dish-price">
+                            {{ dish.price }}€
+                        </p>
+                    </div>
+
+                    <p class="dish-ingredients">
+                        Ingredientes:
+                        {% for ingredient in dish.ingredients %}
+                            {{ ingredient }},
+                        {% empty %}
+                            Sin especificar.
+                        {% endfor %}
+                    </p>
+                </div>
+            </a>
+
+        {% empty %}
+
+            <p>
+                No hay platos todavía para este restaurante.
+            </p>
+
+        {% endfor %}
+    </div>
 {% endblock %}
