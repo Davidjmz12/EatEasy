@@ -28,3 +28,11 @@ def search(request):
 
 def restaurant(request):
     return render(request, "main/restaurant.html")
+
+
+def restaurant_info(request):
+    return render(request, "main/restaurant-info.html")
+
+
+def filters(request):
+    return render(request, "main/layout-filters.html")

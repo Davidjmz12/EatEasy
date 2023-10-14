@@ -1,60 +1,12 @@
-{% extends "main/layout.html" %}
+{% extends "main/layout-filters.html" %}
 {% load static %}
 
-{% block head %}
-    <link rel="stylesheet" href="{% static "main/restaurant.css" %}">
+{% block new-head %}
+    <link rel="stylesheet" href="{% static "main/restaurant-info.css" %}">
 {% endblock %}
 
-{% block body %}
-    <!-- Visible part -->
-	<div class="main">
-        <!-- Name of the restaurant -->
-        <div class="restaurant-name">
-            Restaurant 1
-        </div>
-
-        <!-- Address -->
-        <div class="div-restaurant-info">
-            <div class="div-title">
-                <p>
-                    Address:
-                </p>
-            </div>
-            <div class="div-info">
-                <p>
-                    C/ Imagination, 43 (City)
-                </p>
-            </div>
-        </div>
-
-        <!-- Phone number -->
-        <div class="div-restaurant-info">
-            <div class="div-title">
-                <p>
-                    Telephone:
-                </p>
-            </div>
-            <div class="div-info">
-                <p>
-                    976 85 32 75
-                </p>
-            </div>
-        </div>
-
-        <!-- Web page -->
-        <div class="div-restaurant-info">
-            <div class="div-title">
-                <p>
-                    Web page:
-                </p>
-            </div>
-            <div class="div-info">
-                <a href="{% url 'main:search' %}">
-                    <p>
-                        https://www.myimaginatedwebpage.com/
-                    </p>
-                </a>
-            </div>
-        </div>
-    </div>
+{% block main %}
+    <a href="{% url 'main:restaurant-info' %}">
+        Restaurant 1
+    </a>
 {% endblock %}
