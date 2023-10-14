@@ -6,94 +6,90 @@
 {% endblock %}
 
 {% block body %}
+    <!-- The filters -->
+    <div class="filters-column">
 
-    <!-- The hole view -->
-    <div class="main">
-        <!-- The filters -->
-        <div class="filters-column">
+        <!-- Filters of consumers preferences -->
+        <p class="info-title">
+            Filtros alimenticios
+        </p>
 
-            <!-- Filters of consumers preferences -->
-            <p class="info-title">
-                Filtros alimenticios
-            </p>
+        <div class="one-filter">
+            <input class="filter-checkbox" type="checkbox">
+            <p class="filter-text">Celíaco</p>
+        </div>
 
-            <div class="one-filter">
-                <input class="filter-checkbox" type="checkbox">
-                <p class="filter-text">Celíaco</p>
-            </div>
+        <div class="one-filter">
+            <input class="filter-checkbox" type="checkbox">
+            <p class="filter-text">Vegetariano</p>
+        </div>
 
-            <div class="one-filter">
-                <input class="filter-checkbox" type="checkbox">
-                <p class="filter-text">Vegetariano</p>
-            </div>
-
-            <div class="one-filter">
-                <input class="filter-checkbox" type="checkbox">
-                <p class="filter-text">Vegano</p>
-            </div>
-
-
-            <!-- Types of food -->
-            <p class="info-title">
-                Tipos de comida
-            </p>
-
-            <div class="one-filter">
-                <input class="filter-checkbox" type="checkbox">
-                <p class="filter-text">Italiano</p>
-            </div>
-
-            <div class="one-filter">
-                <input class="filter-checkbox" type="checkbox">
-                <p class="filter-text">Chino</p>
-            </div>
-
-            <div class="one-filter">
-                <input class="filter-checkbox" type="checkbox">
-                <p class="filter-text">Japones</p>
-            </div>
-
-            <div class="one-filter">
-                <input class="filter-checkbox" type="checkbox">
-                <p class="filter-text">Mexicano</p>
-            </div>
-
-            <div class="one-filter">
-                <input class="filter-checkbox" type="checkbox">
-                <p class="filter-text">Asador</p>
-            </div>
-
-            <!-- Filters of price -->
-            <p class="info-title">
-                Precios
-            </p>
-
-            <div class="slider-container">
-                {% csrf_token %}
-                <input class="slice" type="range">
-            </div>
-
+        <div class="one-filter">
+            <input class="filter-checkbox" type="checkbox">
+            <p class="filter-text">Vegano</p>
         </div>
 
 
+        <!-- Types of food -->
+        <p class="info-title">
+            Tipos de comida
+        </p>
+
+        <div class="one-filter">
+            <input class="filter-checkbox" type="checkbox">
+            <p class="filter-text">Italiano</p>
+        </div>
+
+        <div class="one-filter">
+            <input class="filter-checkbox" type="checkbox">
+            <p class="filter-text">Chino</p>
+        </div>
+
+        <div class="one-filter">
+            <input class="filter-checkbox" type="checkbox">
+            <p class="filter-text">Japones</p>
+        </div>
+
+        <div class="one-filter">
+            <input class="filter-checkbox" type="checkbox">
+            <p class="filter-text">Mexicano</p>
+        </div>
+
+        <div class="one-filter">
+            <input class="filter-checkbox" type="checkbox">
+            <p class="filter-text">Asador</p>
+        </div>
+
+        <!-- Filters of price -->
+        <p class="info-title">
+            Precios
+        </p>
+
+        <div class="slider-container">
+            {% csrf_token %}
+            <input class="slice" type="range">
+        </div>
+
+    </div>
+
+
+    <!-- The hole view -->
+    <div class="main">
         <!-- The main view -->
         <div class="screen">
 
             <!-- Restaurants -->
             {% for restaurant in restaurants %}
-            <a class="restaurant-link" href="{% url 'main:index' %}">
+            <a class="restaurant-link" href="{% url 'main:restaurant' %}">
                 <div class="one-restaurant">
-                    <img class="restaurant-image" alt="Restaurante" src="{% static "main/images/munu.png" %}">
+                    <img class="restaurant-image" alt="Restaurante" src="{{ restaurant.img }}">
 
                     <div class="info-one-restaurant">
                         <p class="restaurant-name">
                             {{ restaurant.name }}
                         </p>
                         <p class="restaurant-description">
-                            El mejor cocido madrileño que probarás en toda tu vida! No sé a que estas
-                            esperando, animate y ven a probarlo de una vez por todas! Tiene su chorizo,
-                            morcilla, longaniza, patatas...
-                            Todo lo que te puedas imaginar!
+                            {{ restaurant.description }}
                         </p>
                     </div>
 
@@ -102,9 +98,10 @@
 
             {% empty %}
                 <p>
-                    No hay restaurantes
+                    There is any restaurants in our website. Be the first!
                 </p>
             {% endfor %}
+
 
         </div>
     </div>
