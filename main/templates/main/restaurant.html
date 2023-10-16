@@ -26,14 +26,22 @@
                         </p>
                     </div>
 
-                    <p class="dish-ingredients">
-                        Ingredientes:
-                        {% for ingredient in dish.ingredients %}
-                            {{ ingredient }},
-                        {% empty %}
-                            Sin especificar.
-                        {% endfor %}
-                    </p>
+                    <div class="dish-ingredients">
+                        <p class="dish-ingredients-title">
+                            Ingredientes:
+                        </p>
+
+                        <ul>
+                            {% for ingredient in dish.ingredients %}
+                                <li>
+                                    {{ ingredient }}
+                                </li>
+                            {% empty %}
+                                Sin especificar.
+                            {% endfor %}
+                        </ul>
+
+                    </div>
                 </div>
             </a>
 

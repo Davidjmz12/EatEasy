@@ -45,16 +45,14 @@ p {
     flex-direction: row;
     align-items: center;
 
-    height: 20vh;
     width: 80%;
     margin: 20px 0;
     padding: 20px;
 
     min-width: 500px;
+    min-height: 200px;
 
     box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.3);
-
-    overflow: auto;
 }
 
 .dish-info {
@@ -69,7 +67,8 @@ p {
 }
 
 .dish-img {
-    height: 80%;
+    height: 160px;
+    width: 160px;
     margin: 0 20px;
 }
 
@@ -95,5 +94,23 @@ p {
 }
 
 .dish-ingredients {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+.dish-ingredients-title {
+    text-decoration: underline;
+    text-align: left;
     width: 100%;
+}
+
+ul{
+    text-decoration: none;
+    text-align: left;
+    margin-left: 35px;
+    width: inherit;
 }

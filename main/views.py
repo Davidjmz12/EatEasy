@@ -24,7 +24,9 @@ Restaurants = [Restaurant("Restaurant 1", "Incredible", "../static/main/images/m
                Restaurant("Restaurant 4", "Another interesting description", "../static/main/images/menu.png")]
 
 Dishes = [Dish("Macarrones con bacon", 5.50, 4, ["Macarrones", "Bacon", "Tomate"], "../static/main/images/menu.png"),
-          Dish("Cocido madrileño", 8.75, 4.5, ["Chorizo", "Tomate", "Morcilla", "Longaniza"],
+          Dish("Cocido madrileño", 8.75, 4.5, ["Chorizo", "Tomate", "Morcilla", "Longaniza",
+                                               "Chorizo", "Tomate", "Morcilla", "Longaniza", "Chorizo", "Tomate",
+                                               "Morcilla", "Longaniza", "Chorizo", "Tomate", "Morcilla", "Longaniza"],
                "../static/main/images/menu.png"),
           Dish("Sopa", 4.40, 2, ["Caldo", "Pasta", "Avecren"], "../static/main/images/menu.png"),
           Dish("Macarrones con queso", 5.60, 4.3, ["Macarrones", "Queso", "Tomate"], "../static/main/images/menu.png")]
