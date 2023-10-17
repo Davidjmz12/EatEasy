@@ -12,19 +12,32 @@
         </a>
 
         {% for dish in dishes %}
+            <div class="one-dish-short">
+                <button onclick="toggleContent({{ forloop.counter0 }})">...</button>
+                <p class="dish-name">
+                    {{ dish.name }}
+                </p>
 
-            <a class="one-dish" href="{% url 'main:search' %}">
-                <img class="dish-img" alt="dish" src="{{ dish.img }}">
+                <p class="dish-price">
+                    {{ dish.price }}€
+                </p>
+            </div>
+
+            <div class="one-dish-long" style="display: none">
+                <div class="dish-header">
+                    <button onclick="toggleContent({{ forloop.counter0 }})">...</button>
+
+                    <p class="dish-name">
+                        {{ dish.name }}
+                    </p>
+
+                    <p class="dish-price">
+                        {{ dish.price }}€
+                    </p>
+                </div>
+
                 <div class="dish-info">
-                    <div class="dish-header">
-                        <p class="dish-name">
-                            {{ dish.name }}
-                        </p>
-
-                        <p class="dish-price">
-                            {{ dish.price }}€
-                        </p>
-                    </div>
+                    <img class="dish-img" alt="dish" src="{{ dish.img }}">
 
                     <div class="dish-ingredients">
                         <p class="dish-ingredients-title">
@@ -43,7 +56,8 @@
 
                     </div>
                 </div>
-            </a>
+            </div>
+            <script src="{% static "main/restaurant.js" %}"></script>
 
         {% empty %}
 

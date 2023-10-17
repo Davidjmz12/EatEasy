@@ -34,7 +34,8 @@ p {
     margin-top: 40px;
 }
 
-.one-dish {
+.one-dish-short,
+.one-dish-long {
     border: 2px solid darkcyan;
     background-color: rgb(240, 240, 240);
     text-decoration: none;
@@ -49,20 +50,24 @@ p {
     padding: 20px;
 
     min-width: 500px;
-    min-height: 200px;
-
     box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.3);
+}
+
+.one-dish-long {
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
 }
 
 .dish-info {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
 
     text-align: justify;
 
     height: 100%;
-    width: 90%;
+    width: 100%;
 }
 
 .dish-img {
