@@ -12,8 +12,7 @@
         </a>
 
         {% for dish in dishes %}
-            <div class="one-dish-short">
-                <button onclick="toggleContent({{ forloop.counter0 }})">...</button>
+            <div class="one-dish-short" onclick="toggleContent({{ forloop.counter0 }})">
                 <p class="dish-name">
                     {{ dish.name }}
                 </p>
@@ -23,21 +22,19 @@
                 </p>
             </div>
 
-            <div class="one-dish-long" style="display: none">
-                <div class="dish-header">
-                    <button onclick="toggleContent({{ forloop.counter0 }})">...</button>
-
-                    <p class="dish-name">
-                        {{ dish.name }}
-                    </p>
-
-                    <p class="dish-price">
-                        {{ dish.price }}€
-                    </p>
-                </div>
+            <div class="one-dish-long" style="display: none" onclick="toggleContent({{ forloop.counter0 }})">
+                <img class="dish-img" alt="dish" src="{{ dish.img }}">
 
                 <div class="dish-info">
-                    <img class="dish-img" alt="dish" src="{{ dish.img }}">
+                    <div class="dish-header">
+                        <p class="dish-name">
+                            {{ dish.name }}
+                        </p>
+
+                        <p class="dish-price">
+                            {{ dish.price }}€
+                        </p>
+                    </div>
 
                     <div class="dish-ingredients">
                         <p class="dish-ingredients-title">
