@@ -1,4 +1,5 @@
 from django.db import models
+from login.models import Client
 
 # Create your models here.
 class Ingredients(models.Model):
