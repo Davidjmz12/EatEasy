@@ -13,6 +13,13 @@
 
         {% for dish in dishes %}
             <div class="one-dish-short" onclick="toggleContent({{ forloop.counter0 }})">
+                <img class="type-icon" src="{% static 'main/images/vegetarian.png' %}">
+                <img class="type-icon" src="{% static 'main/images/no-vegetarian.png' %}">
+                <img class="type-icon" src="{% static 'main/images/vegan.png' %}">
+                <img class="type-icon" src="{% static 'main/images/no-vegan.png' %}">
+                <img class="type-icon" src="{% static 'main/images/gluten.png' %}">
+                <img class="type-icon" src="{% static 'main/images/no-gluten.png' %}">
+
                 <p class="dish-name">
                     {{ dish.name }}
                 </p>

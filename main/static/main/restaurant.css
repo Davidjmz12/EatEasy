@@ -53,6 +53,7 @@ p {
     box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.3);
 
     cursor: pointer;
+    overflow: hidden;
 }
 
 .one-dish-long:hover,
@@ -64,6 +65,18 @@ p {
     display: flex;
     flex-direction: row;
     min-height: 200px;
+}
+
+.one-dish-short {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 5px;
+}
+
+.type-icon {
+    height: 70px;
+    margin: 0;
+    padding: 0;
 }
 
 .dish-info {
@@ -96,7 +109,8 @@ p {
 
 .dish-name {
     width: 80%;
-    text-align: center;
+    text-align: left;
+    padding-left: 20px;
 }
 
 .dish-price {
@@ -124,4 +138,65 @@ ul{
     text-align: left;
     margin-left: 35px;
     width: inherit;
+}
+
+p {
+    font-size: 25px;
+}
+
+@media screen and (min-width: 2000px) {
+    p {
+        font-size: 40px;
+    }
+}
+
+
+@media screen and (min-width: 3000px) {
+    p {
+        font-size: 60px;
+    }
+
+    .type-icon {
+        height: 90px;
+    }
+}
+
+@media screen and (min-width: 3700px) {
+    p {
+        font-size: 70px;
+    }
+
+    .type-icon {
+        height: 80px;
+    }
+}
+
+@media screen and (min-width: 4000px) {
+    p {
+        font-size: 80px;
+    }
+
+    .type-icon {
+        height: 110px;
+    }
+}
+
+@media screen and (min-width: 5200px) {
+    p {
+        font-size: 90px;
+    }
+
+    .type-icon {
+        height: 120px;
+    }
+}
+
+@media screen and (min-width: 6000px) {
+    p {
+        font-size: 100px;
+    }
+
+    .type-icon {
+        height: 150px;
+    }
 }

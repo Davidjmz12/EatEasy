@@ -80,3 +80,14 @@
     padding-bottom: 100px;
     margin-left: max(15vw, 200px);
 }
+
+
+@media screen and (max-width: 800px) {
+    .filters-column {
+        display: none;
+    }
+
+    .screen {
+        margin-left: 0;
+    }
+}
