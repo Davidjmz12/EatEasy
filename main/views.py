@@ -1,8 +1,8 @@
 from django.shortcuts import render
-
+from login.models import *
 
 # All the information for one restaurant
-class Restaurant:
+class Restaurante:
     def __init__(self, name, description, img):
         self.name = name
         self.description = description
@@ -18,10 +18,10 @@ class Dish:
         self.img = img
 
 
-Restaurants = [Restaurant("Restaurant 1", "Incredible", "../static/main/images/menu.png"),
-               Restaurant("Restaurant 2", "The best italian", "../static/main/images/menu.png"),
-               Restaurant("Restaurant 3", "A simple restaurant", "../static/main/images/menu.png"),
-               Restaurant("Restaurant 4", "Another interesting description", "../static/main/images/menu.png")]
+Restaurantss = [Restaurante("Restaurant 1", "Incredible", "../static/main/images/menu.png"),
+               Restaurante("Restaurant 2", "The best italian", "../static/main/images/menu.png"),
+               Restaurante("Restaurant 3", "A simple restaurant", "../static/main/images/menu.png"),
+               Restaurante("Restaurant 4", "Another interesting description", "../static/main/images/menu.png")]
 
 Dishes = [Dish("Macarrones con bacon", 5.50, 4, ["Macarrones", "Bacon", "Tomate"], "../static/main/images/menu.png"),
           Dish("Cocido madrileño", 8.75, 4.5, ["Chorizo", "Tomate", "Morcilla", "Longaniza",
@@ -38,8 +38,9 @@ def index(request):
 
 
 def search(request):
+    res = Restaurant.objects.all()
     return render(request, "main/search.html", {
-        "restaurants": Restaurants
+        "restaurants": res
     })
 
 

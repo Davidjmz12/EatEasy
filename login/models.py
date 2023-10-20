@@ -51,6 +51,8 @@ class Restaurant(models.Model):
     precise_location = models.CharField(max_length=100)
     city = models.CharField(max_length=20)
     phone_number = models.IntegerField()
+    description = models.CharField(max_length=200)
+    rest_name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.user.username
@@ -60,18 +62,3 @@ class DeliveryPage(models.Model):
     name = models.CharField(max_length=20)
     url = models.URLField()
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name="delivery_urls")
-
-
-# class Restaurant(User):
-#     base_role = User.Role.RESTAURANT
-#
-#     # New attributes for the restaurant.
-#     web_page = models.URLField(blank=True)
-#     precise_location = models.CharField(max_length=100)
-#     city = models.CharField(max_length=20)
-#     phone_number = models.IntegerField()
-#
-#     restaurants = RestaurantManager()
-#
-#     class Meta:
-#         proxy = True
