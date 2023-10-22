@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'EatEasy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'EatEasyDB2',  # Replace with your database name
+        'NAME': 'EatEasy',  # Replace with your database name
         'USER': 'admin',  # Replace with your PostgreSQL username
         'PASSWORD': 'admin',  # Replace with your PostgreSQL password
         'HOST': 'localhost',  # Use 'localhost' for a local PostgreSQL server
