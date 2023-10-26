@@ -1,0 +1,47 @@
+{% extends "main/layout.html" %}
+
+{% block body %}
+    <div class="filters-column">
+            <div class="one-filter">
+                <a href="{% url 'infouser:newmenu' %}">
+                    <button class="new-button">
+                    Nuevo Plato
+                    </button>
+                </a>
+            </div>
+
+            <div class="one-filter">
+                <a href="{% url 'infouser:restaurant' %}">
+                    <button class="mod-button">
+                    Editar Datos
+                    </button>
+                </a>
+            </div>
+
+            <div class="one-filter">
+                <a href="{% url 'infouser:restaurant' %}">
+                    <button class="est-button">
+                    Estadísticas
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="screen">
+        {% for dish in dishes %}
+            <a class="dish-link" href="{% url 'infouser:restaurant' %}"></a>
+                <div class="info-one-dish">
+                    <p class="dish-name">
+                     {{ dish.name}}      {{ dish.price }}
+                    </p>
+
+                </div>
+            </a>
+
+        {% empty %}
+            <p>
+                There is any dishes in your restaurant. Create the first!
+            </p>
+        {% endfor %}
+        </div>
+{% endblock %}

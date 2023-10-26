@@ -1,0 +1,46 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block body %}
+        <div class="screen">
+        {% for new in news %}
+            <div class="one-rate-short" onclick="toggleContent({{ forloop.counter0 }})">
+                <p class="rate-client">
+                    {{ new.client }}
+                </p>
+                <p class="rate-dish">
+                    {{ new.dish }}
+                </p>
+            </div>
+
+            <div class="one-dish-long" style="display: none" onclick="toggleContent({{ forloop.counter0 }})">
+
+                <div class="rate-info">
+                    <div class="rate-header">
+                        <p class="rate-client">
+                            {{ new.client }}
+                        </p>
+                        <p class="rate-dish">
+                            {{ new.dish }}
+                        </p>
+                    </div>
+
+                    <div class="rate-info">
+                        <p class="rate-comment">
+                            {{ new.comment }}
+                        </p>
+                        <p class="rate-rate">
+                            {{ new.rate }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <script src="{% static "infouser/news.js" %}"></script>
+
+        {% empty %}
+            <p>
+                There is any comments in your restaurant.
+            </p>
+        {% endfor %}
+        </div>
+{% endblock %}

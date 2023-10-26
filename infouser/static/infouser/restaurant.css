@@ -1,0 +1,90 @@
+p {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0.07);
+}
+
+/********************************************************
+                        SCREEN
+********************************************************/
+.new-button {
+    background-color: transparent;
+    text-decoration: none;
+
+    height: 100%;
+    padding: 0;
+
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+.mod-button {
+    background-color: transparent;
+    text-decoration: none;
+
+    height: 100%;
+    padding: 0;
+
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+.est-button {
+    background-color: transparent;
+    text-decoration: none;
+
+    height: 100%;
+    padding: 0;
+
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+
+.dish-link {
+    width: 75%;
+    height: 30vh;
+
+    min-width: 700px;
+    min-height: 235px;
+
+    margin-top: 40px;
+    padding-right: 50px;
+
+    text-decoration: none;
+
+    background-color: white;
+    border: 2px solid darkcyan;
+
+    display: flex;
+    flex-direction: row;
+    flex: 80px 1fr;
+    align-items: center;
+
+    box-shadow: 5px 10px 12px rgba(0, 0, 0, 0.2);
+}
+
+.info-one-dish {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    height: 80%;
+    width: 100%;
+
+    padding: 10px 30px;
+}
+
+.dish-name {
+    font-weight: bold;
+    font-size: 40px;
+    color: darkcyan;
+
+    margin-bottom: 20px;
+}

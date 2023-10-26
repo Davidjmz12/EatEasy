@@ -1,0 +1,16 @@
+{% extends "main/layout.html" %}
+
+{% block body %}
+    <h1>Nuevo plato</h1>
+    <form>
+        Nombre: <input type="text" name="nombre">
+        Precio: <input type="float" name="price">
+        Ingredientes: <input type="form" name="ingredients">
+    </form>
+
+    <a href="{%  url 'infouser:restaurant' %}">
+        <button class="guardar-button">
+            Guardar
+        </button>
+    </a>
+{% endblock %}
