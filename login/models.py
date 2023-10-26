@@ -43,7 +43,6 @@ class RestaurantManager(BaseUserManager):
 
 
 class Restaurant(models.Model):
-
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name="Restaurants")
 
     # New attributes for the restaurant.
@@ -53,6 +52,7 @@ class Restaurant(models.Model):
     phone_number = models.IntegerField()
     description = models.CharField(max_length=200)
     rest_name = models.CharField(max_length=50)
+    img = models.ImageField(blank=True)
 
     def __str__(self):
         return self.user.username
