@@ -7,7 +7,7 @@
 
 {% block main %}
     <div class="main">
-        <a class="restaurant-name" href="{% url 'main:restaurant-info' %}">
+        <a class="restaurant-name" href="{% url 'main:restaurant-info' restaurant.user_id %}">
             {{ restaurant.rest_name }}
         </a>
 

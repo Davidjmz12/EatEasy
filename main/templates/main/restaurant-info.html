@@ -10,7 +10,7 @@
 	<div class="main">
         <!-- Name of the restaurant -->
         <div class="restaurant-name">
-            Restaurant 1
+            {{ restaurant.rest_name }}
         </div>
 
         <!-- Address -->
@@ -22,7 +22,7 @@
             </div>
             <div class="div-info">
                 <p>
-                    C/ Imagination, 43 (City)
+                    {{ restaurant.precise_location }}
                 </p>
             </div>
         </div>
@@ -36,7 +36,7 @@
             </div>
             <div class="div-info">
                 <p>
-                    976 85 32 75
+                    {{ restaurant.phone_number }}
                 </p>
             </div>
         </div>
@@ -51,7 +51,7 @@
             <div class="div-info restaurant-web-page">
                 <a href="{% url 'main:search' %}">
                     <p>
-                        https://www.myimaginatedwebpage.com/
+                        {{ restaurant.web_page }}
                     </p>
                 </a>
             </div>
