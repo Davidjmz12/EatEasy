@@ -14,6 +14,10 @@ class Dish(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name="my_dishes")
     price = models.FloatField()
 
+    vegetarian = models.BooleanField()
+    vegan = models.BooleanField()
+    celiac = models.BooleanField()
+
 
 class Rating(models.Model):
     rate = models.IntegerField()

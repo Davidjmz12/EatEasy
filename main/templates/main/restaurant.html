@@ -13,12 +13,23 @@
 
         {% for dish in dishes %}
             <div class="one-dish-short">
-                <img class="type-icon" src="{% static 'main/images/vegetarian.png' %}">
-                <img class="type-icon" src="{% static 'main/images/no-vegetarian.png' %}">
-                <img class="type-icon" src="{% static 'main/images/vegan.png' %}">
-                <img class="type-icon" src="{% static 'main/images/no-vegan.png' %}">
-                <img class="type-icon" src="{% static 'main/images/gluten.png' %}">
-                <img class="type-icon" src="{% static 'main/images/no-gluten.png' %}">
+                {% if dish.vegetarian %}
+                	<img class="type-icon" src="{% static 'main/images/vegetarian.png' %}">
+                {% else %}
+                    <img class="type-icon" src="{% static 'main/images/no-vegetarian.png' %}">
+                {% endif %}
+
+                {% if dish.vegan %}
+                    <img class="type-icon" src="{% static 'main/images/vegan.png' %}">
+                {% else %}
+                    <img class="type-icon" src="{% static 'main/images/no-vegan.png' %}">
+                {% endif %}
+
+                {% if dish.celiac %}
+                    <img class="type-icon" src="{% static 'main/images/gluten.png' %}">
+                {% else %}
+                    <img class="type-icon" src="{% static 'main/images/no-gluten.png' %}">
+                {% endif %}
 
                 <p class="dish-name">
                     {{ dish.name }}
