@@ -34,8 +34,10 @@
             <div class="header-right">
             {% if request.user.is_authenticated %}
                 <div class="dropdown">
-                    <button class="dropbtn">{{ request.user.username }}</button>
-                    <img alt="usr" src="{% static 'main/images/user.png' %}" class="user-image">
+                    <div class="centrar-img">
+                        <button class="dropbtn">{{ request.user.username }}</button>
+                        <img alt="usr" src="{% static 'main/images/user.png' %}" class="user-image">
+                    </div>
                     <div class="dropdown-content">
                         <a href="{% url 'infouser:index' %}"> My data </a>
                         <a href="{% url 'infouser:index' %}"> Notification </a>
