@@ -1,7 +1,6 @@
 from django.db import models
 from login.models import Client, Restaurant
 
-
 # Create your models here.
 class Ingredients(models.Model):
     name = models.CharField(max_length=20)
@@ -10,8 +9,12 @@ class Ingredients(models.Model):
 class Dish(models.Model):
     ingredients = models.ManyToManyField(Ingredients, related_name="dishes_with", blank=True)
     name = models.CharField(max_length=20)
-    restaurant = models.ForeignKey(Restaurant, related_name="my_dishes", on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name="my_dishes")
     price = models.FloatField()
+
+    vegetarian = models.BooleanField()
+    vegan = models.BooleanField()
+    celiac = models.BooleanField()
 
 
 class Rating(models.Model):

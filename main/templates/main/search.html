@@ -8,18 +8,18 @@
 {% block main %}
     <!-- Restaurants -->
     {% for restaurant in restaurants %}
-    <a class="restaurant-link" href="{% url 'main:restaurant' %}">
-        <img class="restaurant-image" alt="Restaurante" src="{{ restaurant.img }}">
+        <a class="restaurant-link" href="{% url 'main:restaurant' restaurant.user_id %}" onclick="selectRestaurant('{{ restaurant.rest_name }}')">
+            <img class="restaurant-image" alt="Restaurante" src="../../static/main/images/{{ restaurant.img }}">
 
-        <div class="info-one-restaurant">
-            <p class="restaurant-name">
-                {{ restaurant.name }}
-            </p>
-            <p class="restaurant-description">
-                {{ restaurant.description }}
-            </p>
-        </div>
-    </a>
+            <div class="info-one-restaurant">
+                <p class="restaurant-name">
+                    {{ restaurant.rest_name }}
+                </p>
+                <p class="restaurant-description">
+                    {{ restaurant.description }}
+                </p>
+            </div>
+        </a>
 
     {% empty %}
         <p>
