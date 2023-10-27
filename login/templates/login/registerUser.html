@@ -1,0 +1,16 @@
+{% extends "main/layout.html" %}
+{% block body %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend  class="border"> Join </legend>
+            {{ form.as_p }}
+        </fieldset>
+
+        <button type="submit">Sign up</button>
+    </form>
+    <div>
+        <small> Already Have an account? <a href="{% url 'login:login' %}">Sign In</a> </small>
+    </div>
+{% endblock %}

@@ -32,13 +32,25 @@
 
             <!--Right part-->
             <div class="header-right">
-                <a href="{% url 'login:index' %}">
-                    <button class="log-in-button">
-                        Log in
-                    </button>
-                </a>
-            </div>
+            {% if request.user.is_authenticated %}
+                <div class="dropdown">
+                    <button class="dropbtn">{{ request.user.username }}</button>
+                    <img alt="usr" src="{% static 'main/images/user.png' %}" class="user-image">
+                    <div class="dropdown-content">
+                        <a href="{% url 'infouser:index' %}"> My data </a>
+                        <a href="{% url 'infouser:index' %}"> Notification </a>
+                        <a href="{% url 'login:logout' %}"> Log out </a>
+                    </div>
+                </div>
 
+            {% else %}
+                    <a href="{% url 'login:index' %}">
+                        <button class="log-in-button">
+                            Log in
+                        </button>
+                    </a>
+            {% endif %}
+            </div>
         </header>
 
         {% block body %}
