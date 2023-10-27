@@ -12,10 +12,13 @@ def index(request):
     return HttpResponse("InfoUser")
 
 def restaurant(request):
-    dishes = request.user.Restaurants.my_dishes
-    return render(request, "infouser/restaurant.html", {
-        "dishes": dishes
-    })
+    if(request.user.is_authenticated()):
+        dishes = request.user.Restaurants.my_dishes.all()
+        return render(request, "infouser/restaurant.html", {
+            "dishes": dishes
+        })
+    else:
+        return render(request, "main/search.html")
 
 def newmenu(request):
     if request.method=="POST":
@@ -36,7 +39,7 @@ def newmenu(request):
     })
 
 def news(request):
-    news = [Rating(2,'Muy bueno',4,2)]##request.user.Restaurants.my_dishes ####deberia ser mis rating
+    news = [Rating(2,'Muy bueno',4,4)]##request.user.Restaurants.my_dishes ####deberia ser mis rating
     return render(request, "infouser/news.html", {
         "news": news
     })
