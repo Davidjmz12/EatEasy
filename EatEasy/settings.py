@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'crispy_forms'
+    'django.contrib.staticfiles'
 ]
 
 MIDDLEWARE = [
@@ -81,7 +80,7 @@ WSGI_APPLICATION = 'EatEasy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'EatEasy',  # Replace with your database name
+        'NAME': 'EatEasyDB',  # Replace with your database name
         'USER': 'admin',  # Replace with your PostgreSQL username
         'PASSWORD': 'admin',  # Replace with your PostgreSQL password
         'HOST': 'localhost',  # Use 'localhost' for a local PostgreSQL server
