@@ -1,0 +1,15 @@
+{% extends "main/layout.html" %}
+
+{% block body %}
+    <h1>Nuevo plato</h1>
+
+    <form action="{%  url 'infouser:newmenu' %}" method="post">
+        <input type="submit">
+    </form>
+
+    <a href="{%  url 'infouser:restaurant' %}">
+        <button class="guardar-button">
+            Guardar
+        </button>
+    </a>
+{% endblock %}
