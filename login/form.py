@@ -23,7 +23,7 @@ class RestaurantRegistrationForm(UserCreationForm):
     def save(self, commit=True):
         user = super(RestaurantRegistrationForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
-        user.base_role = User.Role.RESTAURANT
+        user.role = User.Role.RESTAURANT
         user.avatar = self.cleaned_data['avatar']
         cleaned = [self.cleaned_data[item] for item in ["web_page", "precise_location", "city",
                                                         "phone_number", "description", "rest_name"]]
@@ -47,7 +47,7 @@ class UserRegistrationForm(UserCreationForm):
     def save(self, commit=True):
         user = super(UserRegistrationForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
-        user.base_role = User.Role.CLIENT
+        user.role = User.Role.CLIENT
         user.avatar = self.cleaned_data['avatar']
         if commit:
             user.save()

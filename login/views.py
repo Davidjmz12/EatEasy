@@ -45,8 +45,8 @@ def registerRest(request):
     if request.method == "POST":
         form = RestaurantRegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
+            restaurant = form.save()
+            login(request, restaurant)
             return HttpResponseRedirect(reverse("main:index"))
         else:
             for error in list(form.errors.values()):
