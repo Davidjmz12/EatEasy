@@ -17,15 +17,12 @@
             <div></div>
             <img alt="logo" class="logo-search" src={% static "main/images/logo-color.png" %}>
             <div></div>
-            <div class="search-bar-button">
+            <form class="search-bar-button" action="{% url 'main:search'%}" method="post">
+                {% csrf_token %}
                 <input class="input-search" placeholder="Busca tu ciudad y empieza a comer...">
                 <div class="vertical-line"></div>
-                <a href={% url 'main:search' %}>
-                    <button class="search-button">
-                        <img alt="search" class="search-button-img" src={% static "main/images/search.svg" %}>
-                    </button>
-                </a>
-            </div>
+                <input class="search-button" type="submit" name="city">
+            </form>
             <div></div>
         </div>
 {% endblock %}
