@@ -4,7 +4,7 @@ from login.models import Client, Restaurant
 
 # Create your models here.
 class Ingredients(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20, primary_key=True)
 
 
 class Dish(models.Model):
@@ -21,6 +21,8 @@ class Dish(models.Model):
     vegan = models.BooleanField()
     celiac = models.BooleanField()
 
+    dish_image = models.ImageField(blank=True)
+
 
 class Rating(models.Model):
     rate = models.IntegerField()
@@ -31,3 +33,6 @@ class Rating(models.Model):
     dish = models.ForeignKey(
         Dish, on_delete=models.CASCADE, related_name="dish_ratings"
     )
+
+    class Meta:
+        unique_together = ("client", "dish")

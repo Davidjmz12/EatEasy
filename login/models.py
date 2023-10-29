@@ -1,7 +1,7 @@
 from django.contrib.auth.base_user import BaseUserManager
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 # Create your models here.
@@ -40,16 +40,18 @@ class RestaurantManager(BaseUserManager):
 
 
 class Restaurant(models.Model):
-
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name="Restaurants")
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, primary_key=True, related_name="Restaurants"
+    )
 
     # New attributes for the restaurant.
     web_page = models.URLField(blank=True)
     precise_location = models.CharField(max_length=100)
     city = models.CharField(max_length=20)
-    phone_number = models.IntegerField()
+    phone_number = PhoneNumberField(blank=True, help_text="Contact phone number")
     description = models.CharField(max_length=300)
     rest_name = models.CharField(max_length=50)
+    rest_image = models.ImageField(blank=True)
 
     def __str__(self):
         return self.user.username
@@ -58,4 +60,6 @@ class Restaurant(models.Model):
 class DeliveryPage(models.Model):
     name = models.CharField(max_length=20)
     url = models.URLField()
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name="delivery_urls")
+    restaurant = models.ForeignKey(
+        Restaurant, on_delete=models.CASCADE, related_name="delivery_urls"
+    )
