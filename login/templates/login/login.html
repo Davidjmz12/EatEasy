@@ -1,17 +1,40 @@
 {% extends "main/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static "login/login.css" %}">
+{% endblock %}
 
 {% block body %}
 
     {% if message %}
         <div>{{ message }}</div>
     {%  endif %}
-    <form action="{% url 'login:login'  %}" method="post">
+
+
+    <form class="form" action="{% url 'login:login'  %}" method="post">
         {% csrf_token %}
-        <input type="text" name="username" placeholder="username">
-        <input type="password" name="password" placeholder="password">
-        <input type="submit" value="LogIn">
+        <div class="one-field">
+            <p class="field">
+                Username:
+            </p>
+            <input class="input-text" type="text" name="username" placeholder="Username">
+        </div>
+
+        <div class="one-field">
+             <p class="field">
+                Password:
+            </p>
+            <input class="input-text" type="password" name="password" placeholder="Password">
+        </div>
+
+        <div class="buttons-forms">
+            <input type="submit" value="LogIn">
+            <div class="space"> </div>
+            <form action="{% url 'login:register' %}">
+                <input type="submit" name="register" value="Register">
+            </form>
+        </div>
     </form>
-    <form action="{% url 'login:register' %}">
-        <input type="submit" name="register" value="register">
-    </form>
+
 {% endblock %}

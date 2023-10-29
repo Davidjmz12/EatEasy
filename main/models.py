@@ -1,9 +1,10 @@
 from django.db import models
 from login.models import Client, Restaurant
 
+
 # Create your models here.
 class Ingredients(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20, primary_key=True)
 
 
 class Dish(models.Model):
@@ -16,9 +17,21 @@ class Dish(models.Model):
     vegan = models.BooleanField()
     celiac = models.BooleanField()
 
+    dish_image = models.ImageField(blank=True)
+
+    class Meta:
+        verbose_name_plural = "Dishes"
+
 
 class Rating(models.Model):
     rate = models.IntegerField()
     comment = models.CharField(max_length=300)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name="user_ratings")
-    dish = models.ForeignKey(Dish, on_delete=models.CASCADE, related_name="dish_ratings")
+    client = models.ForeignKey(
+        Client, on_delete=models.CASCADE, related_name="user_ratings"
+    )
+    dish = models.ForeignKey(
+        Dish, on_delete=models.CASCADE, related_name="dish_ratings"
+    )
+
+    class Meta:
+        unique_together = ("client", "dish")

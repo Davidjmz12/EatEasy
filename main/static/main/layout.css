@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(to bottom, #c8c8c8, white);
+    background-color: rgba(0, 0, 0, 0.07);
     position: fixed;
     top: 0;
     right: 0;
@@ -129,11 +129,12 @@ header {
 
 /* Dropdown desplegable */
 .dropdown-content {
-  display: none;
-  position: absolute;
-  min-width: 160px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  z-index: 1;
+    background-color: white;
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1000;
 }
 
 .dropdown-content a {
