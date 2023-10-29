@@ -1,6 +1,30 @@
 {% extends "main/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'login/register.css' %}">
+{% endblock %}
 
 {% block body %}
-    <a href="{% url 'login:registerRestaurant' %}">Restaurant </a>
-    <a href="{% url 'login:registerUser' %}"> User</a>
+    <div class="panel">
+        <p class="text">
+            What do you want to be?
+        </p>
+
+        <div class="options">
+            <a class="one-option" href="{% url 'login:registerRestaurant' %}">
+                <img alt="Restaurant" src="{% static 'login/images/restaurant.png' %}">
+                <p>
+                    RESTAURANT
+                </p>
+            </a>
+            <div class="space"> </div>
+            <a class="one-option" href="{% url 'login:registerUser' %}">
+                <img alt="Restaurant" src="{% static 'login/images/user.png' %}">
+                <p>
+                    USER
+                </p>
+            </a>
+        </div>
+    </div>
 {% endblock %}
