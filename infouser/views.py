@@ -26,9 +26,8 @@ def newMenu(request):
     if request.method == "POST":
         form = DishForm(request.POST)
         if form.is_valid():
-            dish = form.cleaned_data["dish"]
-            request.session["dish"] += [dish]
-            return HttpResponse(reverse("infouser:restaurant"))
+            form.save(restaurant=request.user.Restaurants)
+            return HttpResponseRedirect(reverse("infouser:restaurant"))
         else:
             for error in list(form.errors.values()):
                 print(request, error)
