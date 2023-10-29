@@ -1,7 +1,6 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from phonenumber_field.modelfields import PhoneNumberField
 
 
 # Create your models here.
@@ -48,7 +47,7 @@ class Restaurant(models.Model):
     web_page = models.URLField(blank=True)
     precise_location = models.CharField(max_length=100)
     city = models.CharField(max_length=20)
-    phone_number = PhoneNumberField(blank=True, help_text="Contact phone number")
+    phone_number = models.IntegerField(blank=True, help_text="Contact phone number")
     description = models.CharField(max_length=300)
     rest_name = models.CharField(max_length=50)
     rest_image = models.ImageField(blank=True)
