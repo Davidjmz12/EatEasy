@@ -4,12 +4,11 @@
     <h1>Nuevo plato</h1>
 
     <form action="{%  url 'infouser:newmenu' %}" method="post">
-        <input type="submit">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend  class="border"> Form </legend>
+            {{ form.as_p }}
+        </fieldset>
+         <button type="submit">Añadir</button>
     </form>
-
-    <a href="{%  url 'infouser:restaurant' %}">
-        <button class="guardar-button">
-            Guardar
-        </button>
-    </a>
 {% endblock %}

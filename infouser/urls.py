@@ -6,7 +6,7 @@ app_name = "infouser"
 urlpatterns = [
     path("", views.index, name="index"),
     path("restaurant/", views.restaurant, name="restaurant"),
-    path("newmenu/", views.newmenu, name="newmenu"),
+    path("newmenu/", views.newMenu, name="newmenu"),
     path("news/", views.news, name="news"),
     path("client/", views.client,name="client")
 ]

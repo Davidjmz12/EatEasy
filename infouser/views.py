@@ -9,11 +9,12 @@ from login.models import *
 
 # Create your views here.
 def index(request):
-    if User(request.user).role == User.Role.RESTAURANT:
+    if request.user.role == User.Role.RESTAURANT:
         return HttpResponseRedirect(reverse("infouser:restaurant"))
-    elif User(request.user).role == User.Role.CLIENT:
+    elif request.user.role == User.Role.CLIENT:
         return HttpResponseRedirect(reverse("infouser:client"))
-    return HttpResponse("InfoUser")
+    else:
+        return HttpResponse("InfoUser")
 
 
 def restaurant(request):
@@ -21,7 +22,7 @@ def restaurant(request):
     return render(request, "infouser/restaurant.html", {"dishes": dishes})
 
 
-def newmenu(request):
+def newMenu(request):
     if request.method == "POST":
         form = DishForm(request.POST)
         if form.is_valid():
@@ -32,12 +33,14 @@ def newmenu(request):
             for error in list(form.errors.values()):
                 print(request, error)
             return render(request, "infouser/newmenu.html", {"form": form})
+    else:
+        form = DishForm()
 
     return render(
         request,
         "infouser/newmenu.html",
         {
-            # "form":form
+            "form": form
         },
     )
 
