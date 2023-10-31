@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(to bottom, #c8c8c8, white);
+    background-color: rgba(0, 0, 0, 0.07);
     position: fixed;
     top: 0;
     right: 0;
@@ -32,8 +32,6 @@ header {
     left: 0;
     right: 0;
     height: 50px;
-
-    padding-right: 50px;
 
     box-shadow: 8px 0 10px rgba(0, 0, 0, 0.3);
 }
@@ -88,6 +86,8 @@ header {
     height: 30px;
     width: 100px;
     cursor: pointer;
+
+    margin-right: 30px;
 }
 
 .user-image{
@@ -97,32 +97,44 @@ header {
     align-content: center;
 }
 
-.dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
 
+/* Dropdown */
 .dropdown {
-    background-color: red;
+    background-color: white;
     position: relative;
     display: inline-block;
     align-content: center;
     justify-content: center;
     height: 100%;
     width: 100%;
+    padding-right: 30px;
 }
 
+.centrar-img {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropbtn {
+    background-color: transparent;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* Dropdown desplegable */
 .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+    background-color: white;
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1000;
 }
 
 .dropdown-content a {
@@ -132,14 +144,16 @@ header {
   display: block;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.dropdown:hover .dropdown-content {
-  display: block;
+.dropdown-content a:hover {
+    background-color: #f1f1f1
 }
 
-.dropdown:hover .dropbtn {
-  background-color: #3e8e41;
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover {
+    background-color: lightgray;
 }
 
 .log-in-button:hover {

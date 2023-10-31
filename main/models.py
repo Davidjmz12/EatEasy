@@ -25,14 +25,12 @@ class Dish(models.Model):
     celiac = models.BooleanField()
 
     dish_image = models.ImageField(blank=True)
+
     class Meta:
         verbose_name_plural= "Dishes"
 
     def __str__(self):
         return self.name
-
-    class Meta:
-        verbose_name_plural = "Dishes"
 
 
 class Rating(models.Model):
@@ -46,7 +44,7 @@ class Rating(models.Model):
     )
 
     def __str__(self):
-        return "Coment from" + str(self.client) + " to " + str(self.dish)
+        return "Comment from" + str(self.client) + " to " + str(self.dish)
 
     class Meta:
         unique_together = ("client", "dish")
