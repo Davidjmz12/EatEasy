@@ -24,15 +24,18 @@
         </div>
 
         {% if message %}
-            <div class="message">{{ message }}</div>
+            <p class="message">{{ message }}</p>
         {%  endif %}
 
         <div class="buttons-forms">
             <input type="submit" value="LogIn">
             <div class="space"> </div>
-            <form action="{% url 'login:register' %}">
-                <input type="submit" name="register" value="Register">
-            </form>
+            <p>
+                If you don't have an account yet,
+                <a href="{% url 'login:register' %}">
+                    Sign up
+                </a>
+            </p>
         </div>
     </form>
 
