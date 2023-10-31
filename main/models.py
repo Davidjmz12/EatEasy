@@ -6,6 +6,9 @@ from login.models import Client, Restaurant
 class Ingredient(models.Model):
     name = models.CharField(max_length=20, primary_key=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Dish(models.Model):
     ingredients = models.ManyToManyField(
@@ -25,6 +28,12 @@ class Dish(models.Model):
     class Meta:
         verbose_name_plural= "Dishes"
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Dishes"
+
 
 class Rating(models.Model):
     rate = models.IntegerField()
@@ -35,6 +44,9 @@ class Rating(models.Model):
     dish = models.ForeignKey(
         Dish, on_delete=models.CASCADE, related_name="dish_ratings"
     )
+
+    def __str__(self):
+        return "Coment from" + str(self.client) + " to " + str(self.dish)
 
     class Meta:
         unique_together = ("client", "dish")

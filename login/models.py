@@ -62,3 +62,6 @@ class DeliveryPage(models.Model):
     restaurant = models.ForeignKey(
         Restaurant, on_delete=models.CASCADE, related_name="delivery_urls"
     )
+
+    def __str__(self):
+        return "Delivery " + str(self.name) + " of " + str(self.restaurant)
