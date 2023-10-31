@@ -3,13 +3,13 @@ from login.models import Client, Restaurant
 
 
 # Create your models here.
-class Ingredients(models.Model):
+class Ingredient(models.Model):
     name = models.CharField(max_length=20, primary_key=True)
 
 
 class Dish(models.Model):
     ingredients = models.ManyToManyField(
-        Ingredients, related_name="dishes_with", blank=True
+        Ingredient, related_name="dishes_with", blank=True
     )
     name = models.CharField(max_length=20)
     restaurant = models.ForeignKey(
@@ -22,6 +22,8 @@ class Dish(models.Model):
     celiac = models.BooleanField()
 
     dish_image = models.ImageField(blank=True)
+    class Meta:
+        verbose_name_plural= "Dishes"
 
 
 class Rating(models.Model):

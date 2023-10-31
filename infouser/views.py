@@ -1,8 +1,10 @@
+from datetime import timezone
+
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from infouser.forms import DishForm
+from infouser.forms import DishForm, ResForm
 from main.models import Rating
 from login.models import *
 
@@ -19,7 +21,10 @@ def index(request):
 
 def restaurant(request):
     dishes = request.user.Restaurants.my_dishes.all()
-    return render(request, "infouser/restaurant.html", {"dishes": dishes})
+    return render(request, "infouser/restaurant.html", {
+        "dishes": dishes,
+        "restaurant": Restaurant.objects.filter(user_id=request.user.Restaurants.user_id).first()
+    })
 
 
 def newMenu(request):
@@ -54,3 +59,28 @@ def news(request):
 
 def client(request):
     return None
+
+def changeinfo(request):
+    res = Restaurant.objects.filter(user_id=request.user.Restaurants.user_id).first()
+    form = ResForm(instance=res)
+    return render(request, "infouser/changeinfo.html", {
+        "restaurant": res,
+        "form": form
+    })
+
+def update_info(request):
+    res =  Restaurant.objects.get(pk=request.user.Restaurants.user_id)
+    form = ResForm(request.POST, instance=res)
+    if form.is_valid():
+        form.save()
+    dishes=request.user.Restaurants.my_dishes.all()
+    return render(request, "infouser/restaurant.html", {
+        "dishes": dishes,
+        "restaurant": Restaurant.objects.filter(user_id=request.user.Restaurants.user_id).first()
+    })
+
+def menu(request, menuid):
+    menu =Restaurant.objects.filter(user_id=request.user.Restaurants.user_id, my_dishes=menuid).first()
+    return render(request, "infouser/menu.html", {
+        "menu": menu
+    })

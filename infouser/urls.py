@@ -8,5 +8,8 @@ urlpatterns = [
     path("restaurant/", views.restaurant, name="restaurant"),
     path("newmenu/", views.newMenu, name="newmenu"),
     path("news/", views.news, name="news"),
-    path("client/", views.client,name="client")
+    path("client/", views.client,name="client"),
+    path("changeinfo/", views.changeinfo, name="changeinfo"),
+    path("update_info/", views.update_info, name="update_info"),
+    path("menu/", views.menu, name="menu")
 ]

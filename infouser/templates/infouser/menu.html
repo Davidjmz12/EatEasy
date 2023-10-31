@@ -1,0 +1,25 @@
+<div class="screen">
+    <p class="dish-name">
+        {{ menu.name}}
+    </p>
+    {% for ingredient in menu.ingredients %}
+        <a class="dish-link" href="{% url 'infouser:menu' %}"></a>
+            <div class="info-one-dish">
+                <p class="dish-name">
+                    {{ingredient.name}}
+                </p>
+
+            </div>
+        </a>
+
+    {% empty %}
+        <p>
+            There is any ingredients in your dish.
+        </p>
+    {% endfor %}
+    <a href="{% url 'infouser:menu' %}">
+        <button class="est-button">
+            Cambiar
+        </button>
+    </a>
+</div>
