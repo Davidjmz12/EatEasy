@@ -18,6 +18,8 @@ class DishForm(ModelForm):
         if commit and restaurant:
             dish.restaurant = restaurant
             dish.save()
+            selected_ingredients=self.cleaned_data['ingredients']
+            dish.ingredients.set(selected_ingredients)
         return dish
 
 

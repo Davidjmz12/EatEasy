@@ -1,25 +1,42 @@
 <div class="screen">
     <p class="dish-name">
-        {{ menu.name}}
+        {{ menu}}
     </p>
-    {% for ingredient in menu.ingredients %}
-        <a class="dish-link" href="{% url 'infouser:menu' %}"></a>
-            <div class="info-one-dish">
-                <p class="dish-name">
-                    {{ingredient.name}}
-                </p>
+    {% for ing in ingredients %}
+        <div class="info-one-dish">
+            <p class="dish-name">
+                {{ing}}
+            </p>
 
-            </div>
-        </a>
+        </div>
 
     {% empty %}
         <p>
             There is any ingredients in your dish.
         </p>
     {% endfor %}
-    <a href="{% url 'infouser:menu' %}">
+    <a href="{% url 'infouser:changemenu' menu %}">
         <button class="est-button">
-            Cambiar
+        Change
         </button>
     </a>
 </div>
+<!--<div>
+    {% for rat in ratings %}
+        <div class="info-one-dish">
+            <p class="dish-name">
+                {{rat.client}}
+                {{ rat.comment }}
+                {{ rat.rate }}
+            </p>
+
+        </div>
+
+    {% empty %}
+        <p>
+            There is any ratings in your dish.
+        </p>
+    {% endfor %}
+
+</div>
+-->

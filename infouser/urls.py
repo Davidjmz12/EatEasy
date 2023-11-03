@@ -11,5 +11,7 @@ urlpatterns = [
     path("client/", views.client,name="client"),
     path("changeinfo/", views.changeinfo, name="changeinfo"),
     path("update_info/", views.update_info, name="update_info"),
-    path("menu/", views.menu, name="menu")
+    path("menu/<str:menuid>/", views.menu, name="menu"),
+    path("changemenu/<str:menuid>/", views.changemenu, name="changemenu"),
+    path("update_menu/<str:menuid>/", views.update_menu, name="update_menu"),
 ]

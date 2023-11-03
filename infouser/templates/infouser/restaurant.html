@@ -29,13 +29,8 @@
 
         <div class="screen">
         {% for dish in dishes %}
-            <a class="dish-link" href="{% url 'infouser:restaurant' %}"></a>
-                <div class="info-one-dish">
-                    <p class="dish-name">
+            <a class="dish-link" href="{% url 'infouser:menu' dish.name %}">
                      {{ dish.name}}      {{ dish.price }}
-                    </p>
-
-                </div>
             </a>
 
         {% empty %}
