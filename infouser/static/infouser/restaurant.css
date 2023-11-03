@@ -1,90 +1,65 @@
-p {
-    padding: 0;
-    margin: 0;
+/*********************************************
+                BUTTONS
+*********************************************/
+
+.buttons-column {
+    background-color: white;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    bottom: 0;
+    right: 85%;
+
+    box-shadow: 8px 0 10px rgba(0, 0, 0, 0.15);
+    min-width: 180px;
+    z-index: 200;
+    overflow: auto;
+
+    padding-top: 50px;
 }
+
+.one-side-button {
+    background-color: darkcyan;
+    color: white;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+
+    height: 100px;
+    width: 80%;
+    margin: 25px 0 25px 10%;
+
+    box-shadow: 5px 5px 8px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+.one-side-button:hover {
+    background-color: #006e6e;
+}
+
+.one-side-button:active {
+    background-color: #004f4f;
+}
+
+
+/*********************************************
+                MAIN
+*********************************************/
 
 body {
-    background-color: rgba(0, 0, 0, 0.07);
-}
+    margin-left: max(15vw, 200px);
+    padding: 20px;
 
-/********************************************************
-                        SCREEN
-********************************************************/
-.new-button {
-    background-color: transparent;
-    text-decoration: none;
-
-    height: 100%;
-    padding: 0;
-
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    justify-content: center;
-}
-.mod-button {
-    background-color: transparent;
-    text-decoration: none;
-
-    height: 100%;
-    padding: 0;
-
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    justify-content: center;
-}
-.est-button {
-    background-color: transparent;
-    text-decoration: none;
-
-    height: 100%;
-    padding: 0;
-
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    justify-content: center;
-}
-
-.dish-link {
-    width: 75%;
-    height: 30vh;
-
-    min-width: 700px;
-    min-height: 235px;
-
-    margin-top: 40px;
-    padding-right: 50px;
-
-    text-decoration: none;
-
-    background-color: white;
-    border: 2px solid darkcyan;
-
-    display: flex;
-    flex-direction: row;
-    flex: 80px 1fr;
-    align-items: center;
-
-    box-shadow: 5px 10px 12px rgba(0, 0, 0, 0.2);
-}
-
-.info-one-dish {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    height: 80%;
-    width: 100%;
-
-    padding: 10px 30px;
 }
 
-.dish-name {
-    font-weight: bold;
-    font-size: 40px;
-    color: darkcyan;
+.screen {
+    margin-left: max(15vw, 200px);
+    width: 100%;
+}
 
-    margin-bottom: 20px;
+.dish-link {
+    width: 100%;
 }

@@ -1,47 +1,103 @@
 {% extends "main/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'infouser/restaurant.css' %}">
+    <link rel="stylesheet" href="{% static 'main/restaurant.css' %}">
+{% endblock %}
 
 {% block body %}
-    <div class="filters-column">
-            <div class="one-filter">
-                <a href="{% url 'infouser:newmenu' %}">
-                    <button class="new-button">
-                    Nuevo Plato
-                    </button>
-                </a>
-            </div>
-
-            <div class="one-filter">
-                <a href="{% url 'infouser:changeinfo' %}">
-                    <button class="mod-button">
-                    Editar Datos
-                    </button>
-                </a>
-            </div>
-
-            <div class="one-filter">
-                <a href="{% url 'infouser:restaurant' %}">
-                    <button class="est-button">
-                    Estadísticas
-                    </button>
-                </a>
-            </div>
+    <div class="buttons-column">
+        <div class="one-filter">
+            <a href="{% url 'infouser:newmenu' %}">
+                <button class="one-side-button">
+                Nuevo Plato
+                </button>
+            </a>
         </div>
 
-        <div class="screen">
-        {% for dish in dishes %}
-            <a class="dish-link" href="{% url 'infouser:restaurant' %}"></a>
-                <div class="info-one-dish">
+        <div class="one-filter">
+            <a href="{% url 'infouser:changeinfo' %}">
+                <button class="one-side-button">
+                Editar Datos
+                </button>
+            </a>
+        </div>
+
+        <div class="one-filter">
+            <a href="{% url 'infouser:restaurant' %}">
+                <button class="one-side-button">
+                Estadísticas
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <div class="screen">
+        <div class="main">
+            <p class="restaurant-name">
+                {{ restaurant.rest_name }}
+            </p>
+
+            {% for dish in dishes %}
+                <div class="one-dish-short">
+                    {% if dish.vegetarian %}
+                        <img class="type-icon" src="{% static 'main/images/vegetarian.png' %}">
+                    {% else %}
+                        <img class="type-icon" src="{% static 'main/images/no-vegetarian.png' %}">
+                    {% endif %}
+
+                    {% if dish.vegan %}
+                        <img class="type-icon" src="{% static 'main/images/vegan.png' %}">
+                    {% else %}
+                        <img class="type-icon" src="{% static 'main/images/no-vegan.png' %}">
+                    {% endif %}
+
+                    {% if dish.celiac %}
+                        <img class="type-icon" src="{% static 'main/images/gluten.png' %}">
+                    {% else %}
+                        <img class="type-icon" src="{% static 'main/images/no-gluten.png' %}">
+                    {% endif %}
+
                     <p class="dish-name">
-                     {{ dish.name}}      {{ dish.price }}
+                        {{ dish.name }}
                     </p>
 
+                    <p class="dish-price">
+                        {{ dish.price }}€
+                    </p>
                 </div>
-            </a>
 
-        {% empty %}
-            <p>
-                There is any dishes in your restaurant. Create the first!
-            </p>
-        {% endfor %}
+                <div class="one-dish-long" style="display: none" onclick="toggleContent({{ forloop.counter0 }})">
+                    <img class="dish-img" alt="dish" src="{{ dish.img }}">
+
+                    <div class="dish-info">
+                        <div class="dish-header">
+                            <p class="dish-name">
+                                {{ dish.name }}
+                            </p>
+
+                            <p class="dish-price">
+                                {{ dish.price }}€
+                            </p>
+                        </div>
+
+                        <div class="dish-ingredients">
+                            <p class="dish-ingredients-title">
+                                Ingredientes:
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <script src="{% static "main/restaurant.js" %}"></script>
+
+            {% empty %}
+
+                <p>
+                    No hay platos todavía para este restaurante.
+                </p>
+
+            {% endfor %}
         </div>
+    </div>
 {% endblock %}
