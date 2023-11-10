@@ -17,7 +17,7 @@
             <div></div>
             <img alt="logo" class="logo-search" src={% static "main/images/logo-color.png" %}>
             <div></div>
-            <form class="search-bar-button" action="{% url 'main:search'%}" method="post">
+            <form class="search-bar-button" action="{% url 'main:search' "Zaragoza"%}" method="post">
                 {% csrf_token %}
                 <input class="input-search" placeholder="Busca tu ciudad y empieza a comer...">
                 <div class="vertical-line"></div>

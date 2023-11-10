@@ -10,7 +10,7 @@ body {
     font-weight: bold;
     background-color: darkcyan;
     width: 40%;
-    padding: 30px 50px;
+    padding: 0px 50px 30px 50px;
     border-radius: 50px;
     box-shadow: 10px 10px 8px rgba(0,0,0,0.3);
 }
