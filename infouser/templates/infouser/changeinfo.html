@@ -1,17 +1,26 @@
 {% extends "main/layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
 
+{% block head %}
+    <link rel="stylesheet" href="{% static 'infouser/newmenu.css' %}">
+{% endblock %}
 
 {% block body %}
-	<form action="{%  url 'infouser:update_info' %}" method="POST">
-        {% csrf_token %}
-        {% if mensaje %}
-            <div class="alert alert-sucess" role="alert">
-                Datos actualizados exitosamente.
+    <div class="formulario">
+        <h1>Tus datos</h1>
+        <form action="{%  url 'infouser:update_info' %}" method="POST">
+            {% csrf_token %}
+            {% if mensaje %}
+                <div class="alert alert-sucess" role="alert">
+                    Datos actualizados exitosamente.
+                </div>
+            {% endif %}
+
+            {{ form|crispy }}
+            <div class="button-submit-div">
+                <button type="submit" class="button-submit">Cambiar</button>
             </div>
-        {% endif %}
-
-        {{ form.as_p }}
-
-        <button type="submit" class="btn btn-primary">Cambiar</button>
-    </form>
+        </form>
+    </div>
 {% endblock %}
