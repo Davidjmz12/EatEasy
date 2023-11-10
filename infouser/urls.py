@@ -9,6 +9,7 @@ urlpatterns = [
     path("newmenu/", views.newMenu, name="newmenu"),
     path("news/", views.news, name="news"),
     path("client/", views.client,name="client"),
+    path("update_info_client/", views.update_info_client,name="update_info_client"),
     path("changeinfo/", views.changeinfo, name="changeinfo"),
     path("update_info/", views.update_info, name="update_info"),
     path("menu/<str:menuid>/", views.menu, name="menu"),

@@ -4,8 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from infouser.forms import DishForm, ResForm
-from main.models import Rating, Dish, Ingredient
+from infouser.forms import DishForm, ResForm, ClientForm
+from main.models import Rating, Dish
 from login.models import *
 
 
@@ -57,7 +57,19 @@ def news(request):
 
 
 def client(request):
-    return None
+    cliente = Client.objects.get(id=request.user.id)
+    form = ClientForm(instance=cliente)
+    return render(request, "infouser/client_info.html", {
+        "form": form
+    })
+
+def update_info_client(request):
+    cliente =  Client.objects.get(pk=request.user.id)
+    form = ClientForm(request.POST, instance=cliente)
+    if form.is_valid():
+        form.save()
+    return render(request, "main/index.html")
+
 
 def changeinfo(request):
     res = Restaurant.objects.filter(user_id=request.user.Restaurants.user_id).first()
@@ -83,11 +95,11 @@ def update_info(request):
 def menu(request, menuid):
     mydish=Dish.objects.filter(name=menuid, restaurant_id=request.user.Restaurants.user_id).first()
     Ing=mydish.ingredients.all()
-    ##rate=Rating.objects.get(dish=mydish.id)
+    rate=Rating.objects.filter(dish_id=mydish.id).all()
     return render(request, "infouser/menu.html", {
         "menu": menuid,
         "ingredients": Ing,
-        ##"ratings": rate
+        "ratings": rate
     })
 
 

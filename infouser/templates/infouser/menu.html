@@ -21,11 +21,11 @@
         </button>
     </a>
 </div>
-<!--<div>
+<div>
     {% for rat in ratings %}
-        <div class="info-one-dish">
-            <p class="dish-name">
-                {{rat.client}}
+        <div>
+            <p>
+                {{rat.client.user_id}}
                 {{ rat.comment }}
                 {{ rat.rate }}
             </p>
@@ -39,4 +39,3 @@
     {% endfor %}
 
 </div>
--->

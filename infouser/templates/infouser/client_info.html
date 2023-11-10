@@ -1,0 +1,17 @@
+{% extends "main/layout.html" %}
+
+
+{% block body %}
+	<form action="{%  url 'infouser:update_info_client' %}" method="POST">
+        {% csrf_token %}
+        {% if mensaje %}
+            <div class="alert alert-sucess" role="alert">
+                Datos actualizados exitosamente.
+            </div>
+        {% endif %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary">Cambiar</button>
+    </form>
+{% endblock %}
