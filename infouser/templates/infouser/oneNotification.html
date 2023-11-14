@@ -1,0 +1,14 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <ul style="align-items: center">
+        <li> From:  {{ notification.emissor }}</li>
+        <li> Date:  {{ notification.date }} </li>
+        <li> Titulo:  {{ notification.title }} </li>
+        <li> Description:  {{ notification.description }}</li>
+    </ul>
+
+    <a href="{% url 'infouser:notifications' %}">See notifications</a>
+    <a href="{% url 'infouser:delNot' notification.pk %}">Delete notification</a>
+{% endblock %}

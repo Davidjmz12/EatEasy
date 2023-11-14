@@ -1,0 +1,17 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    {% for item in notifications %}
+        <ul>
+            {% if item.read %}
+                <li style="background-color: aquamarine"> <a href="{% url "infouser:infoNot" item.pk %}">{{ item.title }}</a></li>
+            {% else %}
+                <li style="background-color: gray"> <a href="{% url "infouser:infoNot" item.pk %}">{{ item.title }}</a></li>
+            {% endif %}
+        </ul>
+    {% empty %}
+        <h1> No hay notificaciones</h1>
+    {% endfor %}
+{% endblock %}

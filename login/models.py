@@ -10,7 +10,7 @@ class User(AbstractUser):
         RESTAURANT = "RESTAURANT", "Restaurant"
         CLIENT = "CLIENT", "Client"
 
-    role = models.CharField(max_length=10, choices=Role.choices)
+    role = models.CharField(max_length=10, choices=Role.choices, default=Role.ADMIN)
     avatar = models.ImageField(blank=True)
 
     def save(self, *args, **kwargs):

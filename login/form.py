@@ -7,7 +7,7 @@ from login.models import User, Restaurant
 
 class RestaurantRegistrationForm(UserCreationForm):
     email = forms.EmailField(help_text="A valid email address, please.", required=False)
-    avatar = forms.ImageField(allow_empty_file=True, help_text='Avatar image', required=False)
+    avatar = forms.ImageField(help_text='Avatar image', required=False)
 
     web_page = forms.URLField(required=False)
     precise_location = forms.CharField()
@@ -15,6 +15,7 @@ class RestaurantRegistrationForm(UserCreationForm):
     phone_number = forms.IntegerField(help_text="+00 000 00 00 00 format")
     description = forms.CharField(max_length=200)
     rest_name = forms.CharField(max_length=50)
+    rest_image = forms.ImageField(help_text="Restaurant Image", required=False)
 
     class Meta:
         model = get_user_model()
@@ -26,9 +27,10 @@ class RestaurantRegistrationForm(UserCreationForm):
         user.role = User.Role.RESTAURANT
         user.avatar = self.cleaned_data['avatar']
         cleaned = [self.cleaned_data[item] for item in ["web_page", "precise_location", "city",
-                                                        "phone_number", "description", "rest_name"]]
+                                                        "phone_number", "description", "rest_name", "rest_image"]]
         restaurant = Restaurant(user=user, web_page=cleaned[0], precise_location=cleaned[1], city=cleaned[2],
-                                phone_number=cleaned[3], description=cleaned[4], rest_name=cleaned[5])
+                                phone_number=cleaned[3], description=cleaned[4], rest_name=cleaned[5],
+                                rest_image=cleaned[6])
         if commit:
             user.save()
             restaurant.save()
@@ -38,7 +40,7 @@ class RestaurantRegistrationForm(UserCreationForm):
 
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(help_text="A valid email address, please.", required=False)
-    avatar = forms.ImageField(allow_empty_file=True, help_text='Avatar image', required=False)
+    avatar = forms.ImageField(help_text='Avatar image', required=False)
 
     class Meta:
         model = get_user_model()
