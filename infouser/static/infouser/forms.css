@@ -1,9 +1,12 @@
 body {
+    /*
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding-top: 100px;
+    overflow: auto;
+    */
 }
 
 .formulario {
@@ -13,6 +16,7 @@ body {
     padding: 0 50px 30px 50px;
     border-radius: 50px;
     box-shadow: 10px 10px 8px rgba(0,0,0,0.3);
+    margin-bottom: 100px;
 }
 
 .form-group {
@@ -54,3 +58,13 @@ h1 {
     background-color: darkgray;
 }
 
+.screen-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    padding: 100px 0;
+}

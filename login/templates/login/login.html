@@ -3,40 +3,44 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static "login/login.css" %}">
+    <link rel="stylesheet" href="{% static "infouser/forms.css" %}">
 {% endblock %}
 
 {% block body %}
-    <form class="form" action="{% url 'login:login' %}" method="post">
-        {% csrf_token %}
+    <div class="screen-form">
+        <form class="formulario" action="{% url 'login:login' %}" method="post">
+            {% csrf_token %}
+            <h1>Login</h1>
+            <div class="one-field">
+                <p class="field">
+                    Username:
+                </p>
+                <input class="input-text" type="text" name="username" placeholder="Username">
+            </div>
 
-        <div class="one-field">
-            <p class="field">
-                Username:
-            </p>
-            <input class="input-text" type="text" name="username" placeholder="Username">
-        </div>
+            <div class="one-field">
+                 <p class="field">
+                    Password:
+                </p>
+                <input class="input-text" type="password" name="password" placeholder="Password">
+            </div>
 
-        <div class="one-field">
-             <p class="field">
-                Password:
-            </p>
-            <input class="input-text" type="password" name="password" placeholder="Password">
-        </div>
+            {% if message %}
+                <p class="message">{{ message }}</p>
+            {%  endif %}
 
-        {% if message %}
-            <p class="message">{{ message }}</p>
-        {%  endif %}
-
-        <div class="buttons-forms">
-            <input type="submit" value="LogIn">
-            <div class="space"> </div>
-            <p>
-                If you don't have an account yet,
-                <a href="{% url 'login:register' %}">
-                    Sign up
-                </a>
-            </p>
-        </div>
-    </form>
+            <div class="buttons-forms">
+                <div class="button-submit-div">
+                    <input class="button-submit" type="submit" value="LogIn">
+                </div>
+                <p class="center-text">
+                    If you don't have an account yet,
+                    <a href="{% url 'login:register' %}">
+                        Sign up
+                    </a>
+                </p>
+            </div>
+        </form>
+    </div>
 
 {% endblock %}

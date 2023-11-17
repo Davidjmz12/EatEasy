@@ -1,9 +1,3 @@
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 input {
     margin: 0 0 10px 0;
     padding-left: 10px;
@@ -18,7 +12,7 @@ input {
 }
 
 .one-field {
-    margin: 0px 0;
+    margin: 0 0;
 }
 
 .one-field p {
@@ -55,26 +49,6 @@ input {
     justify-content: center;
 }
 
-.buttons-forms input {
-    background-color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 20px;
-    height: 35px;
-}
-
-.buttons-forms input:hover {
-    background-color: lightgray;
-}
-
-.buttons-forms input:active {
-    background-color: darkgray;
-}
-
-.space {
-    width: 30px;
-}
-
 .message {
     align-items: center;
     width: 90%;
@@ -83,4 +57,9 @@ input {
     font-size: 20px;
     margin: 0;
     padding: 0;
+}
+
+.center-text {
+    width: 100%;
+    text-align: center;
 }

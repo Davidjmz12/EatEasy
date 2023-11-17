@@ -37,7 +37,8 @@ class RestaurantRegistrationForm(UserCreationForm):
 
 
 class UserRegistrationForm(UserCreationForm):
-    email = forms.EmailField(help_text="A valid email address, please.", required=False)
+    email = forms.EmailField(help_text="A valid email address, please.", required=False,
+                             widget=forms.TextInput(attrs={'class': 'input-text'}))
     avatar = forms.ImageField(allow_empty_file=True, help_text='Avatar image', required=False)
 
     class Meta:

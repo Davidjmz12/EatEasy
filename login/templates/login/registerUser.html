@@ -3,20 +3,23 @@
 {% load crispy_forms_tags %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'infouser/newmenu.css' %}">
+    <link rel="stylesheet" href="{% static 'infouser/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'login/login.css' %}">
 {% endblock %}
 
 {% block body %}
 
-    <div class="formulario">
-        <h1>Introduce tus datos</h1>
-        <form method="POST">
-            {% csrf_token %}
-                {{ form|crispy }}
-            <div class="button-submit-div">
-                <button class="button-submit" type="submit">Sign up</button>
-            </div>
-        </form>
+    <div class="screen-form">
+        <div class="formulario">
+            <h1>Insert your data</h1>
+            <form method="POST">
+                {% csrf_token %}
+                    {{ form.as_p }}
+                <div class="button-submit-div">
+                    <button class="button-submit" type="submit">Sign up</button>
+                </div>
+            </form>
+        </div>
     </div>
 
 {% endblock %}

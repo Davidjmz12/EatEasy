@@ -3,24 +3,26 @@
 {% load crispy_forms_tags %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'infouser/newmenu.css' %}">
+    <link rel="stylesheet" href="{% static 'infouser/forms.css' %}">
 {% endblock %}
 
 {% block body %}
-    <div class="formulario">
-        <h1>Tus datos</h1>
-        <form action="{%  url 'infouser:update_info' %}" method="POST">
-            {% csrf_token %}
-            {% if mensaje %}
-                <div class="alert alert-sucess" role="alert">
-                    Datos actualizados exitosamente.
-                </div>
-            {% endif %}
+    <div class="screen-form">
+        <div class="formulario">
+            <h1>Your data</h1>
+            <form action="{%  url 'infouser:update_info' %}" method="POST">
+                {% csrf_token %}
+                {% if mensaje %}
+                    <div class="alert alert-sucess" role="alert">
+                        Data has been changed.
+                    </div>
+                {% endif %}
 
-            {{ form|crispy }}
-            <div class="button-submit-div">
-                <button type="submit" class="button-submit">Cambiar</button>
-            </div>
-        </form>
+                {{ form.as_p }}
+                <div class="button-submit-div">
+                    <button type="submit" class="button-submit">OK</button>
+                </div>
+            </form>
+        </div>
     </div>
 {% endblock %}
