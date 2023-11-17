@@ -11,6 +11,7 @@
 
 {% block body %}
 <!-- The filters -->
+        <script src="{% static "main/filter.js" %}" defer></script>
         <div class="filters-column">
 
             <!-- Filters of consumers preferences -->
@@ -71,8 +72,11 @@
 
             <div class="slider-container">
                 {% csrf_token %}
-                <input class="slice" type="range">
+                <p id="slider-value">0</p>
+                <input class="slice" type="range" value="0" onmouseup="changeSlider()">
             </div>
+
+            <p id="aaa" onclick="print({{ restaurant }});">a</p>
 
         </div>
 
