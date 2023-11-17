@@ -35,10 +35,18 @@ def restaurant_info(request, user_id):
 def filters(request):
     return render(request, "main/layout-filters.html")
 
+
 def menu(request, menuid):
     mydish=Dish.objects.filter(name=menuid).first()
     Ing=mydish.ingredients.all()
     rate=Rating.objects.filter(dish_id=mydish.id).all()
+    if not request.user.is_authenticated:
+        return render(request, "main/menu.html", {
+            "menu": menuid,
+            "ingredients": Ing,
+            "ratings": rate,
+            "form": None
+        })
     if request.user.role == User.Role.CLIENT:
         if request.method == "POST":
             form = RatingForm(request.POST)
@@ -51,7 +59,7 @@ def menu(request, menuid):
         else:
             form = RatingForm()
 
-        return render(request, "main/menuclient.html", {
+        return render(request, "main/menu.html", {
             "menu": menuid,
             "ingredients": Ing,
             "ratings": rate,
@@ -61,6 +69,7 @@ def menu(request, menuid):
         return render(request, "main/menu.html", {
             "menu": menuid,
             "ingredients": Ing,
-            "ratings": rate
+            "ratings": rate,
+            "form": None
         })
 

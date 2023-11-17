@@ -1,0 +1,80 @@
+body {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100vw;
+    max-width: 100vw;
+}
+
+h1 {
+    width: 100%;
+    text-align: center;
+    color: darkcyan;
+}
+
+.screen-ingredients {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 65%;
+    height: 100%;
+}
+
+.folio {
+    background-color: white;
+    border: solid 2px darkcyan;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
+
+    margin: 50px 0 0 0;
+    width: 80%;
+}
+
+.comments {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+
+    padding: 50px 10px;
+    width: 35%;
+
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+
+    overflow: auto;
+}
+
+.all-comments {
+    height: 70%;
+    width: 100%;
+}
+
+.one-comment {
+    background-color: lightgray;
+    border: solid 2px darkcyan;
+    padding: 10px;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
+}
+
+.user-comment {
+    width: 70%;
+}
+
+.first-line-comment {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.space {
+    width: 20px;
+}
+
+.rate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
+    border: solid 2px darkcyan;
+    border-radius: 10px;
+}

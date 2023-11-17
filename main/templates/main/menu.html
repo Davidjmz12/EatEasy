@@ -1,41 +1,68 @@
 {% extends "main/layout.html" %}
 {% load static %}
 
+{% block head %}
+    <link rel="stylesheet" href="{% static 'infouser/menu.css' %}">
+{% endblock %}
+
 {% block body %}
-    <div class="screen">
-        <p class="dish-name">
-            {{ menu}}
-        </p>
-        {% for ing in ingredients %}
-            <div class="info-one-dish">
-                <p class="dish-name">
-                    {{ing}}
-                </p>
+    <div class="screen-ingredients">
+        <div class="folio">
+            <h1 class="dish-name">
+                {{ menu }}
+            </h1>
 
-            </div>
+            {% for ing in ingredients %}
 
-        {% empty %}
-            <p>
-                There is any ingredients in this dish.
-            </p>
-        {% endfor %}
-    </div>
-    <div>
-        {% for rat in ratings %}
-            <div>
+                <ul>
+                    <li>{{ ing }}</li>
+                </ul>
+
+            {% empty %}
                 <p>
-                    {{rat.client.user_id}}
-                    {{ rat.comment }}
-                    {{ rat.rate }}
+                    There is any ingredients in this dish.
                 </p>
+            {% endfor %}
+        </div>
+    </div>
 
-            </div>
 
-        {% empty %}
-            <p>
-                There is any ratings in this dish.
-            </p>
-        {% endfor %}
 
+
+    <div class="comments">
+        <div class="all-comments">
+            {% for rat in ratings %}
+                <div class="one-comment">
+                    <div class="first-line-comment">
+                        <div class="rate">
+                            {{ rat.rate }}
+                        </div>
+                        <div class="space"></div>
+                        <p class="user-comment">
+                            {{ rat.client.user_id }}
+                        </p>
+                        <div>
+                            {{ rat.date }}
+                        </div>
+                    </div>
+                    <p class="comment-comment">
+                        {{ rat.comment }}
+                    </p>
+                </div>
+
+            {% empty %}
+                <p>
+                    There is any ratings in this dish.
+                </p>
+            {% endfor %}
+        </div>
+
+        {% if form %}
+            <form action="{%  url 'main:menu' menu %}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Publish</button>
+            </form>
+        {% endif %}
     </div>
 {% endblock %}

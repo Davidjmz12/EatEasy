@@ -8,7 +8,7 @@
 {% block body %}
     <div class="screen-form">
         <div class="formulario">
-            <h1>Nuevo plato</h1>
+            <h1>New dish</h1>
             <form action="{%  url 'infouser:newmenu' %}" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
