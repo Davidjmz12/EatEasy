@@ -30,6 +30,7 @@
     margin: 25px 0 25px 10%;
 
     box-shadow: 5px 5px 8px rgba(0,0,0,0.3);
+    border-radius: 5000px;
     cursor: pointer;
 }
 
