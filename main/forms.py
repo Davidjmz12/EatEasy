@@ -13,7 +13,7 @@ class RatingForm(ModelForm):
         if commit and client_id and dish_id:
             rate.client = client_id
             rate.dish = dish_id
-            ratings=Rating.objects.filter(client_id=client_id.id, dish_id=dish_id.id).all()
+            ratings = Rating.objects.filter(client_id=client_id.id, dish_id=dish_id.id).all()
             if(len(ratings)==0):
                 rate.save()
         return rate

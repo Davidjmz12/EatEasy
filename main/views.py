@@ -59,6 +59,8 @@ def menu(request, menuid):
         else:
             form = RatingForm()
 
+        form.fields['rate'].widget.attrs['class'] = "input-form"
+        form.fields['comment'].widget.attrs['class'] = "input-form"
         return render(request, "main/menu.html", {
             "menu": menuid,
             "ingredients": Ing,
