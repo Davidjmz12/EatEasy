@@ -1,0 +1,21 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'infouser/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'login/login.css' %}">
+{% endblock %}
+
+{% block body %}
+    <div>
+        <h1>Restaurants</h1>
+        <div>
+        {% for restaurant in restaurants %}
+            <a href="{% url 'super:oneRest'  %}">{{ restaurant.rest_name }}</a>
+
+        {% empty %}
+            <p>There are no restaurants.</p>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

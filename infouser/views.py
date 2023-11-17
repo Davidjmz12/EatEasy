@@ -67,6 +67,7 @@ def client(request):
         "form": form
     })
 
+
 def update_info_client(request):
     cliente =  Client.objects.get(pk=request.user.id)
     form = ClientForm(request.POST, instance=cliente)
@@ -82,6 +83,7 @@ def changeinfo(request):
         "restaurant": res,
         "form": form
     })
+
 
 def update_info(request):
     res =  Restaurant.objects.get(pk=request.user.Restaurants.user_id)
@@ -112,11 +114,10 @@ def notification(request):
                   context={"notifications": notif})
 
 
-def infoNot(request, notification_id):
+def infoNotifications(request, notification_id):
     notif = Notification.objects.get(pk=notification_id)
     notif.read = True
     notif.save()
-    print(notif)
     return render(request, "infouser/oneNotification.html",
                   context={"notification": notif})
 
