@@ -11,7 +11,7 @@ from main.models import Rating, Ingredient
 from infouser.forms import DishForm, ResForm, ClientForm
 from main.models import Rating, Dish
 from login.models import *
-
+import json
 
 # Create your views here.
 def index(request):
@@ -153,5 +153,7 @@ def statistics(request):
 
     zipp = zip(names, number)
     return render(request, "infouser/statistics.html", {
-        "zip":zipp
+        "ingredients": json.dumps(names),
+        "numbers": json.dumps(number),
+        "zip": zipp
     })

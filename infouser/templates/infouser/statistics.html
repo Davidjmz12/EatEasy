@@ -1,18 +1,16 @@
 {% extends "main/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <meta charset="urf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+    <script src="{% static 'infouser/graphs.js' %}"></script>
+{% endblock %}
 
 {% block body %}
-    {% for name, number in zip %}
-        <div>
-            <p>
-                {{name}}: {{number}}
-            </p>
-
-        </div>
-
-    {% empty %}
-        <p>
-            There is any ingredient.
-        </p>
-    {% endfor %}
-
+    <canvas id="MiGrafica" width="1500" height="500"></canvas>
+    <script>
+        renderGraph(JSON.parse('{{ingredients|escapejs}}') ,
+        JSON.parse('{{numbers|escapejs}}'))
+    </script>
 {% endblock %}

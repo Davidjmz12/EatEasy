@@ -39,6 +39,8 @@ def menu(request, menuid):
     mydish=Dish.objects.filter(name=menuid).first()
     Ing=mydish.ingredients.all()
     rate=Rating.objects.filter(dish_id=mydish.id).all()
+
+    print(User.objects.filter(pk=rate[0].client_id))
     if request.user.role == User.Role.CLIENT:
         if request.method == "POST":
             form = RatingForm(request.POST)
