@@ -1,0 +1,50 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <div class="screen">
+        <p class="dish-name">
+            {{ menu}}
+        </p>
+        {% for ing in ingredients %}
+            <div class="info-one-dish">
+                <p class="dish-name">
+                    {{ing}}
+                </p>
+
+            </div>
+
+        {% empty %}
+            <p>
+                There is any ingredients in this dish.
+            </p>
+        {% endfor %}
+    </div>
+    <div>
+        {% for rat in ratings %}
+            <div>
+                <p>
+                    {{rat.client.user_id}}
+                    {{ rat.comment }}
+                    {{ rat.rate }}
+                </p>
+
+            </div>
+
+        {% empty %}
+            <p>
+                There is any ratings in this dish.
+            </p>
+        {% endfor %}
+    </div>
+    <div>
+        <form action="{%  url 'main:menu' menu %}" method="post">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend  class="border"> Form </legend>
+                {{ form.as_p }}
+            </fieldset>
+             <button type="submit">Añadir</button>
+        </form>
+    </div>
+{% endblock %}

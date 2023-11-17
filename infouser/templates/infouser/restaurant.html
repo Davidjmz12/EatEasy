@@ -40,6 +40,7 @@
             </p>
 
             {% for dish in dishes %}
+                <a class="dish-link" href="{% url 'infouser:menu' dish.name %}">
                 <div class="one-dish-short">
                     {% if dish.vegetarian %}
                         <img class="type-icon" src="{% static 'main/images/vegetarian.png' %}">
@@ -89,6 +90,7 @@
                         </div>
                     </div>
                 </div>
+                </a>
                 <script src="{% static "main/restaurant.js" %}"></script>
 
             {% empty %}

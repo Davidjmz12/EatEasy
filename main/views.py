@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from login.models import Restaurant
+from login.models import Restaurant, User
+from main.forms import RatingForm
+from main.models import Dish, Rating
 
 
 # Create your views here.
@@ -32,3 +34,33 @@ def restaurant_info(request, user_id):
 
 def filters(request):
     return render(request, "main/layout-filters.html")
+
+def menu(request, menuid):
+    mydish=Dish.objects.filter(name=menuid).first()
+    Ing=mydish.ingredients.all()
+    rate=Rating.objects.filter(dish_id=mydish.id).all()
+    if request.user.role == User.Role.CLIENT:
+        if request.method == "POST":
+            form = RatingForm(request.POST)
+            if form.is_valid():
+                form.save(dish_id=mydish, client_id=request.user)
+                return HttpResponseRedirect(reverse("main:search"))
+            else:
+                for error in list(form.errors.values()):
+                    print(request, error)
+        else:
+            form = RatingForm()
+
+        return render(request, "main/menuclient.html", {
+            "menu": menuid,
+            "ingredients": Ing,
+            "ratings": rate,
+            "form": form
+        })
+    else:
+        return render(request, "main/menu.html", {
+            "menu": menuid,
+            "ingredients": Ing,
+            "ratings": rate
+        })
+

@@ -8,6 +8,8 @@ from infouser.forms import DishForm, ResForm
 from infouser.forms import DishForm
 from infouser.models import Notification
 from main.models import Rating
+from infouser.forms import DishForm, ResForm, ClientForm
+from main.models import Rating, Dish
 from login.models import *
 
 
@@ -59,7 +61,19 @@ def news(request):
 
 
 def client(request):
-    return None
+    cliente = Client.objects.get(id=request.user.id)
+    form = ClientForm(instance=cliente)
+    return render(request, "infouser/client_info.html", {
+        "form": form
+    })
+
+def update_info_client(request):
+    cliente =  Client.objects.get(pk=request.user.id)
+    form = ClientForm(request.POST, instance=cliente)
+    if form.is_valid():
+        form.save()
+    return render(request, "main/index.html")
+
 
 def changeinfo(request):
     res = Restaurant.objects.filter(user_id=request.user.Restaurants.user_id).first()
@@ -80,10 +94,15 @@ def update_info(request):
         "restaurant": Restaurant.objects.filter(user_id=request.user.Restaurants.user_id).first()
     })
 
+
 def menu(request, menuid):
-    menu =Restaurant.objects.filter(user_id=request.user.Restaurants.user_id, my_dishes=menuid).first()
+    mydish=Dish.objects.filter(name=menuid, restaurant_id=request.user.Restaurants.user_id).first()
+    Ing=mydish.ingredients.all()
+    rate=Rating.objects.filter(dish_id=mydish.id).all()
     return render(request, "infouser/menu.html", {
-        "menu": menu
+        "menu": menuid,
+        "ingredients": Ing,
+        "ratings": rate
     })
 
 
@@ -106,3 +125,24 @@ def deleteNotification(request, notification_id):
     notif = Notification.objects.get(pk=notification_id)
     notif.delete()
     return HttpResponseRedirect(reverse("infouser:notifications"))
+
+
+def changemenu(request, menuid):
+    dish = request.user.Restaurants.my_dishes.all()
+    mydish= dish.filter(name=menuid).first()
+    form = DishForm(instance=mydish)
+    return render(request, "infouser/changemenu.html", {
+        "menu": menuid,
+        "form": form
+    })
+
+
+def update_menu(request, menuid):
+    dish = Dish.objects.get(restaurant=request.user.Restaurants.user_id,name=menuid)
+    form = DishForm(request.POST, instance=dish)
+    if form.is_valid():
+        form.save(restaurant=request.user.Restaurants)
+    return render(request, "infouser/restaurant.html", {
+        "dishes": request.user.Restaurants.my_dishes.all(),
+        "restaurant": Restaurant.objects.filter(user_id=request.user.Restaurants.user_id).first()
+    })
