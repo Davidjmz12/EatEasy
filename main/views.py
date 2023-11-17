@@ -9,9 +9,9 @@ def index(request):
     return render(request, "main/index.html")
 
 
-def search(request, city):
+def search(request):
     return render(request, "main/search.html", {
-        "restaurants": Restaurant.objects.filter(city=city)
+        "restaurants": Restaurant.objects.all()
     })
 
 
