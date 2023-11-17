@@ -6,6 +6,8 @@
 {% endblock %}
 
 {% block body %}
+
+    <!-- Info of the dish -->
     <div class="screen-ingredients">
         <div class="folio">
             <h1 class="dish-name">
@@ -27,8 +29,7 @@
     </div>
 
 
-
-
+    <!-- Comments of the dish -->
     <div class="comments">
         <div class="all-comments">
             {% for rat in ratings %}
@@ -57,12 +58,17 @@
             {% endfor %}
         </div>
 
+        <!-- Make a comment -->
         {% if form %}
-            <form action="{%  url 'main:menu' menu %}" method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Publish</button>
-            </form>
+            <div class="make-a-comment">
+                <form action="{%  url 'main:menu' menu %}" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="button-submit">
+                        <button class="button-submit-comment" type="submit">Publish</button>
+                    </div>
+                </form>
+            </div>
         {% endif %}
     </div>
 {% endblock %}

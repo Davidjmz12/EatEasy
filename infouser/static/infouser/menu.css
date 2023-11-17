@@ -28,6 +28,7 @@ h1 {
 
     margin: 50px 0 0 0;
     width: 80%;
+    height: 80%;
 }
 
 .comments {
@@ -35,7 +36,7 @@ h1 {
     display: flex;
     flex-direction: column;
 
-    padding: 50px 10px;
+    padding: 50px 10px 0 10px;
     width: 35%;
 
     box-shadow: 0 0 8px rgba(0,0,0,0.3);
@@ -53,6 +54,7 @@ h1 {
     border: solid 2px darkcyan;
     padding: 10px;
     box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 15px ;
 }
 
 .user-comment {
@@ -77,4 +79,38 @@ h1 {
     width: 20px;
     border: solid 2px darkcyan;
     border-radius: 10px;
+}
+
+
+
+.make-a-comment {
+    background-color: darkcyan;
+    padding: 10px;
+    border: solid 2px darkcyan;
+    border-radius: 15px;
+    color: white;
+}
+
+.button-submit {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.button-submit-comment {
+    height: 40px;
+    width: 80px;
+    border-radius: 40px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.button-submit-comment:hover {
+    background-color: lightgray;
+}
+
+.button-submit-comment:active {
+    background-color: darkgray;
 }
