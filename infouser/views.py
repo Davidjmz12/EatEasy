@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from infouser.forms import DishForm, ResForm
+from infouser.forms import DishForm
+from infouser.models import Notification
 from main.models import Rating
 from login.models import *
 
@@ -83,3 +85,24 @@ def menu(request, menuid):
     return render(request, "infouser/menu.html", {
         "menu": menu
     })
+
+
+def notification(request):
+    notif = request.user.my_received_not.all()
+    return render(request, "infouser/notifications.html",
+                  context={"notifications": notif})
+
+
+def infoNot(request, notification_id):
+    notif = Notification.objects.get(pk=notification_id)
+    notif.read = True
+    notif.save()
+    print(notif)
+    return render(request, "infouser/oneNotification.html",
+                  context={"notification": notif})
+
+
+def deleteNotification(request, notification_id):
+    notif = Notification.objects.get(pk=notification_id)
+    notif.delete()
+    return HttpResponseRedirect(reverse("infouser:notifications"))

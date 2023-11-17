@@ -12,4 +12,8 @@ urlpatterns = [
     path("changeinfo/", views.changeinfo, name="changeinfo"),
     path("update_info/", views.update_info, name="update_info"),
     path("menu/", views.menu, name="menu")
+    path("client/", views.client, name="client"),
+    path("notifications/", views.notification, name="notifications"),
+    path("notifications/<int:notification_id>", views.infoNot, name="infoNot"),
+    path("notifications/delete/<int:notification_id>", views.deleteNotification, name="delNot")
 ]
