@@ -9,14 +9,13 @@
 {% block body %}
     <div>
         <h1>Restaurants</h1>
-        <div>
-        {% for restaurant in restaurants %}
-            <a href="{% url 'super:oneRes' restaurant.pk %}">
-                {{ restaurant.rest_name }}
-            </a>
-        {% empty %}
-            <p>There are no restaurants.</p>
-        {% endfor %}
-        </div>
+        <form method="post">
+            {% csrf_token %}
+            <p>Title</p>
+            <input type="text" name="title">
+            <p>Description</p>
+            <input type="text" name="description">
+            <input type="submit">
+        </form>
     </div>
 {% endblock %}
