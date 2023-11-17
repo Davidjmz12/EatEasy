@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
+from login.models import User
 from login.form import UserRegistrationForm, RestaurantRegistrationForm
 
 
