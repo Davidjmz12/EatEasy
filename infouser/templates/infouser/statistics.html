@@ -1,0 +1,18 @@
+{% extends "main/layout.html" %}
+
+{% block body %}
+    {% for name, number in zip %}
+        <div>
+            <p>
+                {{name}}: {{number}}
+            </p>
+
+        </div>
+
+    {% empty %}
+        <p>
+            There is any ingredient.
+        </p>
+    {% endfor %}
+
+{% endblock %}

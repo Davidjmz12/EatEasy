@@ -7,7 +7,7 @@ from django.urls import reverse
 from infouser.forms import DishForm, ResForm
 from infouser.forms import DishForm
 from infouser.models import Notification
-from main.models import Rating
+from main.models import Rating, Ingredient
 from infouser.forms import DishForm, ResForm, ClientForm
 from main.models import Rating, Dish
 from login.models import *
@@ -52,12 +52,6 @@ def newMenu(request):
         },
     )
 
-
-def news(request):
-    news = [
-        Rating(2, "Muy bueno", 4, 4)
-    ]  ##request.user.Restaurants.my_dishes ####deberia ser mis rating
-    return render(request, "infouser/news.html", {"news": news})
 
 
 def client(request):
@@ -145,4 +139,19 @@ def update_menu(request, menuid):
     return render(request, "infouser/restaurant.html", {
         "dishes": request.user.Restaurants.my_dishes.all(),
         "restaurant": Restaurant.objects.filter(user_id=request.user.Restaurants.user_id).first()
+    })
+
+
+def statistics(request):
+    Ing = Ingredient.objects.all()
+    names = []
+    number = []
+    for i in Ing:
+        n = len(i.dishes_with.all())
+        names.append(i.name)
+        number.append(n)
+
+    zipp = zip(names, number)
+    return render(request, "infouser/statistics.html", {
+        "zip":zipp
     })

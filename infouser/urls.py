@@ -7,7 +7,6 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("restaurant/", views.restaurant, name="restaurant"),
     path("newmenu/", views.newMenu, name="newmenu"),
-    path("news/", views.news, name="news"),
     path("client/", views.client,name="client"),
     path("update_info_client/", views.update_info_client,name="update_info_client"),
     path("changeinfo/", views.changeinfo, name="changeinfo"),
@@ -20,4 +19,5 @@ urlpatterns = [
     path("menu/<str:menuid>/", views.menu, name="menu"),
     path("changemenu/<str:menuid>/", views.changemenu, name="changemenu"),
     path("update_menu/<str:menuid>/", views.update_menu, name="update_menu"),
+    path("statistics/", views.statistics, name="statistics")
 ]
