@@ -1,6 +1,5 @@
 {% extends "main/layout.html" %}
 {% load static %}
-{% load crispy_forms_tags %}
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'infouser/forms.css' %}">
@@ -12,7 +11,7 @@
             <h1>Nuevo plato</h1>
             <form action="{%  url 'infouser:newmenu' %}" method="post">
                 {% csrf_token %}
-                {{ form|crispy }}
+                {{ form.as_p }}
                 <div class="button-submit-div">
                     <button class="button-submit" type="submit">Añadir</button>
                 </div>

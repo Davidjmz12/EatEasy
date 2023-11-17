@@ -1,12 +1,5 @@
-body {
-    /*
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding-top: 100px;
-    overflow: auto;
-    */
+p {
+    font-size: 20px;
 }
 
 .formulario {
@@ -27,7 +20,6 @@ h1 {
     width: 100%;
     text-align: center;
     font-size: 50px;
-    text-decoration: underline;
 }
 
 .button-submit-div {

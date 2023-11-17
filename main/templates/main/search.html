@@ -5,6 +5,68 @@
     <link rel="stylesheet" href="{% static "main/search.css" %}">
 {% endblock %}
 
+{% block filters %}
+    <!-- Filters of consumers preferences -->
+    <p class="info-title">
+        Food filters
+    </p>
+
+    <div class="one-filter">
+        <input class="filter-checkbox" type="checkbox">
+        <p class="filter-text">Celiac</p>
+    </div>
+
+    <div class="one-filter">
+        <input class="filter-checkbox" type="checkbox">
+        <p class="filter-text">Vegetarian</p>
+    </div>
+
+    <div class="one-filter">
+        <input class="filter-checkbox" type="checkbox">
+        <p class="filter-text">Vegan</p>
+    </div>
+
+    <!-- Types of food -->
+    <p class="info-title">
+        Food types
+    </p>
+
+    <div class="one-filter">
+        <input class="filter-checkbox" type="checkbox">
+        <p class="filter-text">Italian</p>
+    </div>
+
+    <div class="one-filter">
+        <input class="filter-checkbox" type="checkbox">
+        <p class="filter-text">Chinese</p>
+    </div>
+
+    <div class="one-filter">
+        <input class="filter-checkbox" type="checkbox">
+        <p class="filter-text">Japanese</p>
+    </div>
+
+    <div class="one-filter">
+        <input class="filter-checkbox" type="checkbox">
+        <p class="filter-text">Mexican</p>
+    </div>
+
+    <div class="one-filter">
+        <input class="filter-checkbox" type="checkbox">
+        <p class="filter-text">Grill</p>
+    </div>
+
+    <!-- Filters of price -->
+    <p class="info-title">
+        Prices
+    </p>
+
+    <div class="slider-container">
+        {% csrf_token %}
+        <input class="slice" type="range">
+    </div>
+{% endblock %}
+
 {% block main %}
     <!-- Restaurants -->
     {% for restaurant in restaurants %}
