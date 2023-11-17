@@ -52,20 +52,13 @@ def newMenu(request):
         },
     )
 
-
-def news(request):
-    news = [
-        Rating(2, "Muy bueno", 4, 4)
-    ]  ##request.user.Restaurants.my_dishes ####deberia ser mis rating
-    return render(request, "infouser/news.html", {"news": news})
-
-
 def client(request):
     cliente = Client.objects.get(id=request.user.id)
     form = ClientForm(instance=cliente)
     return render(request, "infouser/client_info.html", {
         "form": form
     })
+
 
 def update_info_client(request):
     cliente =  Client.objects.get(pk=request.user.id)

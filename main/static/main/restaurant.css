@@ -33,8 +33,7 @@ p {
     margin-top: 40px;
 }
 
-.one-dish-short,
-.one-dish-long {
+.one-dish-short{
     border: 2px solid darkcyan;
     background-color: rgb(240, 240, 240);
     text-decoration: none;
@@ -55,15 +54,8 @@ p {
     overflow: hidden;
 }
 
-.one-dish-long:hover,
 .one-dish-short:hover {
     background-color: rgb(200, 200, 200);
-}
-
-.one-dish-long {
-    display: flex;
-    flex-direction: row;
-    min-height: 200px;
 }
 
 .one-dish-short {

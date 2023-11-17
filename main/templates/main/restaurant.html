@@ -72,33 +72,10 @@
                 </p>
             </a>
 
-            <div class="one-dish-long" style="display: none" onclick="toggleContent({{ forloop.counter0 }})">
-                <img class="dish-img" alt="dish" src="{{ dish.img }}">
-
-                <div class="dish-info">
-                    <div class="dish-header">
-                        <p class="dish-name">
-                            {{ dish.name }}
-                        </p>
-
-                        <p class="dish-price">
-                            {{ dish.price }}€
-                        </p>
-                    </div>
-
-                    <div class="dish-ingredients">
-                        <p class="dish-ingredients-title">
-                            Ingredientes:
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <script src="{% static "main/restaurant.js" %}"></script>
-
         {% empty %}
 
             <p>
-                No hay platos todavía para este restaurante.
+                There is any dishes for this restaurant yet...
             </p>
 
         {% endfor %}

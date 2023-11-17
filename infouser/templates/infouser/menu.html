@@ -5,7 +5,7 @@
     {% for ing in ingredients %}
         <div class="info-one-dish">
             <p class="dish-name">
-                {{ing}}
+                {{ ing }}
             </p>
 
         </div>
@@ -15,9 +15,10 @@
             There is any ingredients in your dish.
         </p>
     {% endfor %}
+
     <a href="{% url 'infouser:changemenu' menu %}">
         <button class="est-button">
-        Change
+            Change
         </button>
     </a>
 </div>
