@@ -57,6 +57,11 @@ def newMenu(request):
 def client(request):
     cliente = Client.objects.get(id=request.user.id)
     form = ClientForm(instance=cliente)
+
+    form.fields['first_name'].widget.attrs['class'] = "input-form"
+    form.fields['last_name'].widget.attrs['class'] = "input-form"
+    form.fields['username'].widget.attrs['class'] = "input-form"
+    form.fields['email'].widget.attrs['class'] = "input-form"
     return render(request, "infouser/client_info.html", {
         "form": form
     })
