@@ -14,18 +14,33 @@
                 {{ menu }}
             </h1>
 
-            {% for ing in ingredients %}
+            <div class="dish-ingredients">
+                {% for ing in ingredients %}
 
                 <ul>
                     <li>{{ ing }}</li>
                 </ul>
 
-            {% empty %}
-                <p>
-                    There is any ingredients in this dish.
-                </p>
-            {% endfor %}
+                {% empty %}
+                    <p>
+                        There is any ingredients in this dish.
+                    </p>
+                {% endfor %}
+            </div>
+
+            {% if isRestaurant %}
+
+                <div class="div-enlace">
+                    <a href="{% url 'infouser:changemenu' menu %}">
+                        <button class="button-change-ingredients">
+                            Change
+                        </button>
+                    </a>
+                </div>
+
+            {% endif %}
         </div>
+
     </div>
 
 

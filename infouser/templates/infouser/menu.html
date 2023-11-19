@@ -1,7 +1,12 @@
 {% extends 'main/layout.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'infouser/menu.css' %}">
+{% endblock %}
 
 {% block body %}
-    <div class="screen">
+    <div class="folio">
         <p class="dish-name">
             {{ menu}}
         </p>

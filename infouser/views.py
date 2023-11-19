@@ -106,10 +106,11 @@ def menu(request, menuid):
     mydish=Dish.objects.filter(name=menuid, restaurant_id=request.user.Restaurants.user_id).first()
     Ing=mydish.ingredients.all()
     rate=Rating.objects.filter(dish_id=mydish.id).all()
-    return render(request, "infouser/menu.html", {
+    return render(request, "main/menu.html", {
         "menu": menuid,
         "ingredients": Ing,
-        "ratings": rate
+        "ratings": rate,
+        "isRestaurant": request.user.role == User.Role.RESTAURANT
     })
 
 

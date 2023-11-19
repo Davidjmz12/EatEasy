@@ -1,3 +1,7 @@
+/******************************************************
+                        GENERAL
+*******************************************************/
+
 body {
     display: flex;
     flex-direction: row;
@@ -12,24 +16,71 @@ h1 {
     color: darkcyan;
 }
 
+
+/******************************************************
+                        INGREDIENTS
+*******************************************************/
+
 .screen-ingredients {
     display: flex;
     flex-direction: column;
     align-items: center;
 
     width: 65%;
-    height: 100%;
+    height: fit-content;
+    overflow: auto;
 }
 
 .folio {
+    position: fixed;
+    top: 50px;
+    bottom: 80px;
+    left: 50px;
+    right: 40%;
+
+    min-height: 400px;
+
     background-color: white;
     border: solid 2px darkcyan;
     box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
 
     margin: 50px 0 0 0;
-    width: 80%;
-    height: 80%;
 }
+
+.div-enlace {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.button-change-ingredients {
+    position: absolute;
+    bottom: 50px;
+    left: 40%;
+    width: 20%;
+    min-width: 100px;
+    height: 50px;
+
+    border-radius: 100px;
+    border: none;
+    background-color: darkcyan;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    box-shadow: 5px 5px 8px rgba(0,0,0,0.3);
+}
+
+.button-change-ingredients:hover {
+    background-color: #006e6e;
+}
+
+.button-change-ingredients:active {
+    background-color: #004f4f;
+}
+
+/******************************************************
+                        COMMENTS
+*******************************************************/
 
 .comments {
     background-color: white;
@@ -85,8 +136,6 @@ h1 {
     background-color: white;
 }
 
-
-
 .make-a-comment {
     background-color: darkcyan;
     padding: 10px;
@@ -121,7 +170,6 @@ h1 {
 .button-submit-comment:active {
     background-color: darkgray;
 }
-
 
 .input-form {
     width: 100%;
