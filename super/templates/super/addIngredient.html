@@ -1,0 +1,25 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'infouser/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'login/login.css' %}">
+{% endblock %}
+
+{% block body %}
+
+    <div>
+        <h1>Add Ingredient</h1>
+        <form method="post">
+            {% csrf_token %}
+            <label>
+                <input name="name" type="text">
+            </label>
+            {% if warning %}
+                <p style="color:red">Already created ingredient</p>
+            {% endif %}
+            <input type="submit" value="Add and go back" name="back">
+            <input type="submit" value="Add another" name="another">
+        </form>
+    </div>
+{% endblock %}

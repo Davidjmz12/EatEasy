@@ -8,7 +8,10 @@ from main.models import Dish, Rating
 
 # Create your views here.
 def index(request):
-    return render(request, "main/index.html")
+    if not request.user.is_superuser:
+        return render(request, "main/index.html")
+    else:
+        return HttpResponseRedirect(reverse("super:index"))
 
 
 def search(request):

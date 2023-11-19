@@ -20,7 +20,7 @@ def index(request):
     elif request.user.role == User.Role.CLIENT:
         return HttpResponseRedirect(reverse("infouser:client"))
     else:
-        return HttpResponse("InfoUser")
+        return HttpResponseRedirect(reverse("infouser:admin"))
 
 
 def restaurant(request):
@@ -86,7 +86,7 @@ def changeinfo(request):
 
 
 def update_info(request):
-    res =  Restaurant.objects.get(pk=request.user.Restaurants.user_id)
+    res = Restaurant.objects.get(pk=request.user.Restaurants.user_id)
     form = ResForm(request.POST, instance=res)
     if form.is_valid():
         form.save()
@@ -147,3 +147,8 @@ def update_menu(request, menuid):
         "dishes": request.user.Restaurants.my_dishes.all(),
         "restaurant": Restaurant.objects.filter(user_id=request.user.Restaurants.user_id).first()
     })
+
+
+def admin(request):
+    return render(request, "infouser/admin.html",
+                  {"user": request.user})

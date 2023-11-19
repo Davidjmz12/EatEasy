@@ -1,0 +1,54 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'infouser/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'login/login.css' %}">
+{% endblock %}
+
+{% block body %}
+
+    <div>
+        <h1>Ingredients</h1>
+        <form method="post">
+            {% csrf_token %}
+            {% for ingredient in ingredients %}
+                <div>
+                 <p>
+                    {{ ingredient.name }}
+                </p>
+                    <label>
+                        <input type="checkbox" name="values" class="delete_ing" value="{{ ingredient.pk }}">
+                    </label>
+                </div>
+            {% empty %}
+                <p>There are no ingredients.</p>
+            {% endfor %}
+            <input type="submit" value="Delete" style="display: none" id="submit_ing">
+        </form>
+        <script>
+        function changeButton() {
+            let items = document.getElementsByClassName("delete_ing")
+            let submit = document.getElementById("submit_ing")
+            if(Array.prototype.slice.call(items).some((item)=> item.checked)){
+                submit.style.display="block"
+            }
+            else{
+                submit.style.display="none"
+            }
+        }
+
+        function createListeners(){
+            let items = document.getElementsByClassName("delete_ing")
+            for(let i=0; i<items.length; i++){
+                items[i].addEventListener("click",changeButton,false);
+            }
+        }
+
+        createListeners()
+        </script>
+        <div>
+            <a href="{% url 'super:addIng' %}">Add new Ingredient</a>
+        </div>
+    </div>
+{% endblock %}

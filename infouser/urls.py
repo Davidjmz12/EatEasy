@@ -20,4 +20,5 @@ urlpatterns = [
     path("menu/<str:menuid>/", views.menu, name="menu"),
     path("changemenu/<str:menuid>/", views.changemenu, name="changemenu"),
     path("update_menu/<str:menuid>/", views.update_menu, name="update_menu"),
+    path("admin/",views.admin, name="admin")
 ]
