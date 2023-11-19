@@ -71,7 +71,7 @@
     <!-- Restaurants -->
     {% for restaurant in restaurants %}
         <a class="restaurant-link" href="{% url 'main:restaurant' restaurant.user_id %}" onclick="selectRestaurant('{{ restaurant.rest_name }}')">
-            <img class="restaurant-image" alt="Restaurante" src="../../static/main/images/{{ restaurant.img }}">
+            <img class="restaurant-image" alt="Restaurante" src="{% static 'main/images/restaurant.png' %}">
 
             <div class="info-one-restaurant">
                 <p class="restaurant-name">

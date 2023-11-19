@@ -1,42 +1,46 @@
-<div class="screen">
-    <p class="dish-name">
-        {{ menu}}
-    </p>
-    {% for ing in ingredients %}
-        <div class="info-one-dish">
-            <p class="dish-name">
-                {{ ing }}
-            </p>
+{% extends 'main/layout.html' %}
 
-        </div>
-
-    {% empty %}
-        <p>
-            There is any ingredients in your dish.
+{% block body %}
+    <div class="screen">
+        <p class="dish-name">
+            {{ menu}}
         </p>
-    {% endfor %}
+        {% for ing in ingredients %}
+            <div class="info-one-dish">
+                <p class="dish-name">
+                    {{ ing }}
+                </p>
 
-    <a href="{% url 'infouser:changemenu' menu %}">
-        <button class="est-button">
-            Change
-        </button>
-    </a>
-</div>
-<div>
-    {% for rat in ratings %}
-        <div>
+            </div>
+
+        {% empty %}
             <p>
-                {{rat.client.user_id}}
-                {{ rat.comment }}
-                {{ rat.rate }}
+                There is any ingredients in your dish.
             </p>
+        {% endfor %}
 
-        </div>
+        <a href="{% url 'infouser:changemenu' menu %}">
+            <button class="est-button">
+                Change
+            </button>
+        </a>
+    </div>
+    <div>
+        {% for rat in ratings %}
+            <div>
+                <p>
+                    {{rat.client.user_id}}
+                    {{ rat.comment }}
+                    {{ rat.rate }}
+                </p>
 
-    {% empty %}
-        <p>
-            There is any ratings in your dish.
-        </p>
-    {% endfor %}
+            </div>
 
-</div>
+        {% empty %}
+            <p>
+                There is any ratings in your dish.
+            </p>
+        {% endfor %}
+
+    </div>
+{% endblock %}

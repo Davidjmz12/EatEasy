@@ -44,6 +44,8 @@ def newMenu(request):
     else:
         form = DishForm()
 
+    form.fields['name'].widget.attrs['class'] = "input-form"
+    form.fields['price'].widget.attrs['class'] = "input-form"
     return render(
         request,
         "infouser/newmenu.html",
@@ -71,6 +73,13 @@ def update_info_client(request):
 def changeinfo(request):
     res = Restaurant.objects.filter(user_id=request.user.Restaurants.user_id).first()
     form = ResForm(instance=res)
+
+    form.fields['rest_name'].widget.attrs['class'] = "input-form"
+    form.fields['city'].widget.attrs['class'] = "input-form"
+    form.fields['precise_location'].widget.attrs['class'] = "input-form"
+    form.fields['phone_number'].widget.attrs['class'] = "input-form"
+    form.fields['description'].widget.attrs['class'] = "input-form"
+    form.fields['web_page'].widget.attrs['class'] = "input-form"
     return render(request, "infouser/changeinfo.html", {
         "restaurant": res,
         "form": form
@@ -124,6 +133,9 @@ def changemenu(request, menuid):
     dish = request.user.Restaurants.my_dishes.all()
     mydish= dish.filter(name=menuid).first()
     form = DishForm(instance=mydish)
+
+    form.fields['name'].widget.attrs['class'] = "input-form"
+    form.fields['price'].widget.attrs['class'] = "input-form"
     return render(request, "infouser/changemenu.html", {
         "menu": menuid,
         "form": form
@@ -135,6 +147,7 @@ def update_menu(request, menuid):
     form = DishForm(request.POST, instance=dish)
     if form.is_valid():
         form.save(restaurant=request.user.Restaurants)
+
     return render(request, "infouser/restaurant.html", {
         "dishes": request.user.Restaurants.my_dishes.all(),
         "restaurant": Restaurant.objects.filter(user_id=request.user.Restaurants.user_id).first()

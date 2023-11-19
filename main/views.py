@@ -1,3 +1,5 @@
+import datetime
+
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -51,7 +53,7 @@ def menu(request, menuid):
         if request.method == "POST":
             form = RatingForm(request.POST)
             if form.is_valid():
-                form.save(dish_id=mydish, client_id=request.user)
+                form.save(dish_id=mydish, client_id=request.user, date=datetime.datetime.now())
                 return HttpResponseRedirect(reverse("main:search"))
             else:
                 for error in list(form.errors.values()):
