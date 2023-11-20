@@ -14,7 +14,7 @@ class Dish(models.Model):
     ingredients = models.ManyToManyField(
         Ingredient, related_name="dishes_with", blank=True
     )
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=80)
     restaurant = models.ForeignKey(
         Restaurant, on_delete=models.CASCADE, related_name="my_dishes"
     )

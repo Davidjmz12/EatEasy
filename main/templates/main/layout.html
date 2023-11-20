@@ -40,7 +40,13 @@
                     </div>
                     <div class="dropdown-content">
                         <a href="{% url 'infouser:index' %}"> My data </a>
-                        <a href="{% url 'infouser:notifications' %}"> Notification </a>
+                        {% if request.user.is_superuser %}
+                            <a href="{% url 'super:management' %}"> Management </a>
+                            <a href="{% url 'super:ingredients' %}"> Ingredients </a>
+                        {% else %}
+                            <a href="{% url 'infouser:notifications' %}"> Notification </a>
+                        {% endif %}
+
                         <a href="{% url 'login:logout' %}"> Log out </a>
                     </div>
                 </div>

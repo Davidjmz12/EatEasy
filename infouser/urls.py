@@ -14,9 +14,10 @@ urlpatterns = [
     path("menu/", views.menu, name="menu"),
     path("client/", views.client, name="client"),
     path("notifications/", views.notification, name="notifications"),
-    path("notifications/<int:notification_id>", views.infoNot, name="infoNot"),
+    path("notifications/<int:notification_id>", views.infoNotifications, name="infoNot"),
     path("notifications/delete/<int:notification_id>", views.deleteNotification, name="delNot"),
     path("menu/<str:menuid>/", views.menu, name="menu"),
     path("changemenu/<str:menuid>/", views.changemenu, name="changemenu"),
     path("update_menu/<str:menuid>/", views.update_menu, name="update_menu"),
+    path("admin/",views.admin, name="admin")
 ]

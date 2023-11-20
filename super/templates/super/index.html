@@ -1,0 +1,44 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'infouser/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'login/login.css' %}">
+{% endblock %}
+
+{% block body %}
+
+    <p>Hola</p>
+
+    <div style="background-color: darkgray">
+        <h1>Notifications</h1>
+        {% for notification in notifications %}
+
+            {% if notification.read %}
+                <div style="background-color: gray">
+                    <p>{{ notification.title }}</p>
+                    <p>{{ notification.description }}</p>
+                </div>
+            {% else %}
+                <div style="background-color: gray">>
+                    <p>{{ notification.title }}</p>
+                    <p>{{ notification.description }}</p>
+                </div>
+            {% endif %}
+
+        {% empty %}
+           <p> No Notifications</p>
+        {% endfor %}
+    </div>
+    <div style="background-color:darkgray">
+        <h1> Statistics </h1>
+        {% for statistic in statistics %}
+            <div style="background-color:gray ">
+                <p> {{ statistic.name }}</p>
+                <p> {{ statistic.value }}</p>
+            </div>
+        {% empty %}
+            <p> There is not statistics. </p>
+        {% endfor %}
+    </div>
+{% endblock %}
