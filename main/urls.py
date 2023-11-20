@@ -8,5 +8,5 @@ urlpatterns = [
     path("search/", views.search, name="search"),
     path("restaurant/<int:user_id>", views.restaurant, name="restaurant"),
     path("restaurant/<int:user_id>/info/", views.restaurant_info, name="restaurant-info"),
-    path("menu/<str:menuid>", views.menu, name="menu")
+    path("menu/<str:rest>/<str:menuid>", views.menu, name="menu")
 ]

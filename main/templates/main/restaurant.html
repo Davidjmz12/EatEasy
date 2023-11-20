@@ -44,7 +44,7 @@
         </a>
 
         {% for dish in dishes %}
-            <a class="one-dish-short" href="{% url 'main:menu' dish.name %}">
+            <a class="one-dish-short" href="{% url 'main:menu' restaurant.rest_name dish.name%}">
                 {% if dish.vegetarian %}
                 	<img class="type-icon" src="{% static 'main/images/vegetarian.png' %}">
                 {% else %}

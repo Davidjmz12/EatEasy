@@ -38,8 +38,9 @@ def filters(request):
     return render(request, "main/layout-filters.html")
 
 
-def menu(request, menuid):
-    mydish=Dish.objects.filter(name=menuid).first()
+def menu(request, rest, menuid):
+    restaurant = Restaurant.objects.filter(rest_name=rest).first()
+    mydish=Dish.objects.filter(name=menuid, restaurant=restaurant).first()
     Ing=mydish.ingredients.all()
     rate=Rating.objects.filter(dish_id=mydish.id).all()
     if not request.user.is_authenticated:
