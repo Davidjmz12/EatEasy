@@ -1,7 +1,7 @@
 function changeSlider() {
     let slider = document.getElementsByClassName("slice")[0];
     let vSlice = document.getElementById("slider-value");
-    vSlice.innerHTML = slider.value;
+    vSlice.innerHTML = slider.value.concat("€");
 }
 
 
