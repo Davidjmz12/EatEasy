@@ -51,14 +51,25 @@ def menu(request, rest, menuid):
             "menu": menuid,
             "ingredients": Ing,
             "ratings": rate,
-            "form": None
+            "form": None,
+            "rest": rest
         })
     if request.user.role == User.Role.CLIENT:
         if request.method == "POST":
             form = RatingForm(request.POST)
             if form.is_valid():
                 form.save(dish_id=mydish, client_id=request.user, date=datetime.datetime.now())
-                return HttpResponseRedirect(reverse("main:search"))
+                form = RatingForm()
+                form.fields['rate'].widget.attrs['class'] = "input-form"
+                form.fields['comment'].widget.attrs['class'] = "input-form"
+                return render(request, "main/menu.html", {
+                        "menu": menuid,
+                        "ingredients": Ing,
+                        "ratings": rate,
+                        "form": form,
+                        "rest": rest
+                    })
+                    #(HttpResponseRedirect(reverse("main:search")))
             else:
                 for error in list(form.errors.values()):
                     print(request, error)
@@ -71,13 +82,15 @@ def menu(request, rest, menuid):
             "menu": menuid,
             "ingredients": Ing,
             "ratings": rate,
-            "form": form
+            "form": form,
+            "rest": rest
         })
     else:
         return render(request, "main/menu.html", {
             "menu": menuid,
             "ingredients": Ing,
             "ratings": rate,
-            "form": None
+            "form": None,
+            "rest": rest
         })
 

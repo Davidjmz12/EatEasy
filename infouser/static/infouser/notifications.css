@@ -23,6 +23,7 @@ a {
     border: solid 2px darkcyan;
     width: 80%;
     padding-bottom: 50px;
+    margin-top: 50px;
 }
 
 .read-notification,

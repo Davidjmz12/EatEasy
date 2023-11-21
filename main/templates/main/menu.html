@@ -76,7 +76,7 @@
         <!-- Make a comment -->
         {% if form %}
             <div class="make-a-comment">
-                <form action="{%  url 'main:menu' menu %}" method="post">
+                <form action="{%  url 'main:menu' rest menu %}" method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <div class="button-submit">
@@ -85,5 +85,6 @@
                 </form>
             </div>
         {% endif %}
+
     </div>
 {% endblock %}
