@@ -101,7 +101,7 @@
 {% block main %}
     <!-- Restaurants -->
     {% for restaurant in restaurants %}
-        <a class="restaurant-link" href="{% url 'main:restaurant' restaurant.user_id %}" onclick="selectRestaurant('{{ restaurant.rest_name }}')">
+        <a class="restaurant-link" href="{% url 'main:restaurant' restaurant.user_id {{ cel }} {{ veget }} {{ vegan }} %}">
             <img class="restaurant-image" alt="Restaurante" src="../../static/main/images/{{ restaurant.img }}">
 
             <div class="info-one-restaurant">

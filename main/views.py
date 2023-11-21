@@ -124,12 +124,62 @@ def search(request, location):
     )
 
 
-def restaurant(request, user_id):
-    res = Restaurant.objects.filter(user_id=user_id).first()
+def filter_dish_cel(dishes, cel):
+    if not cel:
+        return dishes
+    else:
+        return [dish for dish in dishes if dish.celiac]
+
+
+def filter_dish_vegan(dishes, vegan):
+    if not vegan:
+        return dishes
+    else:
+        return [dish for dish in dishes if dish.vegan]
+
+
+def filter_dish_veget(dishes, veget):
+    if not veget:
+        return dishes
+    else:
+        return [dish for dish in dishes if dish.vegetarian]
+
+
+def filter_dish_price(dishes, price):
+    return [item for item in dishes if item.price <= price]
+
+
+def filter_dishes(dishes, cel, veget, vegan, price):
+    dishes = filter_dish_cel(dishes, cel)
+    dishes = filter_dish_vegan(dishes, vegan)
+    dishes = filter_dish_veget(dishes, veget)
+    dishes = filter_dish_price(dishes, price)
+    return dishes
+
+
+def getMaxPriceRest(res):
+    return max([dish.price for dish in res.my_dishes.all()])
+
+
+def restaurant(request, user_id, cel, veg, vegan):
+    cel = request.POST.get("celiac", "off") == "onn"
+    veget = request.POST.get("vegetarian", "off") == "on"
+    vegan = request.POST.get("vegan", "off") == "on"
+    price = int(request.POST.get("price", 0))
+    res = Restaurant.objects.get(user_id=user_id)
+    dishes = res.my_dishes.all()
+    maxPrice = getMaxPriceRest(res)
+
+    if request.method == "POST":
+        dishes = filter_dishes(dishes, cel, veget, vegan, price)
+    if cel and veg and vegan:
+        dishes = filter_dishes(dishes, cel, veg, vegan, maxPrice)
+
     return render(
         request,
         "main/restaurant.html",
-        {"restaurant": res, "dishes": res.my_dishes.all()},
+        {"restaurant": res, "dishes": dishes, "celiac": cel,
+         "vegetarian": veget, "vegan": vegan, "max_price": maxPrice, "price": price},
     )
 
 
