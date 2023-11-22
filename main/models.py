@@ -42,6 +42,7 @@ class Rating(models.Model):
     dish = models.ForeignKey(
         Dish, on_delete=models.CASCADE, related_name="dish_ratings"
     )
+    date = models.DateField()
 
     def __str__(self):
         return "Comment from" + str(self.client) + " to " + str(self.dish)

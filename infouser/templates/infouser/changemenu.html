@@ -1,17 +1,28 @@
 {% extends "main/layout.html" %}
+{% load static %}
 
+{% block head %}
+    <link rel="stylesheet" href="{% static 'infouser/forms.css' %}">
+{% endblock %}
 
 {% block body %}
-	<form action="{%  url 'infouser:update_menu' menu %}" method="POST">
-        {% csrf_token %}
-        {% if mensaje %}
-            <div class="alert alert-sucess" role="alert">
-                Datos actualizados exitosamente.
+
+    <div class="screen-form">
+        <form class="formulario" action="{%  url 'infouser:update_menu' menu %}" method="POST">
+            {% csrf_token %}
+            {% if mensaje %}
+                <div class="alert alert-sucess" role="alert">
+                    Data has been change successfully.
+                </div>
+            {% endif %}
+
+            {{ form.as_p }}
+
+            <div class="button-submit-div">
+                <button class="button-submit" type="submit">Accept</button>
             </div>
-        {% endif %}
 
-        {{ form.as_p }}
+        </form>
+    </div>
 
-        <button type="submit" class="btn btn-primary">Cambiar</button>
-    </form>
 {% endblock %}

@@ -8,12 +8,12 @@
 {% block body %}
     <div class="screen-form">
         <div class="formulario">
-            <h1>Nuevo plato</h1>
+            <h1>New dish</h1>
             <form action="{%  url 'infouser:newmenu' %}" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div class="button-submit-div">
-                    <button class="button-submit" type="submit">Añadir</button>
+                    <button class="button-submit" type="submit">Accept</button>
                 </div>
             </form>
         </div>

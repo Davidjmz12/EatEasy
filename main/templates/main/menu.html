@@ -1,41 +1,90 @@
 {% extends "main/layout.html" %}
 {% load static %}
 
+{% block head %}
+    <link rel="stylesheet" href="{% static 'infouser/menu.css' %}">
+{% endblock %}
+
 {% block body %}
-    <div class="screen">
-        <p class="dish-name">
-            {{ menu}}
-        </p>
-        {% for ing in ingredients %}
-            <div class="info-one-dish">
-                <p class="dish-name">
-                    {{ing}}
-                </p>
 
+    <!-- Info of the dish -->
+    <div class="screen-ingredients">
+        <div class="folio">
+            <h1 class="dish-name">
+                {{ menu }}
+            </h1>
+
+            <div class="dish-ingredients">
+                {% for ing in ingredients %}
+
+                <ul>
+                    <li>{{ ing }}</li>
+                </ul>
+
+                {% empty %}
+                    <p>
+                        There is any ingredients in this dish.
+                    </p>
+                {% endfor %}
             </div>
 
-        {% empty %}
-            <p>
-                There is any ingredients in this dish.
-            </p>
-        {% endfor %}
+            {% if isRestaurant %}
+
+                <div class="div-enlace">
+                    <a href="{% url 'infouser:changemenu' menu %}">
+                        <button class="button-change-ingredients">
+                            Change
+                        </button>
+                    </a>
+                </div>
+
+            {% endif %}
+        </div>
+
     </div>
-    <div>
-        {% for rat in ratings %}
-            <div>
+
+
+    <!-- Comments of the dish -->
+    <div class="comments">
+        <div class="all-comments">
+            {% for rat in ratings %}
+                <div class="one-comment">
+                    <div class="first-line-comment">
+                        <div class="rate">
+                            {{ rat.rate }}
+                        </div>
+                        <div class="space"></div>
+                        <p class="user-comment">
+                            {{ rat.client.user_id }}
+                        </p>
+                        <div>
+                            {{ rat.date }}
+                        </div>
+                    </div>
+                    <p class="comment-comment">
+                        {{ rat.comment }}
+                    </p>
+                </div>
+
+            {% empty %}
                 <p>
-                    {{rat.client.user_id}}
-                    {{ rat.comment }}
-                    {{ rat.rate }}
+                    There is any ratings in this dish.
                 </p>
+            {% endfor %}
+        </div>
 
+        <!-- Make a comment -->
+        {% if form %}
+            <div class="make-a-comment">
+                <form action="{%  url 'main:menu' rest menu %}" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="button-submit">
+                        <button class="button-submit-comment" type="submit">Publish</button>
+                    </div>
+                </form>
             </div>
-
-        {% empty %}
-            <p>
-                There is any ratings in this dish.
-            </p>
-        {% endfor %}
+        {% endif %}
 
     </div>
 {% endblock %}

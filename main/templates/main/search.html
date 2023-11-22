@@ -1,8 +1,6 @@
 {% extends "main/layout-filters.html" %}
 {% load static %}
 
-
-
 {% block new-head %}
     <link rel="stylesheet" href="{% static "main/search.css" %}">
 {% endblock %}
@@ -90,8 +88,6 @@
         <input type="number" value="{{ distance }}" name="distance">
            -->
         <input type="submit">
-
-
     </form>
 
 
@@ -101,8 +97,8 @@
 {% block main %}
     <!-- Restaurants -->
     {% for restaurant in restaurants %}
-        <a class="restaurant-link" href="{% url 'main:restaurant' restaurant.user_id {{ cel }} {{ veget }} {{ vegan }} %}">
-            <img class="restaurant-image" alt="Restaurante" src="../../static/main/images/{{ restaurant.img }}">
+        <fomr class="restaurant-link" >
+            <img class="restaurant-image" alt="Restaurante" src="{% static 'main/images/restaurant.png' %}">
 
             <div class="info-one-restaurant">
                 <p class="restaurant-name">
@@ -112,7 +108,7 @@
                     {{ restaurant.description }}
                 </p>
             </div>
-        </a>
+        </fomr>
 
     {% empty %}
         <p>

@@ -1,3 +1,4 @@
+import datetime
 from math import ceil
 
 from django.shortcuts import render
@@ -192,30 +193,56 @@ def filters(request):
     return render(request, "main/layout-filters.html")
 
 
-def menu(request, menuid):
-    mydish = Dish.objects.filter(name=menuid).first()
-    Ing = mydish.ingredients.all()
-    rate = Rating.objects.filter(dish_id=mydish.id).all()
+def menu(request, rest, menuid):
+    restaurant = Restaurant.objects.filter(rest_name=rest).first()
+    mydish=Dish.objects.filter(name=menuid, restaurant=restaurant).first()
+    Ing=mydish.ingredients.all()
+    rate=Rating.objects.filter(dish_id=mydish.id).all()
+    if not request.user.is_authenticated:
+        return render(request, "main/menu.html", {
+            "menu": menuid,
+            "ingredients": Ing,
+            "ratings": rate,
+            "form": None,
+            "rest": rest
+        })
     if request.user.role == User.Role.CLIENT:
         if request.method == "POST":
             form = RatingForm(request.POST)
             if form.is_valid():
-                form.save(dish_id=mydish, client_id=request.user)
-                return HttpResponseRedirect(reverse("main:search"))
+                form.save(dish_id=mydish, client_id=request.user, date=datetime.datetime.now())
+                form = RatingForm()
+                form.fields['rate'].widget.attrs['class'] = "input-form"
+                form.fields['comment'].widget.attrs['class'] = "input-form"
+                return render(request, "main/menu.html", {
+                        "menu": menuid,
+                        "ingredients": Ing,
+                        "ratings": rate,
+                        "form": form,
+                        "rest": rest
+                    })
+                    #(HttpResponseRedirect(reverse("main:search")))
             else:
                 for error in list(form.errors.values()):
                     print(request, error)
         else:
             form = RatingForm()
 
-        return render(
-            request,
-            "main/menuclient.html",
-            {"menu": menuid, "ingredients": Ing, "ratings": rate, "form": form},
-        )
+        form.fields['rate'].widget.attrs['class'] = "input-form"
+        form.fields['comment'].widget.attrs['class'] = "input-form"
+        return render(request, "main/menu.html", {
+            "menu": menuid,
+            "ingredients": Ing,
+            "ratings": rate,
+            "form": form,
+            "rest": rest
+        })
     else:
-        return render(
-            request,
-            "main/menu.html",
-            {"menu": menuid, "ingredients": Ing, "ratings": rate},
-        )
+        return render(request, "main/menu.html", {
+            "menu": menuid,
+            "ingredients": Ing,
+            "ratings": rate,
+            "form": None,
+            "rest": rest
+        })
+

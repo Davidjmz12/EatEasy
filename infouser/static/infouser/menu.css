@@ -1,0 +1,184 @@
+/******************************************************
+                        GENERAL
+*******************************************************/
+
+body {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100vw;
+    max-width: 100vw;
+}
+
+h1 {
+    width: 100%;
+    text-align: center;
+    color: darkcyan;
+}
+
+
+/******************************************************
+                        INGREDIENTS
+*******************************************************/
+
+.screen-ingredients {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 65%;
+    height: fit-content;
+    overflow: auto;
+}
+
+.folio {
+    position: fixed;
+    top: 50px;
+    bottom: 80px;
+    left: 50px;
+    right: 40%;
+
+    min-height: 400px;
+
+    background-color: white;
+    border: solid 2px darkcyan;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
+
+    margin: 50px 0 0 0;
+}
+
+.div-enlace {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.button-change-ingredients {
+    position: absolute;
+    bottom: 50px;
+    left: 40%;
+    width: 20%;
+    min-width: 100px;
+    height: 50px;
+
+    border-radius: 100px;
+    border: none;
+    background-color: darkcyan;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    box-shadow: 5px 5px 8px rgba(0,0,0,0.3);
+}
+
+.button-change-ingredients:hover {
+    background-color: #006e6e;
+}
+
+.button-change-ingredients:active {
+    background-color: #004f4f;
+}
+
+/******************************************************
+                        COMMENTS
+*******************************************************/
+
+.comments {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 50px 10px 0 10px;
+    width: 35%;
+    height: 100%;
+    min-height: 300px;
+
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+
+    overflow: auto;
+    border: solid 2px darkcyan;
+}
+
+
+.all-comments {
+    height: 50%;
+    width: 100%;
+    overflow: auto;
+    margin-bottom: 20px;
+    padding: 20px 0;
+}
+
+.one-comment {
+    background-color: lightgray;
+    border: solid 2px darkcyan;
+    padding: 10px;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 15px ;
+    margin-bottom: 20px;
+}
+
+.user-comment {
+    width: 70%;
+}
+
+.first-line-comment {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.space {
+    width: 20px;
+}
+
+.rate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
+    border: solid 2px darkcyan;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.make-a-comment {
+    background-color: darkcyan;
+    padding: 10px;
+    border: solid 2px darkcyan;
+    border-radius: 15px;
+    color: white;
+    width: 80%;
+    height: 23%;
+}
+
+.button-submit {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.button-submit-comment {
+    height: 40px;
+    width: 80px;
+    border-radius: 40px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.button-submit-comment:hover {
+    background-color: lightgray;
+}
+
+.button-submit-comment:active {
+    background-color: darkgray;
+}
+
+.input-form {
+    width: 100%;
+    height: 20px;
+    border: none;
+    border-radius: 100px;
+}

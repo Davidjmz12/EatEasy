@@ -1,17 +1,32 @@
 {% extends "main/layout.html" %}
 {% load static %}
 
+{% block head %}
+    <link rel="stylesheet" href="{% static 'infouser/notifications.css' %}">
+    <link rel="stylesheet" href="{% static 'main/restaurant.css' %}">
+{% endblock %}
+
 {% block body %}
 
-    {% for item in notifications %}
-        <ul>
+    <div class="all-notifications">
+        <h1>Notifications</h1>
+        {% for item in notifications %}
             {% if item.read %}
-                <li style="background-color: aquamarine"> <a href="{% url "infouser:infoNot" item.pk %}">{{ item.title }}</a></li>
+                <div style="background-color: darkgray" class="one-dish-short read-notification" >
+                    <a class="div-notification" href="{% url "infouser:infoNot" item.pk %}">
+                        {{ item.title }}
+                    </a>
+                </div>
             {% else %}
-                <li style="background-color: gray"> <a href="{% url "infouser:infoNot" item.pk %}">{{ item.title }}</a></li>
+                <div class="one-dish-short unread-notification">
+                    <a class="div-notification" href="{% url "infouser:infoNot" item.pk %}">
+                        {{ item.title }}
+                    </a>
+                </div>
             {% endif %}
-        </ul>
-    {% empty %}
-        <h1> No hay notificaciones</h1>
-    {% endfor %}
+        {% empty %}
+            <p> There is any notification </p>
+        {% endfor %}
+    </div>
+
 {% endblock %}

@@ -55,6 +55,19 @@ def registerRest(request):
     else:
         form = RestaurantRegistrationForm()
 
+    form.fields['web_page'].widget.attrs['class'] = "input-form"
+    form.fields['precise_location'].widget.attrs['class'] = "input-form"
+    form.fields['city'].widget.attrs['class'] = "input-form"
+    form.fields['phone_number'].widget.attrs['class'] = "input-form"
+    form.fields['description'].widget.attrs['class'] = "input-form"
+    form.fields['rest_name'].widget.attrs['class'] = "input-form"
+    form.fields['email'].widget.attrs['class'] = "input-form"
+    form.fields['first_name'].widget.attrs['class'] = "input-form"
+    form.fields['last_name'].widget.attrs['class'] = "input-form"
+    form.fields['username'].widget.attrs['class'] = "input-form"
+    form.fields['password1'].widget.attrs['class'] = "input-form"
+    form.fields['password2'].widget.attrs['class'] = "input-form"
+
     return render(
         request=request,
         template_name="login/registerRest.html",
@@ -75,6 +88,12 @@ def registerUser(request):
     else:
         form = UserRegistrationForm()
 
+    form.fields['email'].widget.attrs['class'] = "input-form"
+    form.fields['first_name'].widget.attrs['class'] = "input-form"
+    form.fields['last_name'].widget.attrs['class'] = "input-form"
+    form.fields['username'].widget.attrs['class'] = "input-form"
+    form.fields['password1'].widget.attrs['class'] = "input-form"
+    form.fields['password2'].widget.attrs['class'] = "input-form"
     return render(
         request=request,
         template_name="login/registerUser.html",
