@@ -13,8 +13,20 @@ from main.models import Dish, Rating
 def index(request):
     if not request.user.is_superuser:
         if request.method == "POST":
+            price = ceil(getMax(Restaurant.objects.all()))
+            loc = request.POST.get("location", " ")
+            location = loc if loc != "" else "all"
             return HttpResponseRedirect(
-                reverse("main:search", kwargs={"location": request.POST["location"]})
+                reverse(
+                    "main:search",
+                    kwargs={
+                        "locationEntry": location,
+                        "priceEntry": price,
+                        "veganEntry": "False",
+                        "vegetEntry": "False",
+                        "celEntry": "False",
+                    },
+                )
             )
         else:
             return render(request, "main/index.html")
@@ -56,31 +68,29 @@ def subsetVegetarian(rest, veget):
 
 
 def subsetCity(rest, loc):
-    new_rest = []
-    for oneRest in rest:
-        if oneRest.precise_location == loc:
-            new_rest.append(oneRest)
-    return new_rest
+    if loc == "all":
+        return rest
+    else:
+        return [oneRest for oneRest in rest if oneRest.precise_location == loc]
 
 
-def subsetPrice(rest, maxSlider):
+def subsetPrice(rest, price):
     new_rest = []
     for oneRest in rest:
         my_dishes = [item.price for item in oneRest.my_dishes.all()]
         avgPrice = sum(my_dishes) / len(my_dishes)
-        if avgPrice <= maxSlider:
+        if avgPrice <= price:
             new_rest.append(oneRest)
-
     return new_rest
 
 
-def queryRestaurants(cel, vegan, veget, loc, maxSlider):
+def queryRestaurants(cel, vegan, veget, loc, price):
     rest = Restaurant.objects.all()
     rest = subsetVegan(rest, vegan)
     rest = subsetVegetarian(rest, veget)
     rest = subsetCeliac(rest, cel)
     rest = subsetCity(rest, loc)
-    rest = subsetPrice(rest, maxSlider)
+    rest = subsetPrice(rest, price)
     return rest
 
 
@@ -90,37 +100,55 @@ def getMax(restaurants):
         my_dishes = [item.price for item in oneRest.my_dishes.all()]
         avg_prices.append(sum(my_dishes) / len(my_dishes))
     try:
-        maxS = max(avg_prices)
+        return max(avg_prices)
     except:
-        maxS = 0
-    return maxS
+        return 0
 
 
-def search(request, location):
-    cel = request.POST.get("celiac", "off") == "on"
-    veget = request.POST.get("vegetarian", "off") == "on"
-    vegan = request.POST.get("vegan", "off") == "on"
-    loc = request.POST.get("location", location)
-    maxSlider = int(request.POST.get("maxValue", 0))
-
+def search(request, locationEntry, celEntry, vegetEntry, veganEntry, priceEntry):
     if request.method == "POST":
-        restaurants = queryRestaurants(cel, vegan, veget, loc, maxSlider)
+        cel = request.POST.get("celiac", "off") == "on"
+        veget = request.POST.get("vegetarian", "off") == "on"
+        vegan = request.POST.get("vegan", "off") == "on"
+        loc = request.POST.get("location")
+        loc = loc if loc != "" else "all"
+        price = int(request.POST.get("sliderPrice", 0))
+        return HttpResponseRedirect(
+            reverse(
+                "main:search",
+                kwargs={
+                    "locationEntry": loc,
+                    "celEntry": cel,
+                    "vegetEntry": veget,
+                    "veganEntry": vegan,
+                    "priceEntry": price,
+                },
+            )
+        )
     else:
         restaurants = Restaurant.objects.all()
-
-    maxPrice = getMax(Restaurant.objects.all())
-    return render(
-        request,
-        "main/search.html",
-        {
-            "restaurants": restaurants,
-            "max": ceil(maxPrice),
-            "location": loc,
-            "cel": cel,
-            "veget": veget,
-            "vegan": vegan,
-        },
-    )
+        maxPrice = ceil(getMax(restaurants))
+        restaurants = queryRestaurants(
+            celEntry == "True",
+            veganEntry == "True",
+            vegetEntry == "True",
+            locationEntry,
+            int(priceEntry),
+        )
+        locationEntry = locationEntry if locationEntry != "all" else ""
+        return render(
+            request,
+            "main/search.html",
+            {
+                "restaurants": restaurants,
+                "max": maxPrice,
+                "location": locationEntry,
+                "cel": celEntry,
+                "veget": vegetEntry,
+                "vegan": veganEntry,
+                "price": priceEntry,
+            },
+        )
 
 
 def filter_dish_cel(dishes, cel):
@@ -149,7 +177,6 @@ def filter_dish_price(dishes, price):
 
 
 def filter_dishes(dishes, cel, veget, vegan, price):
-
     dishes = filter_dish_cel(dishes, cel)
     dishes = filter_dish_vegan(dishes, vegan)
     dishes = filter_dish_veget(dishes, veget)
@@ -183,6 +210,10 @@ def restaurant(request, user_id, celEntry, vegEntry, veganEntry, priceEntry):
             )
         )
     else:
+        maxPrice = ceil(getMaxPriceRest(res))
+        print(priceEntry)
+        priceEntry = priceEntry if priceEntry != "-1" else str(maxPrice)
+        print(priceEntry)
         dishes = filter_dishes(
             dishes,
             celEntry == "True",
@@ -190,8 +221,6 @@ def restaurant(request, user_id, celEntry, vegEntry, veganEntry, priceEntry):
             veganEntry == "True",
             int(priceEntry),
         )
-        maxPrice = getMaxPriceRest(res)
-
         return render(
             request,
             "main/restaurant.html",
@@ -254,7 +283,6 @@ def menu(request, rest, menuid):
                         "rest": rest,
                     },
                 )
-                # (HttpResponseRedirect(reverse("main:search")))
             else:
                 for error in list(form.errors.values()):
                     print(request, error)

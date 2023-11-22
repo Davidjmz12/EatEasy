@@ -68,12 +68,12 @@
         <div class="slider-container">
             {% csrf_token %}
             <p>0€</p>
-            <input class="slider" type="range" value="100" name="maxValue">
-            <p id="final_price">100€</p>
+            <input class="slider" type="range" name="sliderPrice">
+            <p id="final_price">{{ max }}€</p>
         </div>
 
         <script>
-            start({{ max }}, "{{ location }}", "{{ cel }}", "{{ veget }}", "{{ vegan }}");
+            start({{ max }}, {{ price }}, "{{ location }}", "{{ cel }}", "{{ veget }}", "{{ vegan }}");
         </script>
 
         <p class="info-title">
@@ -97,7 +97,7 @@
 {% block main %}
     <!-- Restaurants -->
     {% for restaurant in restaurants %}
-        <a class="restaurant-link" href="{% url 'main:restaurant' user_id=restaurant.user_id celEntry=cel vegEntry=veget veganEntry=vegan priceEntry=max%}">
+        <a class="restaurant-link" href="{% url 'main:restaurant' user_id=restaurant.user_id celEntry=cel vegEntry=veget veganEntry=vegan priceEntry=-1%}">
             <img class="restaurant-image" alt="Restaurante" src="{% static 'main/images/restaurant.png' %}">
 
             <div class="info-one-restaurant">
