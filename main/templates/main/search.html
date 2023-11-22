@@ -97,7 +97,7 @@
 {% block main %}
     <!-- Restaurants -->
     {% for restaurant in restaurants %}
-        <fomr class="restaurant-link" >
+        <a class="restaurant-link" href="{% url 'main:restaurant' user_id=restaurant.user_id celEntry=cel vegEntry=veget veganEntry=vegan priceEntry=max%}">
             <img class="restaurant-image" alt="Restaurante" src="{% static 'main/images/restaurant.png' %}">
 
             <div class="info-one-restaurant">
@@ -108,7 +108,7 @@
                     {{ restaurant.description }}
                 </p>
             </div>
-        </fomr>
+        </a>
 
     {% empty %}
         <p>

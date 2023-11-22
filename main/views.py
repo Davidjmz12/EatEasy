@@ -58,7 +58,6 @@ def subsetVegetarian(rest, veget):
 def subsetCity(rest, loc):
     new_rest = []
     for oneRest in rest:
-        print(oneRest.precise_location, loc)
         if oneRest.precise_location == loc:
             new_rest.append(oneRest)
     return new_rest
@@ -70,7 +69,6 @@ def subsetPrice(rest, maxSlider):
         my_dishes = [item.price for item in oneRest.my_dishes.all()]
         avgPrice = sum(my_dishes) / len(my_dishes)
         if avgPrice <= maxSlider:
-            print(avgPrice, maxSlider)
             new_rest.append(oneRest)
 
     return new_rest
@@ -151,6 +149,7 @@ def filter_dish_price(dishes, price):
 
 
 def filter_dishes(dishes, cel, veget, vegan, price):
+
     dishes = filter_dish_cel(dishes, cel)
     dishes = filter_dish_vegan(dishes, vegan)
     dishes = filter_dish_veget(dishes, veget)
@@ -162,26 +161,50 @@ def getMaxPriceRest(res):
     return max([dish.price for dish in res.my_dishes.all()])
 
 
-def restaurant(request, user_id, cel, veg, vegan):
-    cel = request.POST.get("celiac", "off") == "onn"
-    veget = request.POST.get("vegetarian", "off") == "on"
-    vegan = request.POST.get("vegan", "off") == "on"
-    price = int(request.POST.get("price", 0))
+def restaurant(request, user_id, celEntry, vegEntry, veganEntry, priceEntry):
     res = Restaurant.objects.get(user_id=user_id)
     dishes = res.my_dishes.all()
-    maxPrice = getMaxPriceRest(res)
 
     if request.method == "POST":
-        dishes = filter_dishes(dishes, cel, veget, vegan, price)
-    if cel and veg and vegan:
-        dishes = filter_dishes(dishes, cel, veg, vegan, maxPrice)
+        cel = request.POST.get("celiac", "off") == "on"
+        veget = request.POST.get("vegetarian", "off") == "on"
+        vegan = request.POST.get("vegan", "off") == "on"
+        price = int(request.POST.get("price", 0))
+        return HttpResponseRedirect(
+            reverse(
+                "main:restaurant",
+                kwargs={
+                    "user_id": user_id,
+                    "celEntry": cel,
+                    "veganEntry": vegan,
+                    "vegEntry": veget,
+                    "priceEntry": price,
+                },
+            )
+        )
+    else:
+        dishes = filter_dishes(
+            dishes,
+            celEntry == "True",
+            vegEntry == "True",
+            veganEntry == "True",
+            int(priceEntry),
+        )
+        maxPrice = getMaxPriceRest(res)
 
-    return render(
-        request,
-        "main/restaurant.html",
-        {"restaurant": res, "dishes": dishes, "celiac": cel,
-         "vegetarian": veget, "vegan": vegan, "max_price": maxPrice, "price": price},
-    )
+        return render(
+            request,
+            "main/restaurant.html",
+            {
+                "restaurant": res,
+                "dishes": dishes,
+                "celiac": celEntry,
+                "vegetarian": vegEntry,
+                "vegan": veganEntry,
+                "max_price": maxPrice,
+                "price": priceEntry,
+            },
+        )
 
 
 def restaurant_info(request, user_id):
@@ -195,54 +218,71 @@ def filters(request):
 
 def menu(request, rest, menuid):
     restaurant = Restaurant.objects.filter(rest_name=rest).first()
-    mydish=Dish.objects.filter(name=menuid, restaurant=restaurant).first()
-    Ing=mydish.ingredients.all()
-    rate=Rating.objects.filter(dish_id=mydish.id).all()
+    mydish = Dish.objects.filter(name=menuid, restaurant=restaurant).first()
+    Ing = mydish.ingredients.all()
+    rate = Rating.objects.filter(dish_id=mydish.id).all()
     if not request.user.is_authenticated:
-        return render(request, "main/menu.html", {
-            "menu": menuid,
-            "ingredients": Ing,
-            "ratings": rate,
-            "form": None,
-            "rest": rest
-        })
+        return render(
+            request,
+            "main/menu.html",
+            {
+                "menu": menuid,
+                "ingredients": Ing,
+                "ratings": rate,
+                "form": None,
+                "rest": rest,
+            },
+        )
     if request.user.role == User.Role.CLIENT:
         if request.method == "POST":
             form = RatingForm(request.POST)
             if form.is_valid():
-                form.save(dish_id=mydish, client_id=request.user, date=datetime.datetime.now())
+                form.save(
+                    dish_id=mydish, client_id=request.user, date=datetime.datetime.now()
+                )
                 form = RatingForm()
-                form.fields['rate'].widget.attrs['class'] = "input-form"
-                form.fields['comment'].widget.attrs['class'] = "input-form"
-                return render(request, "main/menu.html", {
+                form.fields["rate"].widget.attrs["class"] = "input-form"
+                form.fields["comment"].widget.attrs["class"] = "input-form"
+                return render(
+                    request,
+                    "main/menu.html",
+                    {
                         "menu": menuid,
                         "ingredients": Ing,
                         "ratings": rate,
                         "form": form,
-                        "rest": rest
-                    })
-                    #(HttpResponseRedirect(reverse("main:search")))
+                        "rest": rest,
+                    },
+                )
+                # (HttpResponseRedirect(reverse("main:search")))
             else:
                 for error in list(form.errors.values()):
                     print(request, error)
         else:
             form = RatingForm()
 
-        form.fields['rate'].widget.attrs['class'] = "input-form"
-        form.fields['comment'].widget.attrs['class'] = "input-form"
-        return render(request, "main/menu.html", {
-            "menu": menuid,
-            "ingredients": Ing,
-            "ratings": rate,
-            "form": form,
-            "rest": rest
-        })
+        form.fields["rate"].widget.attrs["class"] = "input-form"
+        form.fields["comment"].widget.attrs["class"] = "input-form"
+        return render(
+            request,
+            "main/menu.html",
+            {
+                "menu": menuid,
+                "ingredients": Ing,
+                "ratings": rate,
+                "form": form,
+                "rest": rest,
+            },
+        )
     else:
-        return render(request, "main/menu.html", {
-            "menu": menuid,
-            "ingredients": Ing,
-            "ratings": rate,
-            "form": None,
-            "rest": rest
-        })
-
+        return render(
+            request,
+            "main/menu.html",
+            {
+                "menu": menuid,
+                "ingredients": Ing,
+                "ratings": rate,
+                "form": None,
+                "rest": rest,
+            },
+        )
