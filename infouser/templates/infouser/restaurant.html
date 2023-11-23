@@ -25,7 +25,7 @@
         </div>
 
         <div class="one-filter">
-            <a href="{% url 'infouser:restaurant' %}">
+            <a href="{% url 'infouser:statistics' %}">
                 <button class="one-side-button">
                 Estadísticas
                 </button>
@@ -57,6 +57,18 @@
                         <img class="type-icon" src="{% static 'main/images/gluten.png' %}">
                     {% else %}
                         <img class="type-icon" src="{% static 'main/images/no-gluten.png' %}">
+                    {% endif %}
+
+                    {% if dish.nuts_free %}
+                        <img class="type-icon" src="{% static 'main/images/nuts-free.png' %}">
+                    {% else %}
+                        <img class="type-icon" src="{% static 'main/images/no-nuts-free.png' %}">
+                    {% endif %}
+
+                    {% if dish.lactose_free %}
+                        <img class="type-icon" src="{% static 'main/images/lactose-free.png' %}">
+                    {% else %}
+                        <img class="type-icon" src="{% static 'main/images/no-lactose-free.png' %}">
                     {% endif %}
 
                     <p class="dish-name">

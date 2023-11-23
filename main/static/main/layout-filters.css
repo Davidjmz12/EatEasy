@@ -49,6 +49,12 @@ body {
     margin-right: 10px;
 }
 
+.filter-checkbox2 {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+}
+
 .filter-text {
     font-size: 20px;
     font-weight: lighter;

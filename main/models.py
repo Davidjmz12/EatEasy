@@ -23,18 +23,21 @@ class Dish(models.Model):
     vegetarian = models.BooleanField()
     vegan = models.BooleanField()
     celiac = models.BooleanField()
+    nuts_free = models.BooleanField()
+    lactose_free = models.BooleanField()
 
     dish_image = models.ImageField(blank=True)
 
     class Meta:
-        verbose_name_plural= "Dishes"
+        verbose_name_plural = "Dishes"
 
     def __str__(self):
         return self.name
 
 
 class Rating(models.Model):
-    rate = models.IntegerField()
+    OPCIONES = [(1,1),(2,2),(3,3),(4,4),(5,5)]
+    rate = models.IntegerField(choices=OPCIONES)
     comment = models.CharField(max_length=300)
     client = models.ForeignKey(
         Client, on_delete=models.CASCADE, related_name="user_ratings"

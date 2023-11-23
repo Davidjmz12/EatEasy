@@ -18,6 +18,8 @@ urlpatterns = [
     path("notifications/delete/<int:notification_id>", views.deleteNotification, name="delNot"),
     path("menu/<str:menuid>/", views.menu, name="menu"),
     path("changemenu/<str:menuid>/", views.changemenu, name="changemenu"),
+    path("changemenu/delete/<str:menuid>/", views.deletemenu, name="deletemenu"),
     path("update_menu/<str:menuid>/", views.update_menu, name="update_menu"),
-    path("admin/",views.admin, name="admin")
+    path("admin/",views.admin, name="admin"),
+    path("statistics/", views.statistics, name="statistics")
 ]

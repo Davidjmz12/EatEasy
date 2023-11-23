@@ -6,35 +6,59 @@
 {% endblock %}
 
 {% block filters %}
+    <script src="{% static 'main/restaurantFilter.js' %}"></script>
 <!-- Filters of consumers preferences -->
-    <p class="info-title">
-        Food filters
-    </p>
-
-    <div class="one-filter">
-        <input class="filter-checkbox" type="checkbox">
-        <p class="filter-text">Celiac</p>
-    </div>
-
-    <div class="one-filter">
-        <input class="filter-checkbox" type="checkbox">
-        <p class="filter-text">Vegetarian</p>
-    </div>
-
-    <div class="one-filter">
-        <input class="filter-checkbox" type="checkbox">
-        <p class="filter-text">Vegan</p>
-    </div>
-
-    <!-- Filters of price -->
-    <p class="info-title">
-        Prices
-    </p>
-
-    <div class="slider-container">
+    <form method="post" id="myForm">
         {% csrf_token %}
-        <input class="slice" type="range">
-    </div>
+         <p class="info-title">
+            Food filters
+        </p>
+
+        <div class="one-filter" onchange="submitForm()">
+            <input class="filter-checkbox" type="checkbox" name="celiac">
+            <p class="filter-text">Celiac</p>
+        </div>
+
+        <div class="one-filter" onchange="submitForm()">
+            <input class="filter-checkbox" type="checkbox"  name="vegetarian">
+            <p class="filter-text">Vegetarian</p>
+        </div>
+
+        <div class="one-filter" onchange="submitForm()">
+            <input class="filter-checkbox" type="checkbox" name="vegan">
+            <p class="filter-text">Vegan</p>
+        </div>
+
+        <div class="one-filter" onchange="submitForm()">
+            <input class="filter-checkbox" type="checkbox" name="nuts">
+            <p class="filter-text">Nuts-Free</p>
+        </div>
+
+        <div class="one-filter" onchange="submitForm()">
+            <input class="filter-checkbox" type="checkbox" name="lactose">
+            <p class="filter-text">Lactose-Free</p>
+        </div>
+
+        <!-- Filters of price -->
+        <p class="info-title">
+            Prices
+        </p>
+
+        <p>0€</p>
+        <div class="slider-container">
+            <input class="slice" type="range" name="price" value="100" onchange="submitForm()">
+        </div>
+        <p id="final_price">{{ max_price }}</p>
+        <!--
+        <input type="submit" value="search">
+        -->
+
+    </form>
+
+    <script>
+        start_rest("{{ celiac }}", "{{ vegetarian }}", "{{ vegan }}", "{{ nuts }}", "{{ lactose }}", "{{ max_price }}", "{{ price }}")
+    </script>
+
 {% endblock %}
 
 {% block main %}
@@ -45,6 +69,13 @@
 
         {% for dish in dishes %}
             <a class="one-dish-short" href="{% url 'main:menu' restaurant.rest_name dish.name%}">
+
+                {% if dish.celiac %}
+                    <img class="type-icon" src="{% static 'main/images/gluten.png' %}">
+                {% else %}
+                    <img class="type-icon" src="{% static 'main/images/no-gluten.png' %}">
+                {% endif %}
+
                 {% if dish.vegetarian %}
                 	<img class="type-icon" src="{% static 'main/images/vegetarian.png' %}">
                 {% else %}
@@ -57,10 +88,16 @@
                     <img class="type-icon" src="{% static 'main/images/no-vegan.png' %}">
                 {% endif %}
 
-                {% if dish.celiac %}
-                    <img class="type-icon" src="{% static 'main/images/gluten.png' %}">
+                {% if dish.nuts_free %}
+                    <img class="type-icon" src="{% static 'main/images/nuts-free.png' %}">
                 {% else %}
-                    <img class="type-icon" src="{% static 'main/images/no-gluten.png' %}">
+                    <img class="type-icon" src="{% static 'main/images/no-nuts-free.png' %}">
+                {% endif %}
+
+                {% if dish.lactose_free %}
+                    <img class="type-icon" src="{% static 'main/images/lactose-free.png' %}">
+                {% else %}
+                    <img class="type-icon" src="{% static 'main/images/no-lactose-free.png' %}">
                 {% endif %}
 
                 <p class="dish-name">
