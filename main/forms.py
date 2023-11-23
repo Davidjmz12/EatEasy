@@ -6,7 +6,7 @@ from main.models import Rating
 class RatingForm(ModelForm):
     class Meta:
         model = Rating
-        fields = ['rate', 'comment']
+        fields = ['comment']
 
     def save(self, commit=True, client_id=None, dish_id=None, date=None):
         rate = super(RatingForm, self).save(commit=False)
