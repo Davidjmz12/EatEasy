@@ -7,11 +7,11 @@ from django.urls import reverse
 from infouser.forms import DishForm, ResForm
 from infouser.forms import DishForm
 from infouser.models import Notification
-from main.models import Rating
+from main.models import Rating, Ingredient
 from infouser.forms import DishForm, ResForm, ClientForm
 from main.models import Rating, Dish
 from login.models import *
-
+import json
 
 # Create your views here.
 def index(request):
@@ -187,3 +187,20 @@ def deletemenu(request, menuid):
     dish = Dish.objects.get(restaurant=request.user.Restaurants.user_id, name=menuid)
     dish.delete()
     return HttpResponseRedirect(reverse("infouser:restaurant"))
+
+
+def statistics(request):
+    Ing = Ingredient.objects.all()
+    names = []
+    number = []
+    for i in Ing:
+        n = len(i.dishes_with.all())
+        names.append(i.name)
+        number.append(n)
+
+    zipp = zip(names, number)
+    return render(request, "infouser/statistics.html", {
+        "ingredients": json.dumps(names),
+        "numbers": json.dumps(number),
+        "zip": zipp
+    })
