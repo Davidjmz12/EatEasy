@@ -138,8 +138,6 @@ def notification(request):
 
 def infoNotifications(request, notification_id):
     notif = Notification.objects.get(pk=notification_id)
-    notif.read = True
-    notif.save()
     return render(
         request, "infouser/oneNotification.html", context={"notification": notif}
     )

@@ -98,7 +98,7 @@ def getMax(restaurants):
     avg_prices = []
     for oneRest in restaurants:
         my_dishes = [item.price for item in oneRest.my_dishes.all()]
-        avg_prices.append(sum(my_dishes) / len(my_dishes))
+        avg_prices.append(sum(my_dishes) / len(my_dishes)) if len(my_dishes) != 0 else 0
     return max0(avg_prices)
 
 
