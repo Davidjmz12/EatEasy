@@ -25,6 +25,8 @@ def index(request):
                         "veganEntry": "False",
                         "vegetEntry": "False",
                         "celEntry": "False",
+                        "nutsEntry": "False",
+                        "lactoseEntry": "False"
                     },
                 )
             )
@@ -34,7 +36,7 @@ def index(request):
         return HttpResponseRedirect(reverse("super:index"))
 
 
-def subsetPreferences(rest, veget, cel, vegan):
+def subsetPreferences(rest, veget, cel, vegan, nuts, lactose):
     return [
         oneRest
         for oneRest in rest
@@ -43,6 +45,8 @@ def subsetPreferences(rest, veget, cel, vegan):
                 (veget and item.vegetarian or not veget)
                 and (cel and item.celiac or not cel)
                 and (vegan and item.vegan or not vegan)
+                and (nuts and item.nuts_free or not nuts)
+                and (lactose and item.lactose_free or not lactose)
                 for item in oneRest.my_dishes.all()
             ]
         )
@@ -76,9 +80,9 @@ def subsetPrice(rest, price):
     ]
 
 
-def queryRestaurants(cel, vegan, veget, loc, price):
+def queryRestaurants(cel, vegan, veget, nuts, lactose, loc, price):
     rest = Restaurant.objects.all()
-    rest = subsetPreferences(rest, veget, cel, vegan)
+    rest = subsetPreferences(rest, veget, cel, vegan, nuts, lactose)
     rest = subsetCity(rest, loc)
     rest = subsetPrice(rest, price)
     return rest
@@ -92,11 +96,13 @@ def getMax(restaurants):
     return max0(avg_prices)
 
 
-def search(request, locationEntry, celEntry, vegetEntry, veganEntry, priceEntry):
+def search(request, locationEntry, celEntry, vegetEntry, veganEntry,nutsEntry, lactoseEntry, priceEntry):
     if request.method == "POST":
         cel = request.POST.get("celiac", "off") == "on"
         veget = request.POST.get("vegetarian", "off") == "on"
         vegan = request.POST.get("vegan", "off") == "on"
+        nuts = request.POST.get("nuts", "off") == "on"
+        lactose = request.POST.get("lactose", "off") == "on"
         loc = request.POST.get("location")
         loc = loc if loc != "" else "all"
         price = int(request.POST.get("sliderPrice", 0))
@@ -108,6 +114,8 @@ def search(request, locationEntry, celEntry, vegetEntry, veganEntry, priceEntry)
                     "celEntry": cel,
                     "vegetEntry": veget,
                     "veganEntry": vegan,
+                    "nutsEntry": nuts,
+                    "lactoseEntry": lactose,
                     "priceEntry": price,
                 },
             )
@@ -119,6 +127,8 @@ def search(request, locationEntry, celEntry, vegetEntry, veganEntry, priceEntry)
             celEntry == "True",
             veganEntry == "True",
             vegetEntry == "True",
+            nutsEntry == "True",
+            lactoseEntry == "True",
             locationEntry,
             int(priceEntry),
         )
@@ -134,17 +144,21 @@ def search(request, locationEntry, celEntry, vegetEntry, veganEntry, priceEntry)
                 "veget": vegetEntry,
                 "vegan": veganEntry,
                 "price": priceEntry,
+                "nuts": nutsEntry,
+                "lactose": lactoseEntry
             },
         )
 
 
-def filterPreferences(dishes, cel, veget, vegan):
+def filter_preferences(dishes, cel, veget, vegan, nuts, lactose):
     return [
         dish
         for dish in dishes
         if (dish.vegetarian and veget or not veget)
         and (dish.celiac and cel or not cel)
         and (dish.vegan and vegan or not vegan)
+        and (dish.nuts_free and nuts or not nuts)
+        and (dish.lactose_free and lactose or not lactose)
     ]
 
 
@@ -152,8 +166,8 @@ def filter_dish_price(dishes, price):
     return [item for item in dishes if item.price <= price]
 
 
-def filter_dishes(dishes, cel, veget, vegan, price):
-    dishes = filterPreferences(dishes, cel, veget, vegan)
+def filter_dishes(dishes, cel, veget, vegan, nuts, lactose, price):
+    dishes = filter_preferences(dishes, cel, veget, vegan, nuts, lactose)
     dishes = filter_dish_price(dishes, price)
     return dishes
 
@@ -162,7 +176,7 @@ def getMaxPriceRest(res):
     return max([dish.price for dish in res.my_dishes.all()])
 
 
-def restaurant(request, user_id, celEntry, vegEntry, veganEntry, priceEntry):
+def restaurant(request, user_id, celEntry, vegEntry, veganEntry, nutsEntry, lactoseEntry, priceEntry):
     res = Restaurant.objects.get(user_id=user_id)
     dishes = res.my_dishes.all()
 
@@ -170,6 +184,8 @@ def restaurant(request, user_id, celEntry, vegEntry, veganEntry, priceEntry):
         cel = request.POST.get("celiac", "off") == "on"
         veget = request.POST.get("vegetarian", "off") == "on"
         vegan = request.POST.get("vegan", "off") == "on"
+        nuts = request.POST.get("nuts", "off") == "on"
+        lactose = request.POST.get("lactose", "off") == "on"
         price = int(request.POST.get("price", 0))
         return HttpResponseRedirect(
             reverse(
@@ -179,6 +195,8 @@ def restaurant(request, user_id, celEntry, vegEntry, veganEntry, priceEntry):
                     "celEntry": cel,
                     "veganEntry": vegan,
                     "vegEntry": veget,
+                    "nutsEntry": nuts,
+                    "lactoseEntry": lactose,
                     "priceEntry": price,
                 },
             )
@@ -191,6 +209,8 @@ def restaurant(request, user_id, celEntry, vegEntry, veganEntry, priceEntry):
             celEntry == "True",
             vegEntry == "True",
             veganEntry == "True",
+            nutsEntry == "True",
+            lactoseEntry == "True",
             int(priceEntry),
         )
         return render(
@@ -202,6 +222,8 @@ def restaurant(request, user_id, celEntry, vegEntry, veganEntry, priceEntry):
                 "celiac": celEntry,
                 "vegetarian": vegEntry,
                 "vegan": veganEntry,
+                "nuts": nutsEntry,
+                "lactose": lactoseEntry,
                 "max_price": maxPrice,
                 "price": priceEntry,
             },

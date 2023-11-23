@@ -59,6 +59,18 @@
                         <img class="type-icon" src="{% static 'main/images/no-gluten.png' %}">
                     {% endif %}
 
+                    {% if dish.nuts_free %}
+                        <img class="type-icon" src="{% static 'main/images/nuts-free.png' %}">
+                    {% else %}
+                        <img class="type-icon" src="{% static 'main/images/no-nuts-free.png' %}">
+                    {% endif %}
+
+                    {% if dish.lactose_free %}
+                        <img class="type-icon" src="{% static 'main/images/lactose-free.png' %}">
+                    {% else %}
+                        <img class="type-icon" src="{% static 'main/images/no-lactose-free.png' %}">
+                    {% endif %}
+
                     <p class="dish-name">
                         {{ dish.name }}
                     </p>

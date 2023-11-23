@@ -29,6 +29,16 @@
             <p class="filter-text">Vegan</p>
         </div>
 
+        <div class="one-filter" onchange="submitForm()">
+            <input class="filter-checkbox" type="checkbox" name="nuts">
+            <p class="filter-text">Nuts-Free</p>
+        </div>
+
+        <div class="one-filter" onchange="submitForm()">
+            <input class="filter-checkbox" type="checkbox" name="lactose">
+            <p class="filter-text">Lactose-Free</p>
+        </div>
+
         <!-- Filters of price -->
         <p class="info-title">
             Prices
@@ -46,7 +56,7 @@
     </form>
 
     <script>
-        start_rest("{{ celiac }}", "{{ vegetarian }}", "{{ vegan }}", "{{ max_price }}", "{{ price }}")
+        start_rest("{{ celiac }}", "{{ vegetarian }}", "{{ vegan }}", "{{ nuts }}", "{{ lactose }}", "{{ max_price }}", "{{ price }}")
     </script>
 
 {% endblock %}
@@ -78,6 +88,17 @@
                     <img class="type-icon" src="{% static 'main/images/no-vegan.png' %}">
                 {% endif %}
 
+                {% if dish.nuts_free %}
+                    <img class="type-icon" src="{% static 'main/images/nuts-free.png' %}">
+                {% else %}
+                    <img class="type-icon" src="{% static 'main/images/no-nuts-free.png' %}">
+                {% endif %}
+
+                {% if dish.lactose_free %}
+                    <img class="type-icon" src="{% static 'main/images/lactose-free.png' %}">
+                {% else %}
+                    <img class="type-icon" src="{% static 'main/images/no-lactose-free.png' %}">
+                {% endif %}
 
                 <p class="dish-name">
                     {{ dish.name }}

@@ -9,7 +9,7 @@ from main.models import Dish
 class DishForm(ModelForm):
     class Meta:
         model = Dish
-        fields = ['name', 'ingredients', 'price', 'vegan', 'vegetarian','celiac', 'dish_image']
+        fields = ['name', 'ingredients', 'price', 'vegan', 'vegetarian', 'celiac', 'nuts_free', 'lactose_free', 'dish_image']
         widgets = {
             'ingredients': forms.CheckboxSelectMultiple,
         }

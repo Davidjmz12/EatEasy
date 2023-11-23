@@ -30,6 +30,16 @@
             <p class="filter-text">Vegan</p>
         </div>
 
+        <div class="one-filter">
+            <input class="filter-checkbox" type="checkbox" name="nuts" onchange="submitForm()">
+            <p class="filter-text">Nuts-Free</p>
+        </div>
+
+        <div class="one-filter">
+            <input class="filter-checkbox" type="checkbox" name="lactose" onchange="submitForm()">
+            <p class="filter-text">Lactose-Free</p>
+        </div>
+
         <!-- Types of food -->
         <p class="info-title">
             Food types
@@ -73,7 +83,7 @@
         </div>
 
         <script>
-            start({{ max }}, {{ price }}, "{{ location }}", "{{ cel }}", "{{ veget }}", "{{ vegan }}");
+            start({{ max }}, {{ price }}, "{{ location }}", "{{ cel }}", "{{ veget }}", "{{ vegan }}", "{{ nuts }}", "{{ lactose }}");
         </script>
 
         <p class="info-title">
@@ -97,7 +107,7 @@
 {% block main %}
     <!-- Restaurants -->
     {% for restaurant in restaurants %}
-        <a class="restaurant-link" href="{% url 'main:restaurant' user_id=restaurant.user_id celEntry=cel vegEntry=veget veganEntry=vegan priceEntry=-1%}">
+        <a class="restaurant-link" href="{% url 'main:restaurant' user_id=restaurant.user_id celEntry=cel vegEntry=veget veganEntry=vegan nutsEntry=nuts lactoseEntry=lactose priceEntry=-1%}">
             <img class="restaurant-image" alt="Restaurante" src="{% static 'main/images/restaurant.png' %}">
 
             <div class="info-one-restaurant">
