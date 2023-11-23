@@ -9,24 +9,24 @@
     <!-- Filters of consumers preferences -->
     <script src="{% static 'main/prices.js' %}"></script>
 
-    <form method="post">
+    <form method="post" id="myForm">
         {% csrf_token %}
          <p class="info-title">
             Food filters
         </p>
 
         <div class="one-filter">
-            <input class="filter-checkbox" type="checkbox" name="celiac">
+            <input class="filter-checkbox" type="checkbox" name="celiac" onchange="submitForm()">
             <p class="filter-text">Celiac</p>
         </div>
 
         <div class="one-filter">
-            <input class="filter-checkbox" type="checkbox" name="vegetarian">
+            <input class="filter-checkbox" type="checkbox" name="vegetarian" onchange="submitForm()">
             <p class="filter-text">Vegetarian</p>
         </div>
 
         <div class="one-filter">
-            <input class="filter-checkbox" type="checkbox" name="vegan">
+            <input class="filter-checkbox" type="checkbox" name="vegan" onchange="submitForm()">
             <p class="filter-text">Vegan</p>
         </div>
 
@@ -68,7 +68,7 @@
         <div class="slider-container">
             {% csrf_token %}
             <p>0€</p>
-            <input class="slider" type="range" name="sliderPrice">
+            <input class="slider" type="range" name="sliderPrice" onchange="submitForm()">
             <p id="final_price">{{ max }}€</p>
         </div>
 
@@ -86,8 +86,8 @@
             Distance
         </p>
         <input type="number" value="{{ distance }}" name="distance">
-           -->
-        <input type="submit">
+
+        <input type="submit"> -->
     </form>
 
 

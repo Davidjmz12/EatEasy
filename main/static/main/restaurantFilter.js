@@ -27,3 +27,7 @@ function start_rest(celiac, vegetarian, vegan, max_price, price) {
     setFilters(celiac,vegetarian,vegan,filters)
     slider.addEventListener("mouseup",function(){changeSlider(vSlice,slider)}, false);
 }
+
+function submitForm(){
+    document.getElementById("myForm").submit();
+}

@@ -34,61 +34,51 @@ def index(request):
         return HttpResponseRedirect(reverse("super:index"))
 
 
-def subsetCeliac(rest, cel):
-    new_rest = []
-    for oneRest in rest:
-        my_dishes = oneRest.my_dishes.all()
-        celiacArray = [item.celiac for item in my_dishes]
-        if not cel or (cel and any(celiacArray)):
-            new_rest.append(oneRest)
-
-    return new_rest
-
-
-def subsetVegan(rest, veg):
-    new_rest = []
-    for oneRest in rest:
-        my_dishes = oneRest.my_dishes.all()
-        veganArray = [item.vegan for item in my_dishes]
-        if not veg or (veg and any(veganArray)):
-            new_rest.append(oneRest)
-
-    return new_rest
-
-
-def subsetVegetarian(rest, veget):
-    new_rest = []
-    for oneRest in rest:
-        my_dishes = oneRest.my_dishes.all()
-        vegetarianArray = [item.vegetarian for item in my_dishes]
-        if not veget or (veget and any(vegetarianArray)):
-            new_rest.append(oneRest)
-
-    return new_rest
+def subsetPreferences(rest, veget, cel, vegan):
+    return [
+        oneRest
+        for oneRest in rest
+        if any(
+            [
+                (veget and item.vegetarian or not veget)
+                and (cel and item.celiac or not cel)
+                and (vegan and item.vegan or not vegan)
+                for item in oneRest.my_dishes.all()
+            ]
+        )
+    ]
 
 
 def subsetCity(rest, loc):
-    if loc == "all":
-        return rest
+    return (
+        rest
+        if loc == "all"
+        else [oneRest for oneRest in rest if oneRest.precise_location == loc]
+    )
+
+
+def avg(v):
+    return sum(v) / len(v)
+
+
+def max0(v):
+    if len(v) == 0:
+        return 0
     else:
-        return [oneRest for oneRest in rest if oneRest.precise_location == loc]
+        return max(v)
 
 
 def subsetPrice(rest, price):
-    new_rest = []
-    for oneRest in rest:
-        my_dishes = [item.price for item in oneRest.my_dishes.all()]
-        avgPrice = sum(my_dishes) / len(my_dishes)
-        if avgPrice <= price:
-            new_rest.append(oneRest)
-    return new_rest
+    return [
+        oneRest
+        for oneRest in rest
+        if avg([item.price for item in oneRest.my_dishes.all()]) <= price
+    ]
 
 
 def queryRestaurants(cel, vegan, veget, loc, price):
     rest = Restaurant.objects.all()
-    rest = subsetVegan(rest, vegan)
-    rest = subsetVegetarian(rest, veget)
-    rest = subsetCeliac(rest, cel)
+    rest = subsetPreferences(rest, veget, cel, vegan)
     rest = subsetCity(rest, loc)
     rest = subsetPrice(rest, price)
     return rest
@@ -99,10 +89,7 @@ def getMax(restaurants):
     for oneRest in restaurants:
         my_dishes = [item.price for item in oneRest.my_dishes.all()]
         avg_prices.append(sum(my_dishes) / len(my_dishes))
-    try:
-        return max(avg_prices)
-    except:
-        return 0
+    return max0(avg_prices)
 
 
 def search(request, locationEntry, celEntry, vegetEntry, veganEntry, priceEntry):
@@ -151,25 +138,14 @@ def search(request, locationEntry, celEntry, vegetEntry, veganEntry, priceEntry)
         )
 
 
-def filter_dish_cel(dishes, cel):
-    if not cel:
-        return dishes
-    else:
-        return [dish for dish in dishes if dish.celiac]
-
-
-def filter_dish_vegan(dishes, vegan):
-    if not vegan:
-        return dishes
-    else:
-        return [dish for dish in dishes if dish.vegan]
-
-
-def filter_dish_veget(dishes, veget):
-    if not veget:
-        return dishes
-    else:
-        return [dish for dish in dishes if dish.vegetarian]
+def filterPreferences(dishes, cel, veget, vegan):
+    return [
+        dish
+        for dish in dishes
+        if (dish.vegetarian and veget or not veget)
+        and (dish.celiac and cel or not cel)
+        and (dish.vegan and vegan or not vegan)
+    ]
 
 
 def filter_dish_price(dishes, price):
@@ -177,9 +153,7 @@ def filter_dish_price(dishes, price):
 
 
 def filter_dishes(dishes, cel, veget, vegan, price):
-    dishes = filter_dish_cel(dishes, cel)
-    dishes = filter_dish_vegan(dishes, vegan)
-    dishes = filter_dish_veget(dishes, veget)
+    dishes = filterPreferences(dishes, cel, veget, vegan)
     dishes = filter_dish_price(dishes, price)
     return dishes
 
@@ -211,9 +185,7 @@ def restaurant(request, user_id, celEntry, vegEntry, veganEntry, priceEntry):
         )
     else:
         maxPrice = ceil(getMaxPriceRest(res))
-        print(priceEntry)
         priceEntry = priceEntry if priceEntry != "-1" else str(maxPrice)
-        print(priceEntry)
         dishes = filter_dishes(
             dishes,
             celEntry == "True",

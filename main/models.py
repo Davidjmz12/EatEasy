@@ -23,6 +23,8 @@ class Dish(models.Model):
     vegetarian = models.BooleanField()
     vegan = models.BooleanField()
     celiac = models.BooleanField()
+    nuts_free = models.BooleanField()
+    latose_free = models.BooleanField()
 
     dish_image = models.ImageField(blank=True)
 

@@ -30,3 +30,7 @@ function start(max, price, location, cel, veget, vegan){
     setFilters(cel,veget,vegan)
     slider.addEventListener("mouseup",function(){changeSlider(slider)}, false);
 }
+
+function submitForm(){
+    document.getElementById("myForm").submit();
+}

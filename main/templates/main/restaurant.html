@@ -8,23 +8,23 @@
 {% block filters %}
     <script src="{% static 'main/restaurantFilter.js' %}"></script>
 <!-- Filters of consumers preferences -->
-    <form method="post">
+    <form method="post" id="myForm">
         {% csrf_token %}
          <p class="info-title">
             Food filters
         </p>
 
-        <div class="one-filter">
+        <div class="one-filter" onchange="submitForm()">
             <input class="filter-checkbox" type="checkbox" name="celiac">
             <p class="filter-text">Celiac</p>
         </div>
 
-        <div class="one-filter">
+        <div class="one-filter" onchange="submitForm()">
             <input class="filter-checkbox" type="checkbox"  name="vegetarian">
             <p class="filter-text">Vegetarian</p>
         </div>
 
-        <div class="one-filter">
+        <div class="one-filter" onchange="submitForm()">
             <input class="filter-checkbox" type="checkbox" name="vegan">
             <p class="filter-text">Vegan</p>
         </div>
@@ -36,11 +36,13 @@
 
         <p>0€</p>
         <div class="slider-container">
-            <input class="slice" type="range" name="price" value="100">
+            <input class="slice" type="range" name="price" value="100" onchange="submitForm()">
         </div>
         <p id="final_price">{{ max_price }}</p>
-
+        <!--
         <input type="submit" value="search">
+        -->
+
     </form>
 
     <script>
@@ -57,6 +59,13 @@
 
         {% for dish in dishes %}
             <a class="one-dish-short" href="{% url 'main:menu' restaurant.rest_name dish.name%}">
+
+                {% if dish.celiac %}
+                    <img class="type-icon" src="{% static 'main/images/gluten.png' %}">
+                {% else %}
+                    <img class="type-icon" src="{% static 'main/images/no-gluten.png' %}">
+                {% endif %}
+
                 {% if dish.vegetarian %}
                 	<img class="type-icon" src="{% static 'main/images/vegetarian.png' %}">
                 {% else %}
@@ -69,11 +78,6 @@
                     <img class="type-icon" src="{% static 'main/images/no-vegan.png' %}">
                 {% endif %}
 
-                {% if dish.celiac %}
-                    <img class="type-icon" src="{% static 'main/images/gluten.png' %}">
-                {% else %}
-                    <img class="type-icon" src="{% static 'main/images/no-gluten.png' %}">
-                {% endif %}
 
                 <p class="dish-name">
                     {{ dish.name }}
