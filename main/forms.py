@@ -17,5 +17,9 @@ class RatingForm(ModelForm):
             ratings = Rating.objects.filter(client_id=client_id.id, dish_id=dish_id.id).all()
             if(len(ratings)==0):
                 rate.save()
+            else:
+                for onerate in ratings:
+                    onerate.delete()
+                rate.save()
         return rate
 

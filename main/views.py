@@ -68,7 +68,7 @@ def subsetCity(rest, loc):
 
 
 def avg(v):
-    return sum(v) / len(v)
+    return 0 if len(v) == 0 else sum(v) / len(v)
 
 
 def max0(v):

@@ -36,7 +36,8 @@ class Dish(models.Model):
 
 
 class Rating(models.Model):
-    rate = models.IntegerField()
+    OPCIONES = [(1,1),(2,2),(3,3),(4,4),(5,5)]
+    rate = models.IntegerField(choices=OPCIONES)
     comment = models.CharField(max_length=300)
     client = models.ForeignKey(
         Client, on_delete=models.CASCADE, related_name="user_ratings"
