@@ -1,12 +1,20 @@
 import datetime
 from math import ceil
 
-from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse
+
 from login.models import Restaurant, User
 from main.forms import RatingForm
 from main.models import Dish, Rating
+
+from Levenshtein import distance as distanceLev
+
+
+def are_strings_similar(str1, str2, threshold=3):
+    distance = distanceLev(str1.lower(), str2.lower())
+    return distance <= threshold
 
 
 # Create your views here.
@@ -26,7 +34,7 @@ def index(request):
                         "vegetEntry": "False",
                         "celEntry": "False",
                         "nutsEntry": "False",
-                        "lactoseEntry": "False"
+                        "lactoseEntry": "False",
                     },
                 )
             )
@@ -55,9 +63,7 @@ def subsetPreferences(rest, veget, cel, vegan, nuts, lactose):
 
 def subsetCity(rest, loc):
     return (
-        rest
-        if loc == "all"
-        else [oneRest for oneRest in rest if oneRest.precise_location == loc]
+        rest if loc == "all" else [oneRest for oneRest in rest if are_strings_similar(oneRest.city, loc)]
     )
 
 
@@ -96,7 +102,16 @@ def getMax(restaurants):
     return max0(avg_prices)
 
 
-def search(request, locationEntry, celEntry, vegetEntry, veganEntry,nutsEntry, lactoseEntry, priceEntry):
+def search(
+    request,
+    locationEntry,
+    celEntry,
+    vegetEntry,
+    veganEntry,
+    nutsEntry,
+    lactoseEntry,
+    priceEntry,
+):
     if request.method == "POST":
         cel = request.POST.get("celiac", "off") == "on"
         veget = request.POST.get("vegetarian", "off") == "on"
@@ -145,7 +160,7 @@ def search(request, locationEntry, celEntry, vegetEntry, veganEntry,nutsEntry, l
                 "vegan": veganEntry,
                 "price": priceEntry,
                 "nuts": nutsEntry,
-                "lactose": lactoseEntry
+                "lactose": lactoseEntry,
             },
         )
 
@@ -176,7 +191,16 @@ def getMaxPriceRest(res):
     return max([dish.price for dish in res.my_dishes.all()])
 
 
-def restaurant(request, user_id, celEntry, vegEntry, veganEntry, nutsEntry, lactoseEntry, priceEntry):
+def restaurant(
+    request,
+    user_id,
+    celEntry,
+    vegEntry,
+    veganEntry,
+    nutsEntry,
+    lactoseEntry,
+    priceEntry,
+):
     res = Restaurant.objects.get(user_id=user_id)
     dishes = res.my_dishes.all()
 
