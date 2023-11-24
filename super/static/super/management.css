@@ -3,8 +3,18 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    overflow: auto;
 }
 
+h1 {
+    margin: 30px 0;
+    color: darkcyan;
+}
+
+p {
+    width: 90%;
+}
 
 .folio {
     display: flex;
@@ -14,10 +24,85 @@ body {
     background-color: white;
     border: 2px solid darkcyan;
     width: 80%;
-    height: 80%;
+    height: fit-content;
+    min-height: max(80%, 350px);
+
+    box-shadow: 5px 5px 8px rgba(0,0,0,0.3);
 }
 
 .one-restaurant {
+    width: 100%;
+}
+
+.enlace-restaurant {
     width: 80%;
+    height: 50px;
     background-color: lightgray;
+    text-decoration: none;
+    color: black;
+    border-radius: 25px;
+    border: solid 2px darkcyan;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding-left: 30px;
+    margin-bottom: 40px;
+
+    box-shadow: 5px 5px 8px rgba(0,0,0,0.3);
+}
+
+.enlace-restaurant:hover {
+    background-color: darkgray;
+}
+
+.enlace-restaurant:active {
+    background-color: #727272;
+}
+
+.enlaces-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 60%;
+    height: fit-content;
+}
+
+.enlace-button {
+    height: 50px;
+    background-color: darkcyan;
+    color: white;
+    width: 40%;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 5px 5px 8px rgba(0,0,0,0.3);
+}
+
+.enlace-button:hover {
+    background-color: #006e6e;
+}
+
+.enlace-button:active {
+    background-color: #004f4f;
+}
+
+.div-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+}
+
+.restaurant-name {
+    color: darkcyan;
 }

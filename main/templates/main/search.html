@@ -47,9 +47,11 @@
 
         <div class="slider-container">
             {% csrf_token %}
-            <p>0€</p>
+            <div class="prices-slider">
+                <p>0€</p>
+                <p id="final_price">{{ max }}€</p>
+            </div>
             <input class="slider" type="range" name="sliderPrice" onchange="submitForm()">
-            <p id="final_price">{{ max }}€</p>
         </div>
 
         <script>
@@ -59,7 +61,7 @@
         <p class="info-title">
             Location
         </p>
-        <input type="text" value="{{ location }}" name="location">
+        <input class="search-bar-filters" type="text" value="{{ location }}" name="location">
 
     </form>
 

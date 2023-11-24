@@ -1,0 +1,19 @@
+.one-ingredient {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.ingredient-name {
+    padding-left: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+
+.button-submit {
+    margin: 0 20px;
+}

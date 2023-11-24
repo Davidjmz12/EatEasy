@@ -2,21 +2,33 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'infouser/forms.css' %}">
-    <link rel="stylesheet" href="{% static 'login/login.css' %}">
+    <link rel="stylesheet" href="{% static 'super/management.css' %}">
 {% endblock %}
 
 {% block body %}
-    <div>
-        <h1>Restaurant</h1>
-        <p> {{ restaurant.phone_number }}</p>
-        <p> {{ restaurant.city }}</p>
+    <div class="folio">
+        <h1 class="restaurant-name">Restaurant information</h1>
+        <p>
+            Restaurant name: {{ restaurant.rest_name }}
+        </p>
+        <p>
+            Phone: {{ restaurant.phone_number }}
+        </p>
+        <p>
+            City: {{ restaurant.city }}
+        </p>
 
-        <a href="{% url 'super:deleteRes' restaurant.pk %}"
-            onclick="return confirm('Are you sure you want to delete this?')">
-            Delete
-        </a>
+        <div class="div-buttons">
+            <div class="space"></div>
+            <div class="enlaces-buttons">
+                <a class="enlace-button" href="{% url 'super:deleteRes' restaurant.pk %}"
+                    onclick="return confirm('Are you sure you want to delete this?')">
+                    Delete
+                </a>
 
-        <a href="{% url 'super:notification' restaurant.pk %}">Notification</a>
+                <a class="enlace-button" href="{% url 'super:notification' restaurant.pk %}">Notification</a>
+            </div>
+        </div>
+
     </div>
 {% endblock %}

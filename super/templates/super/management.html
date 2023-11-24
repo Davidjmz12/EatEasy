@@ -9,11 +9,13 @@
     <div class="folio">
         <h1>Restaurants</h1>
         {% for restaurant in restaurants %}
-            <a href="{% url 'super:oneRes' restaurant.pk %}">
-                <div class="one-restaurant">
+
+            <a class="enlace-restaurant" href="{% url 'super:oneRes' restaurant.pk %}">
+                <p class="one-restaurant">
                     {{ restaurant.rest_name }}
-                </div>
+                </p>
             </a>
+
         {% empty %}
             <p>There are no restaurants.</p>
         {% endfor %}

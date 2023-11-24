@@ -3,19 +3,24 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'infouser/forms.css' %}">
-    <link rel="stylesheet" href="{% static 'login/login.css' %}">
 {% endblock %}
 
 {% block body %}
-    <div>
-        <h1>Restaurants</h1>
-        <form method="post">
-            {% csrf_token %}
-            <p>Title</p>
-            <input type="text" name="title">
-            <p>Description</p>
-            <input type="text" name="description">
-            <input type="submit">
-        </form>
+
+    <div class="screen-form">
+        <div class="formulario">
+            <h1>Restaurants</h1>
+            <form method="post">
+                {% csrf_token %}
+                <p>Title:</p>
+                <input class="input-form" type="text" name="title">
+                <p>Message:</p>
+                <input class="input-form" type="text" name="description">
+                <div class="button-submit-div">
+                    <input class="button-submit" type="submit">
+                </div>
+            </form>
+        </div>
     </div>
+
 {% endblock %}
