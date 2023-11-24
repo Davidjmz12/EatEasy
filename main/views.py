@@ -6,7 +6,6 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from login.models import Restaurant, User
-from main.forms import RatingForm
 from main.models import Dish, Rating
 
 from Levenshtein import distance as distanceLev
@@ -63,7 +62,9 @@ def subsetPreferences(rest, veget, cel, vegan, nuts, lactose):
 
 def subsetCity(rest, loc):
     return (
-        rest if loc == "all" else [oneRest for oneRest in rest if are_strings_similar(oneRest.city, loc)]
+        rest
+        if loc == "all"
+        else [oneRest for oneRest in rest if are_strings_similar(oneRest.city, loc)]
     )
 
 
@@ -264,71 +265,55 @@ def filters(request):
 
 
 def menu(request, rest, menuid):
-    restaurant = Restaurant.objects.filter(rest_name=rest).first()
-    mydish = Dish.objects.filter(name=menuid, restaurant=restaurant).first()
-    Ing = mydish.ingredients.all()
-    rate = Rating.objects.filter(dish_id=mydish.id).all()
-    if not request.user.is_authenticated:
-        return render(
-            request,
-            "main/menu.html",
-            {
-                "menu": menuid,
-                "ingredients": Ing,
-                "ratings": rate,
-                "form": None,
-                "rest": rest,
-            },
-        )
-    if request.user.role == User.Role.CLIENT:
-        if request.method == "POST":
-            array = [request.POST.get(item) for item in ["1","2","3","4","5"]]
-            items = array.index("on")+1
-            form = RatingForm(request.POST)
-            if form.is_valid():
-                form.save(
-                    dish_id=mydish, client_id=request.user, date=datetime.datetime.now()
-                )
-                form = RatingForm()
-                form.fields["comment"].widget.attrs["class"] = "input-form"
-                return render(
-                    request,
-                    "main/menu.html",
-                    {
-                        "menu": menuid,
-                        "ingredients": Ing,
-                        "ratings": rate,
-                        "form": form,
-                        "rest": rest,
-                    },
-                )
-            else:
-                for error in list(form.errors.values()):
-                    print(request, error)
-        else:
-            form = RatingForm()
+    myRestaurant = Restaurant.objects.filter(rest_name=rest).first()
+    myDish = Dish.objects.filter(name=menuid, restaurant=myRestaurant).first()
+    myIngredients = myDish.ingredients.all()
+    ratingOfDish = Rating.objects.filter(dish_id=myDish.id).all()
+    mean_rating = avg([item.rate for item in ratingOfDish])
 
-        form.fields["comment"].widget.attrs["class"] = "input-form"
-        return render(
-            request,
-            "main/menu.html",
-            {
-                "menu": menuid,
-                "ingredients": Ing,
-                "ratings": rate,
-                "form": form,
-                "rest": rest,
-            },
-        )
+    if (
+        request.user.is_authenticated
+        and request.user.role == User.Role.CLIENT
+        and request.method == "POST"
+    ):
+        rating_v = request.POST.get("rating")
+        comment = request.POST.get("comment")
+        if not rating_v or not comment:
+            return render(
+                request,
+                "main/menu.html",
+                {
+                    "menu": menuid,
+                    "ingredients": myIngredients,
+                    "ratings": ratingOfDish,
+                    "rest": rest,
+                    "mean_ratings": mean_rating,
+                    "i_am_client": request.user.role == User.Role.CLIENT,
+                    "err": True,
+                },
+            )
+        else:
+            rating_v = int(rating_v)
+            my_new_rating = Rating(comment=comment, rate=rating_v, client=request.user, dish=myDish, date=datetime.datetime.now())
+            my_other_ratings = Rating.objects.filter(client_id=request.user.id, dish_id=myDish.id).all()
+            if len(my_other_ratings) > 0:
+                for oneRate in my_other_ratings:
+                    oneRate.delete()
+            my_new_rating.save()
+            return HttpResponseRedirect(
+                reverse("main:menu", kwargs={"rest": rest, "menuid": menuid})
+            )
     else:
         return render(
             request,
             "main/menu.html",
             {
                 "menu": menuid,
-                "ingredients": Ing,
-                "ratings": rate,
-                "form": None,
+                "ingredients": myIngredients,
+                "ratings": ratingOfDish,
                 "rest": rest,
+                "mean_ratings": mean_rating,
+                "i_am_client": request.user.role == User.Role.CLIENT,
             },
         )
+

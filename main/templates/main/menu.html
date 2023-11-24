@@ -28,6 +28,8 @@
                 {% endfor %}
             </div>
 
+            <p>Average Rating: {{ mean_ratings }} </p>
+
             {% if isRestaurant %}
 
                 <div class="div-enlace">
@@ -52,22 +54,22 @@
     <!-- Comments of the dish -->
     <div class="comments">
         <div class="all-comments">
-            {% for rat in ratings %}
+            {% for oneRating in ratings %}
                 <div class="one-comment">
                     <div class="first-line-comment">
                         <div class="rate">
-                            {{ rat.rate }}
+                            {{ oneRating.rate }}
                         </div>
                         <div class="space"></div>
                         <p class="user-comment">
-                            {{ rat.client.username }}
+                            {{ oneRating.client.username }}
                         </p>
                         <div>
-                            {{ rat.date }}
+                            {{ oneRating.date }}
                         </div>
                     </div>
                     <p class="comment-comment">
-                        {{ rat.comment }}
+                        {{ oneRating.comment }}
                     </p>
                 </div>
 
@@ -79,28 +81,35 @@
         </div>
 
         <!-- Make a comment -->
-        {% if form %}
+        {% if i_am_client %}
             <div class="make-a-comment">
-                <div class="rating">
-                    <p>Rating: </p>
-                    <input type="radio" id="star5" name="rating" value="5">
-                    <label for="star5" class="star">&#9733;</label>
-                    <input type="radio" id="star4" name="rating" value="4">
-                    <label for="star4" class="star">&#9733;</label>
-                    <input type="radio" id="star3" name="rating" value="3">
-                    <label for="star3" class="star">&#9733;</label>
-                    <input type="radio" id="star2" name="rating" value="2">
-                    <label for="star2" class="star">&#9733;</label>
-                    <input type="radio" id="star1" name="rating" value="1">
-                    <label for="star1" class="star">&#9733;</label>
-                </div>
                 <form action="{%  url 'main:menu' rest menu %}" method="post">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    <p>Rating:</p>
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5" class="star">&#9733;</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4" class="star">&#9733;</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3" class="star">&#9733;</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2" class="star">&#9733;</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1" class="star">&#9733;</label>
+                    </div>
+
+                    <label>
+                        <input type="text" class = "input-form" name="comment" placeholder="Write a comment">
+                    </label>
+
                     <div class="button-submit">
                         <button class="button-submit-comment" type="submit">Publish</button>
                     </div>
                 </form>
+                {% if err %}
+                    <p style="color:red"> All fields are required</p>
+                {% endif %}
             </div>
         {% endif %}
 
