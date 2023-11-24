@@ -20,7 +20,7 @@ def index(request):
     elif request.user.role == User.Role.CLIENT:
         return HttpResponseRedirect(reverse("infouser:client"))
     else:
-        return HttpResponseRedirect(reverse("infouser:admin"))
+        return HttpResponseRedirect(reverse("super:index"))
 
 
 def restaurant(request):
@@ -175,10 +175,6 @@ def update_menu(request, menuid):
             ).first(),
         },
     )
-
-
-def admin(request):
-    return render(request, "infouser/admin.html", {"user": request.user})
 
 
 def deletemenu(request, menuid):

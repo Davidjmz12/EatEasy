@@ -313,7 +313,7 @@ def menu(request, rest, menuid):
                 "ratings": ratingOfDish,
                 "rest": rest,
                 "mean_ratings": mean_rating,
-                "i_am_client": request.user.role == User.Role.CLIENT,
+                "i_am_client": False #request.user.role == User.Role.CLIENT,
             },
         )
 
