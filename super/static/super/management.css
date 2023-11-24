@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.folio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: white;
+    border: 2px solid darkcyan;
+    width: 80%;
+    height: 80%;
+}
+
+.one-restaurant {
+    width: 80%;
+    background-color: lightgray;
+}

@@ -2,21 +2,20 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'infouser/forms.css' %}">
-    <link rel="stylesheet" href="{% static 'login/login.css' %}">
+    <link rel="stylesheet" href="{% static 'super/management.css' %}">
 {% endblock %}
 
 {% block body %}
-    <div>
+    <div class="folio">
         <h1>Restaurants</h1>
-        <div>
         {% for restaurant in restaurants %}
             <a href="{% url 'super:oneRes' restaurant.pk %}">
-                {{ restaurant.rest_name }}
+                <div class="one-restaurant">
+                    {{ restaurant.rest_name }}
+                </div>
             </a>
         {% empty %}
             <p>There are no restaurants.</p>
         {% endfor %}
-        </div>
     </div>
 {% endblock %}

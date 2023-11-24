@@ -3,37 +3,44 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'super/adminNotifications.css' %}">
+    <link rel="stylesheet" href="{% static 'infouser/menu.css' %}">
 {% endblock %}
 
 {% block body %}
 
     <div class="statistics">
         <h1> Statistics </h1>
-        {% for statistic in statistics %}
-            <div>
-                <p> {{ statistic.name }}</p>
-                <p> {{ statistic.value }}</p>
-            </div>
-        {% empty %}
-            <p> There is not statistics. </p>
-        {% endfor %}
+
+        <div class="choices">
+            <p>Select the type of graphics that you want to generate:</p>
+            <select name="statistics">
+                <option value="prices">Prices</option>
+                <option value="types_of_food">Types of food</option>
+                <option value="city">City</option>
+            </select>
+        </div>
+
     </div>
 
-    <div >
+    <div class="notifications">
         <h1>Notifications</h1>
         {% for notification in notifications %}
 
-            {% if notification.read %}
-                <div>
-                    <p>{{ notification.title }}</p>
-                    <p>{{ notification.description }}</p>
-                </div>
-            {% else %}
-                <div>
-                    <p>{{ notification.title }}</p>
-                    <p>{{ notification.description }}</p>
-                </div>
-            {% endif %}
+            <a href="{% url 'super:index' %}" class="one-comment">
+                {% if notification.read %}
+                    <div>
+                        <p class="notification-title">{{ notification.title }}</p>
+                        <p>{{ notification.description }}</p>
+                    </div>
+                {% else %}
+                    <div>
+                        <p class="notification-title">{{ notification.title }}</p>
+                        <p>{{ notification.description }}</p>
+                    </div>
+                {% endif %}
+            </a>
+
+
 
         {% empty %}
            <p> No Notifications</p>
