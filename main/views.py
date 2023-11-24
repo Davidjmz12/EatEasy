@@ -282,13 +282,14 @@ def menu(request, rest, menuid):
         )
     if request.user.role == User.Role.CLIENT:
         if request.method == "POST":
+            array = [request.POST.get(item) for item in ["1","2","3","4","5"]]
+            items = array.index("on")+1
             form = RatingForm(request.POST)
             if form.is_valid():
                 form.save(
                     dish_id=mydish, client_id=request.user, date=datetime.datetime.now()
                 )
                 form = RatingForm()
-                form.fields["rate"].widget.attrs["class"] = "input-form"
                 form.fields["comment"].widget.attrs["class"] = "input-form"
                 return render(
                     request,
@@ -307,7 +308,6 @@ def menu(request, rest, menuid):
         else:
             form = RatingForm()
 
-        form.fields["rate"].widget.attrs["class"] = "input-form"
         form.fields["comment"].widget.attrs["class"] = "input-form"
         return render(
             request,

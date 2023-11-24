@@ -193,3 +193,33 @@ h1 {
     border: none;
     border-radius: 100px;
 }
+
+
+
+
+
+
+.rating {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.star {
+    font-size: 2em;
+    padding: 0.1em;
+    transition: color 0.5s;
+}
+
+.star:hover,
+.star:hover ~ .star {
+    color: gold;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]:checked ~ label {
+    color: gold;
+}
