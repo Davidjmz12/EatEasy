@@ -1,0 +1,16 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <meta charset="urf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+    <script src="{% static 'super/graphs.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    <canvas id="MiGrafica" width="1500" height="500"></canvas>
+    <script>
+        renderGraph(JSON.parse('{{ingredients|escapejs}}') ,
+        JSON.parse('{{numbers|escapejs}}'))
+    </script>
+{% endblock %}

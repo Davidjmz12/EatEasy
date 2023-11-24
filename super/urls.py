@@ -11,4 +11,7 @@ urlpatterns = [
     path("management/notificate/<int:pk>", views.notification, name="notification"),
     path("management/ingredients", views.ingredients, name="ingredients"),
     path("management/ingredients/add", views.addIng, name="addIng"),
+    path("statistic_price/", views.statistic_price, name="statistic_price"),
+    path("statistic_filter/", views.statistic_filter, name="statistic_filter"),
+    path("statistic_city/", views.statistic_city, name="statistic_city")
 ]
