@@ -3,23 +3,36 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'infouser/forms.css' %}">
-    <link rel="stylesheet" href="{% static 'login/login.css' %}">
+    <link rel="stylesheet" href="{% static 'super/addIngredients.css' %}"
 {% endblock %}
 
 {% block body %}
 
-    <div>
-        <h1>Add Ingredient</h1>
-        <form method="post">
-            {% csrf_token %}
-            <label>
-                <input name="name" type="text">
-            </label>
-            {% if warning %}
-                <p style="color:red">Already created ingredient</p>
-            {% endif %}
-            <input type="submit" value="Add and go back" name="back">
-            <input type="submit" value="Add another" name="another">
-        </form>
+    <div class="screen-form">
+        <div class="formulario">
+            <h1>Add Ingredient</h1>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <input class="input-form" name="name" type="text" placeholder="Ingredient's name">
+
+                {% if warning %}
+                    <p style="color:red">Already created ingredient</p>
+                {% endif %}
+
+                <div class="button-submit-div">
+                    <button class="button-submit" type="submit" value="Add and go back" name="back">
+                        Add and go back
+                    </button>
+                    <button class="button-submit" type="submit" value="Add another" name="another">
+                        Add another
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
     </div>
+
 {% endblock %}
