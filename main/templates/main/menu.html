@@ -54,22 +54,22 @@
     <!-- Comments of the dish -->
     <div class="comments">
         <div class="all-comments">
-            {% for rat in ratings %}
+            {% for oneRating in ratings %}
                 <div class="one-comment">
                     <div class="first-line-comment">
                         <div class="rate">
-                            {{ rat.rate }}
+                            {{ oneRating.rate }}
                         </div>
                         <div class="space"></div>
                         <p class="user-comment">
-                            {{ rat.client.user_id }}
+                            {{ oneRating.client.user_id }}
                         </p>
                         <div>
-                            {{ rat.date }}
+                            {{ oneRating.date }}
                         </div>
                     </div>
                     <p class="comment-comment">
-                        {{ rat.comment }}
+                        {{ oneRating.comment }}
                     </p>
                 </div>
 
@@ -81,7 +81,7 @@
         </div>
 
         <!-- Make a comment -->
-        {% if form %}
+        {% if i_am_client %}
             <div class="make-a-comment">
                 <form action="{%  url 'main:menu' rest menu %}" method="post">
                     {% csrf_token %}
@@ -99,11 +99,17 @@
                         <label for="star1" class="star">&#9733;</label>
                     </div>
 
-                    {{ form.as_p }}
+                    <label>
+                        <input type="text" class = "input-form" name="comment" placeholder="Write a comment">
+                    </label>
+
                     <div class="button-submit">
                         <button class="button-submit-comment" type="submit">Publish</button>
                     </div>
                 </form>
+                {% if err %}
+                    <p style="color:red"> All fields are required</p>
+                {% endif %}
             </div>
         {% endif %}
 
