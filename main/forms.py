@@ -6,20 +6,22 @@ from main.models import Rating
 class RatingForm(ModelForm):
     class Meta:
         model = Rating
-        fields = ['comment']
+        fields = ["comment"]
 
-    def save(self, commit=True, client_id=None, dish_id=None, date=None):
-        rate = super(RatingForm, self).save(commit=False)
+    def save(self, commit=True, client_id=None, dish_id=None, date=None, rating_v=0):
+        rating = super(RatingForm, self).save(commit=False)
         if commit and client_id and dish_id:
-            rate.client = client_id
-            rate.dish = dish_id
-            rate.date = date
-            ratings = Rating.objects.filter(client_id=client_id.id, dish_id=dish_id.id).all()
-            if(len(ratings)==0):
-                rate.save()
+            rating.client = client_id
+            rating.dish = dish_id
+            rating.date = date
+            rating.rate = rating_v
+            ratings = Rating.objects.filter(
+                client_id=client_id.id, dish_id=dish_id.id
+            ).all()
+            if len(ratings) == 0:
+                rating.save()
             else:
-                for onerate in ratings:
-                    onerate.delete()
-                rate.save()
-        return rate
-
+                for oneRate in ratings:
+                    oneRate.delete()
+                rating.save()
+        return rating

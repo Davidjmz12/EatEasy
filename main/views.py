@@ -268,6 +268,7 @@ def menu(request, rest, menuid):
     mydish = Dish.objects.filter(name=menuid, restaurant=restaurant).first()
     Ing = mydish.ingredients.all()
     rate = Rating.objects.filter(dish_id=mydish.id).all()
+    mean_rating = avg([item.rate for item in rate])
     if not request.user.is_authenticated:
         return render(
             request,
@@ -278,19 +279,18 @@ def menu(request, rest, menuid):
                 "ratings": rate,
                 "form": None,
                 "rest": rest,
+                "mean_ratings": mean_rating
             },
         )
-    if request.user.role == User.Role.CLIENT:
+    elif request.user.role == User.Role.CLIENT:
         if request.method == "POST":
-            array = [request.POST.get(item) for item in ["1","2","3","4","5"]]
-            items = array.index("on")+1
+            rating_v = int(request.POST.get("rating"))
             form = RatingForm(request.POST)
             if form.is_valid():
-                form.save(
-                    dish_id=mydish, client_id=request.user, date=datetime.datetime.now()
-                )
+                form.save(dish_id=mydish, client_id=request.user, date=datetime.datetime.now(), rating_v=rating_v)
                 form = RatingForm()
                 form.fields["comment"].widget.attrs["class"] = "input-form"
+                rate = Rating.objects.filter(dish_id=mydish.id).all()
                 return render(
                     request,
                     "main/menu.html",
@@ -300,6 +300,7 @@ def menu(request, rest, menuid):
                         "ratings": rate,
                         "form": form,
                         "rest": rest,
+                        "mean_ratings": mean_rating,
                     },
                 )
             else:
@@ -318,6 +319,7 @@ def menu(request, rest, menuid):
                 "ratings": rate,
                 "form": form,
                 "rest": rest,
+                "mean_ratings": mean_rating
             },
         )
     else:
@@ -330,5 +332,6 @@ def menu(request, rest, menuid):
                 "ratings": rate,
                 "form": None,
                 "rest": rest,
+                "mean_ratings": mean_rating
             },
         )

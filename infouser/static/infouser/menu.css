@@ -190,7 +190,8 @@ h1 {
 
 .rating {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
+    justify-content: left;
     cursor: pointer;
 }
 
