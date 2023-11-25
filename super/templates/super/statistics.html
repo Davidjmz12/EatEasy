@@ -11,6 +11,7 @@
     <canvas id="MiGrafica" width="1500" height="500"></canvas>
     <script>
         renderGraph(JSON.parse('{{ingredients|escapejs}}') ,
-        JSON.parse('{{numbers|escapejs}}'))
+        JSON.parse('{{numbers|escapejs}}'),
+        "{{ type }}")
     </script>
 {% endblock %}

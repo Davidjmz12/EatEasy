@@ -13,6 +13,9 @@ from main.models import Rating, Dish
 from login.models import *
 import json
 
+from super.views import getRenderGraph
+
+
 # Create your views here.
 def index(request):
     if request.user.role == User.Role.RESTAURANT:
@@ -181,24 +184,17 @@ def admin(request):
     return render(request, "infouser/admin.html", {"user": request.user})
 
 
-def deletemenu(request, menuid):
+def deleteMenu(request, menuid):
     dish = Dish.objects.get(restaurant=request.user.Restaurants.user_id, name=menuid)
     dish.delete()
     return HttpResponseRedirect(reverse("infouser:restaurant"))
 
 
-def statistics(request):
-    Ing = Ingredient.objects.all()
-    names = []
-    number = []
-    for i in Ing:
-        n = len(i.dishes_with.all())
-        names.append(i.name)
-        number.append(n)
-
-    zipp = zip(names, number)
+def statistics(request, typeGraph):
+    names, number, zipp = getRenderGraph(typeGraph, request.user.Restaurants)
     return render(request, "infouser/statistics.html", {
         "ingredients": json.dumps(names),
         "numbers": json.dumps(number),
-        "zip": zipp
+        "zip": zipp,
+        "type": typeGraph,
     })

@@ -12,21 +12,21 @@
         <h1> Statistics </h1>
 
         <div class="fila">
-            <button class="statistics-button">
+            <a class="statistics-button" href="{% url 'super:statistics' 'ingredients' %}">
                 Ingredients
-            </button>
-            <button class="statistics-button">
+            </a>
+            <a class="statistics-button"  href="{% url 'super:statistics' 'price' %}">
                 Prices
-            </button>
+            </a>
         </div>
 
         <div class="fila">
-            <button class="statistics-button">
+            <a class="statistics-button"  href="{% url 'super:statistics' 'city' %}">
                 Cities
-            </button>
-            <button class="statistics-button">
+            </a>
+            <a class="statistics-button"  href="{% url 'super:statistics' 'filter' %}">
                 Types of food
-            </button>
+            </a>
         </div>
         <!--
         <div class="choices">
