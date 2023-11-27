@@ -21,6 +21,10 @@
                     <p style="color:red">Already created ingredient</p>
                 {% endif %}
 
+                {% if warningSintax %}
+                    <p style="color:red">Non valid ingredient name</p>
+                {% endif %}
+
                 <div class="button-submit-div">
                     <button class="button-submit" type="submit" value="Add and go back" name="back">
                         Add and go back

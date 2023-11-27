@@ -44,11 +44,14 @@
             Prices
         </p>
 
-        <p>0€</p>
         <div class="slider-container">
-            <input class="slice" type="range" name="price" value="100" onchange="submitForm()">
+            {% csrf_token %}
+            <div class="prices-slider">
+                <p>0€</p>
+                <p id="final_price">{{ max }}€</p>
+            </div>
+            <input class="slider" type="range" name="sliderPrice" onchange="submitForm()">
         </div>
-        <p id="final_price">{{ max_price }}</p>
         <!--
         <input type="submit" value="search">
         -->

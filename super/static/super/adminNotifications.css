@@ -56,14 +56,6 @@ body {
     margin-left: -15%;
 }
 
-/*
-.choices {
-    display: flex;
-    flex-direction: column;
-}
-
- */
-
 .fila {
     display: flex;
     flex-direction: row;
@@ -75,16 +67,22 @@ body {
 }
 
 .statistics-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     height: 60%;
     width: 40%;
 
-    border: none;
     background-color: darkcyan;
     color: white;
     font-weight: bold;
     font-size: 20px;
     border-radius: 1000px;
     cursor: pointer;
+
+    text-decoration: none;
 
     box-shadow: 5px 5px 8px rgba(0,0,0,0.3);
 }

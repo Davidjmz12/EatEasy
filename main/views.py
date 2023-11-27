@@ -270,15 +270,41 @@ def menu(request, rest, menuid):
     myIngredients = myDish.ingredients.all()
     ratingOfDish = Rating.objects.filter(dish_id=myDish.id).all()
     mean_rating = avg([item.rate for item in ratingOfDish])
+    allStars = []
+    for i in range(0,5):
+        allStars.append(i <= mean_rating-0.5)
 
-    if (
-        request.user.is_authenticated
-        and request.user.role == User.Role.CLIENT
-        and request.method == "POST"
-    ):
-        rating_v = request.POST.get("rating")
-        comment = request.POST.get("comment")
-        if not rating_v or not comment:
+    if request.user.is_authenticated:
+        if request.user.role == User.Role.CLIENT and request.method == "POST":
+            rating_v = request.POST.get("rating")
+            comment = request.POST.get("comment")
+            if not rating_v or not comment:
+                return render(
+                    request,
+                    "main/menu.html",
+                    {
+                        "menu": menuid,
+                        "ingredients": myIngredients,
+                        "ratings": ratingOfDish,
+                        "rest": rest,
+                        "mean_ratings": mean_rating,
+                        "allStars": allStars,
+                        "i_am_client": request.user.role == User.Role.CLIENT,
+                        "err": True,
+                    },
+                )
+            else:
+                rating_v = int(rating_v)
+                my_new_rating = Rating(comment=comment, rate=rating_v, client=request.user, dish=myDish, date=datetime.datetime.now())
+                my_other_ratings = Rating.objects.filter(client_id=request.user.id, dish_id=myDish.id).all()
+                if len(my_other_ratings) > 0:
+                    for oneRate in my_other_ratings:
+                        oneRate.delete()
+                my_new_rating.save()
+                return HttpResponseRedirect(
+                    reverse("main:menu", kwargs={"rest": rest, "menuid": menuid})
+                )
+        else:
             return render(
                 request,
                 "main/menu.html",
@@ -288,20 +314,9 @@ def menu(request, rest, menuid):
                     "ratings": ratingOfDish,
                     "rest": rest,
                     "mean_ratings": mean_rating,
+                    "allStars": allStars,
                     "i_am_client": request.user.role == User.Role.CLIENT,
-                    "err": True,
                 },
-            )
-        else:
-            rating_v = int(rating_v)
-            my_new_rating = Rating(comment=comment, rate=rating_v, client=request.user, dish=myDish, date=datetime.datetime.now())
-            my_other_ratings = Rating.objects.filter(client_id=request.user.id, dish_id=myDish.id).all()
-            if len(my_other_ratings) > 0:
-                for oneRate in my_other_ratings:
-                    oneRate.delete()
-            my_new_rating.save()
-            return HttpResponseRedirect(
-                reverse("main:menu", kwargs={"rest": rest, "menuid": menuid})
             )
     else:
         return render(
@@ -313,7 +328,8 @@ def menu(request, rest, menuid):
                 "ratings": ratingOfDish,
                 "rest": rest,
                 "mean_ratings": mean_rating,
-                "i_am_client": False #request.user.role == User.Role.CLIENT,
+                "allStars": allStars,
+                "i_am_client": False
             },
         )
 

@@ -64,9 +64,14 @@ def ingredients(request):
 
 def addIng(request):
     if request.method == "POST":
-        name = request.POST["name"]
+        name = request.POST["name"].strip().capitalize()
         try:
-            Ingredient(name=name).save()
+            if name == "":
+                return render(
+                    request, "super/addIngredient.html", context={"warningSintax": True}
+                )
+            else:
+                Ingredient(name=name).save()
         except:
             return render(
                 request, "super/addIngredient.html", context={"warning": True}

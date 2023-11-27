@@ -10,9 +10,14 @@
     <!-- Info of the dish -->
     <div class="screen-ingredients">
         <div class="folio">
+
             <h1 class="dish-name">
                 {{ menu }}
             </h1>
+
+            <h3>
+                Ingredients:
+            </h3>
 
             <div class="dish-ingredients">
                 {% for ing in ingredients %}
@@ -28,7 +33,14 @@
                 {% endfor %}
             </div>
 
-            <p>Average Rating: {{ mean_ratings }} </p>
+            <h3>
+                Average rating:
+            </h3>
+
+            <ul>
+                <li>{{ mean_ratings }}</li>
+            </ul>
+
 
             {% if isRestaurant %}
 
@@ -46,6 +58,17 @@
                 </div>
 
             {% endif %}
+
+            <div class="title-dish">
+                {% for star in allStars %}
+                    {% if star %}
+                        <span style="color: gold; font-size: 30px">&#9733;</span>
+                    {% else %}
+                        <span style="color: black; font-size: 30px">&#9733;</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
         </div>
 
     </div>
@@ -53,6 +76,7 @@
 
     <!-- Comments of the dish -->
     <div class="comments">
+        <h1>Comments</h1>
         <div class="all-comments">
             {% for oneRating in ratings %}
                 <div class="one-comment">
@@ -85,31 +109,37 @@
             <div class="make-a-comment">
                 <form action="{%  url 'main:menu' rest menu %}" method="post">
                     {% csrf_token %}
-                    <p>Rating:</p>
-                    <div class="rating">
-                        <input type="radio" id="star5" name="rating" value="5">
-                        <label for="star5" class="star">&#9733;</label>
-                        <input type="radio" id="star4" name="rating" value="4">
-                        <label for="star4" class="star">&#9733;</label>
-                        <input type="radio" id="star3" name="rating" value="3">
-                        <label for="star3" class="star">&#9733;</label>
-                        <input type="radio" id="star2" name="rating" value="2">
-                        <label for="star2" class="star">&#9733;</label>
-                        <input type="radio" id="star1" name="rating" value="1">
-                        <label for="star1" class="star">&#9733;</label>
+                    <div class="rating-stars">
+                        <p>Rating:</p>
+                        <div class="rating">
+                            <input type="radio" id="star5" name="rating" value="5">
+                            <label for="star5" class="star">&#9733;</label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4" class="star">&#9733;</label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3" class="star">&#9733;</label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2" class="star">&#9733;</label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1" class="star">&#9733;</label>
+                        </div>
                     </div>
 
+                    <p>
+                        Comment:
+                    </p>
                     <label>
                         <input type="text" class = "input-form" name="comment" placeholder="Write a comment">
                     </label>
+
+                    {% if err %}
+                        <p style="color:red"> All fields are required</p>
+                    {% endif %}
 
                     <div class="button-submit">
                         <button class="button-submit-comment" type="submit">Publish</button>
                     </div>
                 </form>
-                {% if err %}
-                    <p style="color:red"> All fields are required</p>
-                {% endif %}
             </div>
         {% endif %}
 

@@ -44,7 +44,9 @@
                             <a href="{% url 'super:ingredients' %}"> Ingredients </a>
                         {% else %}
                             <a href="{% url 'infouser:index' %}"> My data </a>
-                            <a href="{% url 'infouser:notifications' %}"> Notification </a>
+                            {% if request.user.role != "CLIENT" %}
+                                <a href="{% url 'infouser:notifications' %}"> Notification </a>
+                            {% endif %}
                         {% endif %}
 
                         <a href="{% url 'login:logout' %}"> Log out </a>
