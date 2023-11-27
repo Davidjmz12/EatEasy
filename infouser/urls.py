@@ -18,7 +18,7 @@ urlpatterns = [
     path("notifications/delete/<int:notification_id>", views.deleteNotification, name="delNot"),
     path("menu/<str:menuid>/", views.menu, name="menu"),
     path("changemenu/<str:menuid>/", views.changemenu, name="changemenu"),
-    path("changemenu/delete/<str:menuid>/", views.deletemenu, name="deletemenu"),
+    path("changemenu/delete/<str:menuid>/", views.deleteMenu, name="deletemenu"),
     path("update_menu/<str:menuid>/", views.update_menu, name="update_menu"),
-    path("statistics/", views.statistics, name="statistics")
+    path("statistics/<str:typeGraph>", views.statistics, name="statistics")
 ]

@@ -6,7 +6,7 @@ from django.urls import reverse
 from infouser.models import Notification
 from login.models import Restaurant, User
 from main.models import Ingredient, Dish
-
+from collections import Counter
 
 # Create your views here.
 def index(request):
@@ -80,68 +80,55 @@ def addIng(request):
         return render(request, "super/addIngredient.html")
 
 
-def statistic_price(request):
-    Ing = Dish.objects.all()
-    prices = []
+def getNumberNamesPrice(prices):
+    maxPrice = max(prices)
     number = []
     names = []
-    maximo=0
-    for i in Ing:
-        if(maximo<i.price):
-            maximo=i.price
-        prices.append(i.price)
-
-    for m in range(int(maximo/5)+1):
+    for m in range(int(maxPrice / 5) + 1):
         n = 0
         for i in range(len(prices)):
-            if(prices[i]<5*(m+1) and prices[i]>=5*m):
-                n=n+1
-
-        names.append(5*m)
+            if 5 * (m + 1) > prices[i] >= 5 * m:
+                n = n + 1
+        names.append(5 * m)
         number.append(n)
+    return number, names
 
-    zipp = zip(names, number)
-    return render(request, "super/statistics.html", {
-        "ingredients": json.dumps(names),
-        "numbers": json.dumps(number),
-        "zip": zipp
-    })
 
-def statistic_filter(request):
-    Ing = Dish.objects.all()
+def getRenderGraph(typeGraph, filterRest=None):
     number = []
-    names = ["vegan","vegetarian","nuts free", "lactose free", "gluten free"]
-    n=len(Ing.filter(vegan=True).all())
-    number.append(n)
-    n=len(Ing.filter(vegetarian=True).all())
-    number.append(n)
-    n=len(Ing.filter(nuts_free=True).all())
-    number.append(n)
-    n=len(Ing.filter(lactose_free=True).all())
-    number.append(n)
-    n=len(Ing.filter(celiac=True).all())
-    number.append(n)
-
+    names = []
+    if typeGraph == "price":
+        Ing = Dish.objects.filter(restaurant=filterRest).all() if filterRest else Dish.objects.all()
+        prices = [oneIng.price for oneIng in Ing]
+        number, names = getNumberNamesPrice(prices)
+    elif typeGraph == "filter":
+        Ing = Dish.objects.filter(restaurant=filterRest).all() if filterRest else Dish.objects.all()
+        names = ["vegan", "vegetarian", "nuts_free", "lactose_free", "celiac"]
+        number = [len(Ing.filter(**{filter_: True}).all()) for filter_ in names]
+    elif typeGraph == "city":
+        res = Restaurant.objects.all()
+        city_counter = Counter(r.city for r in res)
+        names, number = zip(*city_counter.items())
+    elif typeGraph == "ingredients":
+        Ing = Ingredient.objects.all()
+        if filterRest:
+            number = [len(oneIng.dishes_with.filter(restaurant=filterRest).all()) for oneIng in Ing]
+        else:
+            number = [len(oneIng.dishes_with.all()) for oneIng in Ing]
+        names = [_.name for _ in Ing]
     zipp = zip(names, number)
-    return render(request, "super/statistics.html", {
-        "ingredients": json.dumps(names),
-        "numbers": json.dumps(number),
-        "zip": zipp
-    })
+    return names, number, zipp
 
-def statistic_city(request):
-    res=Restaurant.objects.all()
-    cities=[]
-    number=[]
-    for r in res:
-        if r.city not in cities:
-            cities.append(r.city)
-            n=len(res.filter(city=r.city))
-            number.append(n)
 
-    zipp = zip(cities, number)
-    return render(request, "super/statistics.html", {
-        "ingredients": json.dumps(cities),
-        "numbers": json.dumps(number),
-        "zip": zipp
-    })
+def statistics(request, typeGraph):
+    names, number, zipp = getRenderGraph(typeGraph)
+    return render(
+        request,
+        "super/statistics.html",
+        {
+            "ingredients": json.dumps(names),
+            "numbers": json.dumps(number),
+            "zip": zipp,
+            "type": typeGraph,
+        },
+    )

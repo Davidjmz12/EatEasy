@@ -8,6 +8,8 @@
 
 {% block body %}
     <div class="buttons-column">
+
+        <p> My data </p>
         <div class="one-filter">
             <a href="{% url 'infouser:newmenu' %}">
                 <button class="one-side-button">
@@ -20,14 +22,33 @@
             <a href="{% url 'infouser:changeinfo' %}">
                 <button class="one-side-button">
                 Edit data
+                Edit Profile
+                </button>
+            </a>
+        </div>
+
+        <p> Statistics</p>
+
+        <div class="one-filter">
+            <a href="{% url 'infouser:statistics' 'price' %}">
+                <button class="one-side-button">
+                Price Statistic
                 </button>
             </a>
         </div>
 
         <div class="one-filter">
-            <a href="{% url 'infouser:statistics' %}">
+            <a href="{% url 'infouser:statistics' 'ingredients' %}">
                 <button class="one-side-button">
                 Statistics
+                Ingredients Statistic
+                </button>
+            </a>
+        </div>
+        <div class="one-filter">
+            <a href="{% url 'infouser:statistics' 'filter' %}">
+                <button class="one-side-button">
+                Filter Statistic
                 </button>
             </a>
         </div>
