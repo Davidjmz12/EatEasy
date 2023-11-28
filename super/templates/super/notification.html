@@ -13,9 +13,14 @@
             <form method="post">
                 {% csrf_token %}
                 <p>Title:</p>
-                <input class="input-form" type="text" name="title">
+                <input class="input-form" type="text" name="title" value="{{ title }}">
                 <p>Message:</p>
-                <input class="input-form" type="text" name="description">
+                <input class="input-form" type="text" name="description" value="{{ description }}">
+
+                {% if err %}
+                    <p style="color: red">{{ err }}</p>
+                {% endif %}
+
                 <div class="button-submit-div">
                     <input class="button-submit" type="submit">
                 </div>

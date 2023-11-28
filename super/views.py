@@ -36,16 +36,37 @@ def oneRestaurant(request, pk):
 
 def notification(request, pk):
     if request.method == "POST":
-        title = request.POST["title"]
-        description = request.POST["description"]
+        title = request.POST["title"].strip()
+        if title != "":
+            title = title[0].upper() + title[1:]
+        description = request.POST["description"].strip()
+        if description != "":
+            description = description[0].upper() + title[1:]
         emissor = User.objects.get(pk=request.user.pk)
         receiver = User.objects.get(pk=pk)
-        notif = Notification(
-            emissor=emissor, receiver=receiver, description=description, title=title
-        )
-        notif.save()
-        return HttpResponseRedirect(reverse("super:management"))
-    return render(request, "super/notification.html")
+        if title == "" or description == "":
+            return render(request, "super/notification.html",
+                          context={"err": "Inputs cannot be empty",
+                                   "title": title,
+                                    "description": description})
+        elif len(title) > 30:
+            return render(request, "super/notification.html",
+                          context={"err": "Title max length is 30",
+                                   "title": title,
+                                   "description": description})
+        elif len(description) > 200:
+            return render(request, "super/notification.html",
+                          context={"err": "Description max length is 200",
+                                   "title": title,
+                                   "description": description})
+        else:
+            notif = Notification(
+                emissor=emissor, receiver=receiver, description=description, title=title
+            )
+            notif.save()
+            return HttpResponseRedirect(reverse("super:management"))
+    else:
+        return render(request, "super/notification.html")
 
 
 def ingredients(request):
