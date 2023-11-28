@@ -194,3 +194,18 @@ def statistics(request, typeGraph):
         "zip": zipp,
         "type": typeGraph,
     })
+
+
+def delete_comment(request, user_pk, menuid, rest):
+    myClient = Client.objects.get(pk=user_pk)
+    myRestaurant = Restaurant.objects.get(rest_name=rest)
+    myDish = Dish.objects.get(name=menuid, restaurant=myRestaurant)
+    print("a",myClient,"b", myRestaurant,"c", myDish)
+    my_ratings = Rating.objects.filter(client=myClient, dish=myDish).all()
+    print("a",myClient,"b", myRestaurant,"c", myDish, "d", my_ratings)
+    for one_rating in my_ratings:
+        one_rating.delete()
+    return HttpResponseRedirect(
+        reverse("main:menu", kwargs={"rest": rest, "menuid": menuid})
+    )
+    

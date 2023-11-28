@@ -20,5 +20,6 @@ urlpatterns = [
     path("changemenu/<str:menuid>/", views.changemenu, name="changemenu"),
     path("changemenu/delete/<str:menuid>/", views.deleteMenu, name="deletemenu"),
     path("update_menu/<str:menuid>/", views.update_menu, name="update_menu"),
-    path("statistics/<str:typeGraph>", views.statistics, name="statistics")
+    path("statistics/<str:typeGraph>", views.statistics, name="statistics"),
+    path("comments/delete/<int:user_pk>/<str:menuid>/<str:rest>", views.delete_comment, name="delCom")
 ]

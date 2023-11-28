@@ -163,10 +163,20 @@ h1 {
     height: fit-content;
 }
 
+.buttons-make-a-comment {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
 .button-submit {
     display: flex;
     justify-content: center;
     width: 100%;
+    text-align: center;
 }
 
 .button-submit-comment {

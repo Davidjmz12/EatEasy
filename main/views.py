@@ -269,10 +269,10 @@ def menu(request, rest, menuid):
     myDish = Dish.objects.filter(name=menuid, restaurant=myRestaurant).first()
     myIngredients = myDish.ingredients.all()
     ratingOfDish = Rating.objects.filter(dish_id=myDish.id).all()
-    mean_rating = avg([item.rate for item in ratingOfDish])
+    mean_rating = round(avg([item.rate for item in ratingOfDish]), 2)
     allStars = []
-    for i in range(0,5):
-        allStars.append(i <= mean_rating-0.5)
+    for i in range(0, 5):
+        allStars.append(i <= mean_rating - 0.5)
 
     if request.user.is_authenticated:
         if request.user.role == User.Role.CLIENT and request.method == "POST":
@@ -295,8 +295,16 @@ def menu(request, rest, menuid):
                 )
             else:
                 rating_v = int(rating_v)
-                my_new_rating = Rating(comment=comment, rate=rating_v, client=request.user, dish=myDish, date=datetime.datetime.now())
-                my_other_ratings = Rating.objects.filter(client_id=request.user.id, dish_id=myDish.id).all()
+                my_new_rating = Rating(
+                    comment=comment,
+                    rate=rating_v,
+                    client=request.user,
+                    dish=myDish,
+                    date=datetime.datetime.now(),
+                )
+                my_other_ratings = Rating.objects.filter(
+                    client_id=request.user.id, dish_id=myDish.id
+                ).all()
                 if len(my_other_ratings) > 0:
                     for oneRate in my_other_ratings:
                         oneRate.delete()
@@ -305,6 +313,14 @@ def menu(request, rest, menuid):
                     reverse("main:menu", kwargs={"rest": rest, "menuid": menuid})
                 )
         else:
+            hasRating = (
+                len(
+                    Rating.objects.filter(
+                        client_id=request.user.id, dish_id=myDish.id
+                    ).all()
+                )
+                > 0
+            )
             return render(
                 request,
                 "main/menu.html",
@@ -316,6 +332,7 @@ def menu(request, rest, menuid):
                     "mean_ratings": mean_rating,
                     "allStars": allStars,
                     "i_am_client": request.user.role == User.Role.CLIENT,
+                    "hasRating": hasRating,
                 },
             )
     else:
@@ -329,7 +346,6 @@ def menu(request, rest, menuid):
                 "rest": rest,
                 "mean_ratings": mean_rating,
                 "allStars": allStars,
-                "i_am_client": False
+                "i_am_client": False,
             },
         )
-

@@ -38,7 +38,12 @@
             </h3>
 
             <ul>
-                <li>{{ mean_ratings }}</li>
+                {% if mean_ratings == 0 %}
+                     <li>The dish has not been rated yet.</li>
+                {% else %}
+                    <li>{{ mean_ratings }}</li>
+                {% endif %}
+
             </ul>
 
 
@@ -136,9 +141,17 @@
                         <p style="color:red"> All fields are required</p>
                     {% endif %}
 
-                    <div class="button-submit">
-                        <button class="button-submit-comment" type="submit">Publish</button>
+                    <div class="buttons-make-a-comment">
+                        <div class="button-submit">
+                            <button class="button-submit-comment" type="submit">Publish</button>
+                        </div>
+                        {% if hasRating %}
+                            <div class="button-submit">
+                                <a style="text-decoration: none; display: flex; justify-content: center; align-items: center" class="button-submit-comment" href="{% url 'infouser:delCom' user_pk=request.user.pk menuid=menu rest=rest %}">Delete</a>
+                            </div>
+                        {% endif %}
                     </div>
+
                 </form>
             </div>
         {% endif %}
