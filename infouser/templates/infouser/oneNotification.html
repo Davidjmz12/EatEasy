@@ -16,7 +16,7 @@
             {{ notification.description }}
         </div>
 
-        <a href="{% url 'infouser:notifications' %}">
+        <a href="{% url 'infouser:notifications' notification.pk %}">
             <button class="button-notification button-read">
                 Mark as read
             </button>
