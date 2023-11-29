@@ -80,13 +80,14 @@ h1 {
     font-weight: bold;
     font-size: 20px;
     box-shadow: 5px 5px 8px rgba(0,0,0,0.3);
+    cursor: pointer;
 }
 
-.button-change-ingredients:hover {
+.button-menu:hover {
     background-color: #006e6e;
 }
 
-.button-change-ingredients:active {
+.button-menu:active {
     background-color: #004f4f;
 }
 

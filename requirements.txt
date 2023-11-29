@@ -1,3 +1,5 @@
 Django~=5.0a1
-django-crispy-forms
 Levenshtein~=0.23.0
+Pillow~=10.1.0
+psycopg~=3.1.13
+psycopg2-binary~=2.9.9
