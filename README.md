@@ -1,4 +1,7 @@
-# Eatasy - Restaurant Management Web Application
+# Eatasy - Restaurant Management Web Application 
+<p align="right">
+  <img src="main/static/main/images/logo-ES.png" align="right" style="padding: 10px; border-radius: 15px;" width="300"/>
+</p>
 
 ## Overview
 "Eatasy" is a web application designed for restaurant management, providing detailed information about each dish. The goal is to cater to individuals with dietary restrictions or different food preferences, allowing them to explore various dining options in a specific area. Each menu item can be reviewed, contributing to a general opinion that aids decision-making for both customers and restaurants.
