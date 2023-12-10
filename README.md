@@ -36,7 +36,7 @@ The application has a global focus but is particularly valuable for individuals 
 We welcome contributions to improve Eatasy. If you have suggestions, bug reports, or want to contribute code, please follow our [Contribution Guidelines](CONTRIBUTING.md).
 
 ## License
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [GNU License](LICENSE).
 
 ## Contact
 For inquiries, reach out to the project maintainers:
