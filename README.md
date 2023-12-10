@@ -36,7 +36,7 @@ The application has a global focus but is particularly valuable for individuals 
    [http://localhost:8000/](http://localhost:8000/)
    
 ## Contributing
-We welcome contributions to improve Eatasy. If you have suggestions, bug reports, or want to contribute code, please follow our [Contribution Guidelines](CONTRIBUTING.md).
+We welcome contributions to improve Eatasy. If you have suggestions, bug reports, or want to contribute code, please report them.
 
 ## License
 This project is licensed under the [GNU License](LICENSE).
