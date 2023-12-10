@@ -40,6 +40,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 For inquiries, reach out to the project maintainers:
-- David Jiménez Omeñaca (your-email@example.com)
-- Sonia Cambrón Blanco (your-email@example.com)
-- David Tizne Ondiviela (your-email@example.com)
+- David Jiménez Omeñaca (825068@unizar.es)
+- Sonia Cambrón Blanco (815964@unizar.es)
+- David Tizne Ondiviela (821482@unizar.es)
