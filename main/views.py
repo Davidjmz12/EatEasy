@@ -7,7 +7,6 @@ from django.urls import reverse
 
 from login.models import Restaurant, User
 from main.models import Dish, Rating
-
 from Levenshtein import distance as distanceLev
 
 
@@ -211,7 +210,8 @@ def restaurant(
         vegan = request.POST.get("vegan", "off") == "on"
         nuts = request.POST.get("nuts", "off") == "on"
         lactose = request.POST.get("lactose", "off") == "on"
-        price = int(request.POST.get("price", 0))
+        price = int(request.POST.get("sliderPrice", 0))
+        print(price)
         return HttpResponseRedirect(
             reverse(
                 "main:restaurant",
@@ -228,6 +228,7 @@ def restaurant(
         )
     else:
         maxPrice = ceil(getMaxPriceRest(res))
+        print(maxPrice)
         priceEntry = priceEntry if priceEntry != "-1" else str(maxPrice)
         dishes = filter_dishes(
             dishes,
