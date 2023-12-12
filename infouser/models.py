@@ -11,7 +11,7 @@ class Notification(models.Model):
     description = models.CharField(max_length=200)
     title = models.CharField(max_length=30)
     read = models.BooleanField(default=False)
-    date = models.TimeField(auto_now=True)
+    date = models.TimeField(auto_now=False)
 
     def __str__(self):
         return "Notification from " + str(self.emissor) + " to " + str(self.receiver) + " called " + self.title

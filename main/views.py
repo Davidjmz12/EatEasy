@@ -211,7 +211,6 @@ def restaurant(
         nuts = request.POST.get("nuts", "off") == "on"
         lactose = request.POST.get("lactose", "off") == "on"
         price = int(request.POST.get("sliderPrice", 0))
-        print(price)
         return HttpResponseRedirect(
             reverse(
                 "main:restaurant",
@@ -228,7 +227,6 @@ def restaurant(
         )
     else:
         maxPrice = ceil(getMaxPriceRest(res))
-        print(maxPrice)
         priceEntry = priceEntry if priceEntry != "-1" else str(maxPrice)
         dishes = filter_dishes(
             dishes,

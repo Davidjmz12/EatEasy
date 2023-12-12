@@ -147,7 +147,9 @@
                         </div>
                         {% if hasRating %}
                             <div class="button-submit">
-                                <a style="text-decoration: none; display: flex; justify-content: center; align-items: center" class="button-submit-comment" href="{% url 'infouser:delCom' user_pk=request.user.pk menuid=menu rest=rest %}">Delete</a>
+                                <a style="text-decoration: none; display: flex; justify-content: center; align-items: center; color: black" class="button-submit-comment" href="{% url 'infouser:delCom' user_pk=request.user.pk menuid=menu rest=rest %}">
+                                    Delete
+                                </a>
                             </div>
                         {% endif %}
                     </div>

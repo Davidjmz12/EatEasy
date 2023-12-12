@@ -16,16 +16,26 @@
             {{ notification.description }}
         </div>
 
-        <a href="{% url 'infouser:notifications' notification.pk %}">
+        {% if not notification.read %}
+        <a href="{% url 'infouser:markAsRead' notification.pk %}">
             <button class="button-notification button-read">
                 Mark as read
             </button>
         </a>
-        <a href="{% url 'infouser:delNot' notification.pk %}">
+
+            <a href="{% url 'infouser:delNot' notification.pk %}" onclick="return confirm('Are you sure you want to delete this notification?')">
             <button class="button-notification button-delete">
                 Delete
             </button>
         </a>
+            {% else %}
+            <a href="{% url 'infouser:delNot' notification.pk %}" onclick="return confirm('Are you sure you want to delete this notification?')">
+            <button class="button-notification button-delete-2">
+                Delete
+            </button>
+        </a>
+        {% endif %}
+
 
     </div>
 

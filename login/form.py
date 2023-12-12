@@ -7,14 +7,14 @@ from login.models import User, Restaurant
 
 class RestaurantRegistrationForm(UserCreationForm):
     email = forms.EmailField(help_text="A valid email address, please.", required=False)
-    avatar = forms.ImageField(allow_empty_file=True, help_text='Avatar image', required=False)
+    avatar = forms.ImageField(allow_empty_file=True, required=False)
 
+    rest_name = forms.CharField(max_length=50)
     web_page = forms.URLField(required=False)
     precise_location = forms.CharField()
     city = forms.CharField()
     phone_number = forms.IntegerField(help_text="+00 000 00 00 00 format")
     description = forms.CharField(max_length=200)
-    rest_name = forms.CharField(max_length=50)
 
     class Meta:
         model = get_user_model()
@@ -39,7 +39,7 @@ class RestaurantRegistrationForm(UserCreationForm):
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(help_text="A valid email address, please.", required=False,
                              widget=forms.TextInput(attrs={'class': 'input-text'}))
-    avatar = forms.ImageField(allow_empty_file=True, help_text='Avatar image', required=False)
+    avatar = forms.ImageField(allow_empty_file=True, required=False)
 
     class Meta:
         model = get_user_model()

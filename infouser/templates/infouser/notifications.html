@@ -12,7 +12,7 @@
         <h1>Notifications</h1>
         {% for item in notifications %}
             {% if item.read %}
-                <div style="background-color: darkgray" class="one-dish-short read-notification" >
+                <div class="one-dish-short" id="read-notification">
                     <a class="div-notification" href="{% url "infouser:infoNot" item.pk %}">
                         {{ item.title }}
                     </a>

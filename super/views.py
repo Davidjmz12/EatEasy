@@ -1,5 +1,7 @@
 import json
+from datetime import datetime
 
+import pytz
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -7,6 +9,7 @@ from infouser.models import Notification
 from login.models import Restaurant, User
 from main.models import Ingredient, Dish
 from collections import Counter
+
 
 # Create your views here.
 def index(request):
@@ -30,7 +33,6 @@ def deleteRes(request, pk):
 
 def oneRestaurant(request, pk):
     restaurant = Restaurant.objects.get(pk=pk)
-    print(restaurant.rest_name)
     return render(request, "super/oneRestaurant.html", {"restaurant": restaurant})
 
 
@@ -41,27 +43,46 @@ def notification(request, pk):
             title = title[0].upper() + title[1:]
         description = request.POST["description"].strip()
         if description != "":
-            description = description[0].upper() + title[1:]
+            description = description[0].upper() + description[1:]
         emissor = User.objects.get(pk=request.user.pk)
         receiver = User.objects.get(pk=pk)
         if title == "" or description == "":
-            return render(request, "super/notification.html",
-                          context={"err": "Inputs cannot be empty",
-                                   "title": title,
-                                    "description": description})
+            return render(
+                request,
+                "super/notification.html",
+                context={
+                    "err": "Inputs cannot be empty",
+                    "title": title,
+                    "description": description,
+                },
+            )
         elif len(title) > 30:
-            return render(request, "super/notification.html",
-                          context={"err": "Title max length is 30",
-                                   "title": title,
-                                   "description": description})
+            return render(
+                request,
+                "super/notification.html",
+                context={
+                    "err": "Title max length is 30",
+                    "title": title,
+                    "description": description,
+                },
+            )
         elif len(description) > 200:
-            return render(request, "super/notification.html",
-                          context={"err": "Description max length is 200",
-                                   "title": title,
-                                   "description": description})
+            return render(
+                request,
+                "super/notification.html",
+                context={
+                    "err": "Description max length is 200",
+                    "title": title,
+                    "description": description,
+                },
+            )
         else:
             notif = Notification(
-                emissor=emissor, receiver=receiver, description=description, title=title
+                emissor=emissor,
+                receiver=receiver,
+                description=description,
+                title=title,
+                date=datetime.now(pytz.timezone('Europe/Madrid')),
             )
             notif.save()
             return HttpResponseRedirect(reverse("super:management"))
@@ -124,11 +145,19 @@ def getRenderGraph(typeGraph, filterRest=None):
     number = []
     names = []
     if typeGraph == "price":
-        Ing = Dish.objects.filter(restaurant=filterRest).all() if filterRest else Dish.objects.all()
+        Ing = (
+            Dish.objects.filter(restaurant=filterRest).all()
+            if filterRest
+            else Dish.objects.all()
+        )
         prices = [oneIng.price for oneIng in Ing]
         number, names = getNumberNamesPrice(prices)
     elif typeGraph == "filter":
-        Ing = Dish.objects.filter(restaurant=filterRest).all() if filterRest else Dish.objects.all()
+        Ing = (
+            Dish.objects.filter(restaurant=filterRest).all()
+            if filterRest
+            else Dish.objects.all()
+        )
         names = ["vegan", "vegetarian", "nuts_free", "lactose_free", "celiac"]
         number = [len(Ing.filter(**{filter_: True}).all()) for filter_ in names]
     elif typeGraph == "city":
@@ -138,7 +167,10 @@ def getRenderGraph(typeGraph, filterRest=None):
     elif typeGraph == "ingredients":
         Ing = Ingredient.objects.all()
         if filterRest:
-            number = [len(oneIng.dishes_with.filter(restaurant=filterRest).all()) for oneIng in Ing]
+            number = [
+                len(oneIng.dishes_with.filter(restaurant=filterRest).all())
+                for oneIng in Ing
+            ]
         else:
             number = [len(oneIng.dishes_with.all()) for oneIng in Ing]
         names = [_.name for _ in Ing]

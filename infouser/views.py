@@ -139,6 +139,13 @@ def notification(request):
     )
 
 
+def markAsRead(request, notification_id):
+    notif = Notification.objects.get(pk=notification_id)
+    notif.read = True
+    notif.save()
+    return HttpResponseRedirect(reverse("infouser:notifications"))
+
+
 def infoNotifications(request, notification_id):
     notif = Notification.objects.get(pk=notification_id)
     return render(
@@ -200,9 +207,7 @@ def delete_comment(request, user_pk, menuid, rest):
     myClient = Client.objects.get(pk=user_pk)
     myRestaurant = Restaurant.objects.get(rest_name=rest)
     myDish = Dish.objects.get(name=menuid, restaurant=myRestaurant)
-    print("a",myClient,"b", myRestaurant,"c", myDish)
     my_ratings = Rating.objects.filter(client=myClient, dish=myDish).all()
-    print("a",myClient,"b", myRestaurant,"c", myDish, "d", my_ratings)
     for one_rating in my_ratings:
         one_rating.delete()
     return HttpResponseRedirect(

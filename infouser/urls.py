@@ -15,6 +15,7 @@ urlpatterns = [
     path("client/", views.client, name="client"),
     path("notifications/", views.notification, name="notifications"),
     path("notifications/<int:notification_id>", views.infoNotifications, name="infoNot"),
+    path("notifications/read/<int:notification_id>", views.markAsRead, name="markAsRead"),
     path("notifications/delete/<int:notification_id>", views.deleteNotification, name="delNot"),
     path("menu/<str:menuid>/", views.menu, name="menu"),
     path("changemenu/<str:menuid>/", views.changemenu, name="changemenu"),
@@ -22,4 +23,5 @@ urlpatterns = [
     path("update_menu/<str:menuid>/", views.update_menu, name="update_menu"),
     path("statistics/<str:typeGraph>", views.statistics, name="statistics"),
     path("comments/delete/<int:user_pk>/<str:menuid>/<str:rest>", views.delete_comment, name="delCom")
+
 ]
